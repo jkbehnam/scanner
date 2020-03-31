@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@android:color/transparent"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:contentInsetStartWithNavigation="0dp"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/Toolbar.Light"
+    app:contentInsetEnd="50dp"
+    app:contentInsetLeft="50dp"
+    app:contentInsetRight="50dp"
+    app:contentInsetStart="50dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+
+            android:textSize="20sp"
+            android:id="@+id/txttoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:typeface="serif"
+            android:text="ثبت نام"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/toobartext"
+            >
+
+        </TextView>
+    </LinearLayout>
+
+</androidx.appcompat.widget.Toolbar>
+

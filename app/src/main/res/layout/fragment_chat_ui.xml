@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:chatview="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar" android:id="@+id/toolbar"></include>
+
+
+    <co.intentservice.chatui.ChatView
+        android:id="@+id/chat_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        chatview:backgroundColor="@color/off_white"
+        app:bubbleBackgroundSend="#F1F1F1"
+        app:bubbleElevation="flat"
+
+        app:inputHint="پیام خود را بنویسید..."
+        app:bubbleBackgroundRcv="@color/allOkButton"
+        app:sendBtnIconTint="#ffffff"
+app:sendBtnBackgroundTint="@color/allOkButton"
+         />
+</LinearLayout>

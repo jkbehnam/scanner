@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "237844892783",
+    "firebase_url": "https://scanner-fe8eb.firebaseio.com",
+    "project_id": "scanner-fe8eb",
+    "storage_bucket": "scanner-fe8eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237844892783:android:7548a1f7cfba8e62f8119a",
+        "android_client_info": {
+          "package_name": "com.patient.mokhtari.scanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237844892783-c08lrqfrohqvgm4o69l4gqtgvpd7d9r1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.patient.mokhtari.scanner",
+            "certificate_hash": "c02daf535f611095ff2e4fa6c86b2fd25f1b6c73"
+          }
+        },
+        {
+          "client_id": "237844892783-4ong3m2tt7tij794pm1sh37pnbnlo1lu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4rctZ8raEvd-PW8jrc8AqoHSCFLsDOPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237844892783-4ong3m2tt7tij794pm1sh37pnbnlo1lu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

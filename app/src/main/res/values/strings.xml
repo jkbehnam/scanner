@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">demo_skin_patient</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="transition_name">transition_name</string>
+    <string name="title_1">سوال 1</string>
+    <string name="title_2">سوال 2</string>
+    <string name="title_3">سوال 3</string>
+    <string name="title_4">سوال 4</string>
+    <string name="title_5">سوال 5</string>
+    <string name="title_6">سوال 6</string>
+    <string name="title_7">سوال 7</string>
+    <string name="title_8">سوال 8</string>
+    <string name="title_9">سوال 9</string>
+    <string name="title_10">سوال 10</string>
+
+    <string name="text_1">آیا محل ضایعه بیمار همراه با درد است؟ </string>
+    <string name="text_2">آیا محل ضایعه بیمار همراه با خارش است؟ </string>
+    <string name="text_3">آیا بیمار تب دارد؟ </string>
+    <string name="text_4">آیا بیمار در حال حاضر داروی خاصی مصرف می کند؟ در صورت استفاده از دارو نام آن را وارد کنید. </string>
+    <string name="text_5">آیا بیماری خاصی مانند( ایدز- هپاتیت - دیابت - سل) دارید. در صورت داشتن بیماری، نام بیماری خود را وارد کنید </string>
+    <string name="text_6">آیا بیمار حامله است؟ </string>
+    <string name="text_7">آیا در خانواده بیمار کسی شرایط مشابه بیمار را داشته است؟</string>
+    <string name="text_8">اولین منطقه ای که ضایعه ظهور پیدا کرد کدام قسمت بدن بود؟ </string>
+    <string name="text_9">آیا ضایعه قابل لمس (برجستگی، خشکی یا زبری) است؟ </string>
+    <string name="text_10">در این قسمت اگر تاریچه پزشکی خاصی (دوره درمانی قبلی، بیماری¬های مشابه) برای بیمار وجود دارد ذکر کنید. </string>
+
+
+
+
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="toast_image_intent_null">Image picker option is missing!</string>
+    <string name="msg_error_unable_select_profile_pic">Unable to set profile image. Please try again!</string>
+    <string name="lbl_set_profile_photo">انتخاب تصویر ضایعه</string>
+    <string name="lbl_take_camera_picture">عکس برداری</string>
+    <string name="lbl_choose_from_gallery">انتخاب از حافظه دستگاه</string>
+
+    <string name="dialog_permission_title">Grant Permissions</string>
+    <string name="dialog_permission_message">This app needs permission to use this feature. You can grant them in app settings.</string>
+    <string name="go_to_settings">GOTO SETTINGS</string>
+</resources>

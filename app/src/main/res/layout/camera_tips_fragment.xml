@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/imageContainer"
+        android:orientation="vertical"
+        android:gravity="center_horizontal|center_vertical"
+        android:layout_marginBottom="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    android:layout_width="300dp"
+    app:cardElevation="0dp"
+    app:cardCornerRadius="10dp"
+    android:layout_height="230dp">
+    <ImageView
+        android:id="@+id/imagePage1"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+
+        android:src="@drawable/skin_desise1"
+        android:layout_height="match_parent" />
+</androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_marginTop="44dp"
+                android:text="خوش آمدید"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:textColor="@color/text_color_all"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textPage1"
+                android:text="سامانه تشخیص و درمان بیماری پوستی"
+                android:padding="8dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/text_color_second"
+android:textSize="18dp"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
