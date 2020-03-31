@@ -190,55 +190,6 @@ public class Frag_Body_part extends myFragment {
     public void unRegisterTouchListener(MyTouchListener listener){
         mTouchListeners.remove(listener);
     }
-
-
-    public void genderClick(View view){
-        switch (view.getId()){
-            case R.id.man_btn:
-                if(bodyWidget.toggleBodyGenderImage(true)) {
-                    rootView. findViewById(R.id.man_btn).setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
-                    rootView. findViewById(R.id.woman_btn).setBackgroundColor(Color.TRANSPARENT);
-                    manIv.setImageResource(R.mipmap.icon_man_pressed);
-                    manTv.setTextColor(Color.WHITE);
-                    womanIv.setImageResource(R.mipmap.icon_woman);
-                    womanTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
-                }
-                break;
-            case R.id.woman_btn:
-                if(bodyWidget.toggleBodyGenderImage(false)) {
-                    rootView.findViewById(R.id.man_btn).setBackgroundColor(Color.TRANSPARENT);
-                    rootView.findViewById(R.id.woman_btn).setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
-                    manIv.setImageResource(R.mipmap.icon_man);
-                    manTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
-                    womanIv.setImageResource(R.mipmap.icon_woman_pressed);
-                    womanTv.setTextColor(Color.WHITE);
-                }
-                break;
-        }
-    }
-
-    public void sideClick(View view){
-
-        switch (view.getId()){
-            case R.id.flipFront:
-                if(bodyWidget.flipBody(false)) {
-                    flipFrontTv.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
-                    flipBackTv.setBackgroundColor(Color.TRANSPARENT);
-                    flipFrontTv.setTextColor(Color.WHITE);
-                    flipBackTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
-                }
-                break;
-            case R.id.flipBack:
-                if(bodyWidget.flipBody(true)) {
-                    flipFrontTv.setBackgroundColor(Color.TRANSPARENT);
-                    flipBackTv.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
-                    flipFrontTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
-                    flipBackTv.setTextColor(Color.WHITE);
-                }
-                break;
-        }
-    }
-
     public interface MyTouchListener
     {
         void onTouchEvent(MotionEvent event);

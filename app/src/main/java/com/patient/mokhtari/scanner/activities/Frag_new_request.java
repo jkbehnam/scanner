@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 
 public class Frag_new_request extends myFragment implements View.OnClickListener{
 static ArrayList<ReqQuestions> reqQuestionsArrayList=new ArrayList<>();
-
+    //static ArrayList<ReqQuestions> reqQuestionsArrayList=new ArrayList<>();
     private OnFragmentInteractionListener mListener;
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;

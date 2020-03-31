@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.patient.mokhtari.scanner.R;
@@ -63,7 +64,7 @@ public class Frag_Question_list extends myFragment implements View.OnClickListen
         ButterKnife.bind(this, rootView);
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "پاسخ به سوالات");
-
+Fragment fragment=this;
         mViewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
 
         Typeface typeface3 = Typeface.createFromAsset(getActivity().getAssets(), "font/iran_sans.ttf");
@@ -122,6 +123,8 @@ public class Frag_Question_list extends myFragment implements View.OnClickListen
                     reqQuestionsArrayList.add(reqQuestions);
                     Log.d("behnamq",String.valueOf(reqQuestionsArrayList.toString()));
                 }
+                if(position==mCardAdapter.getCount()-1){
+                    getActivity().onBackPressed();                }
                 mViewPager.setCurrentItem(position + 1, true);
             }
         });
@@ -148,12 +151,7 @@ public class Frag_Question_list extends myFragment implements View.OnClickListen
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //  if (context instanceof OnFragmentInteractionListener) {
-        //      mListener = (OnFragmentInteractionListener) context;
-        //   } else {
-        //     throw new RuntimeException(context.toString()
-        //              + " must implement OnFragmentInteractionListener");
-        //   }
+
     }
 
     @Override
