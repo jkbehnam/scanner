@@ -34,6 +34,7 @@ import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.New_request.select_photo.ImagePickerActivity;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
+import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
 import com.patient.mokhtari.scanner.activities.camera_tips.camera_tips_main;
 
 import java.io.IOException;
@@ -43,6 +44,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPhotosArrayList;
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqTestPhotosArrayList;
 import static com.yalantis.ucrop.UCropFragment.TAG;
 
 
@@ -229,6 +232,20 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
         glist.get(position).setAddress(url);
         madapter.notifyDataSetChanged();
         madapter.notifyItemChanged(position);
+        boolean dup=false;
+        for (ReqPhoto req : reqBodyPhotosArrayList
+        ) {
+            if (req.getId() == position) {
+                dup=true;
+                reqBodyPhotosArrayList.set(reqBodyPhotosArrayList.indexOf(req),new ReqPhoto(position,url));
+                Log.d("behnamBodyphoto",String.valueOf(reqBodyPhotosArrayList.toString()));
+            }
+
+        }
+        if(!dup){
+            reqBodyPhotosArrayList.add(new ReqPhoto(position,url));
+            Log.d("behnamBodyphoto",String.valueOf(reqBodyPhotosArrayList.toString()));
+        }
     }
 
     @Override

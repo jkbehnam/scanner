@@ -3,14 +3,14 @@ package com.patient.mokhtari.scanner.activities;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterRcycleMain;
@@ -18,6 +18,7 @@ import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.New_request.AddSkinPhoto;
 import com.patient.mokhtari.scanner.activities.New_request.AddTestPhoto;
 import com.patient.mokhtari.scanner.activities.Objects.MainList;
+import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
 import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
 
 import java.util.ArrayList;
@@ -26,9 +27,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class Frag_new_request extends myFragment implements View.OnClickListener{
-static ArrayList<ReqQuestions> reqQuestionsArrayList=new ArrayList<>();
-    //static ArrayList<ReqQuestions> reqQuestionsArrayList=new ArrayList<>();
+public class Frag_new_request extends myFragment implements View.OnClickListener {
+    public static ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
+    public static ArrayList<ReqPhoto> reqTestPhotosArrayList = new ArrayList<>();
+    public static ArrayList<ReqPhoto> reqBodyPhotosArrayList = new ArrayList<>();
     private OnFragmentInteractionListener mListener;
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
@@ -48,10 +50,10 @@ static ArrayList<ReqQuestions> reqQuestionsArrayList=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView= inflater.inflate(R.layout.fragment_new_request, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_new_request, container, false);
         ButterKnife.bind(this, rootView);
         setFragmentActivity(getActivity());
-        setToolbar_notmain(rootView,"درخواست جدید");
+        setToolbar_notmain(rootView, "درخواست جدید");
 
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
@@ -80,13 +82,13 @@ static ArrayList<ReqQuestions> reqQuestionsArrayList=new ArrayList<>();
 
                 switch (position) {
                     case 0:
-                       // Intent i=new Intent(getActivity(), BodyMain.class);
-                       /// startActivity(i);
-                           loadFragment(new Frag_Body_part());
+                        // Intent i=new Intent(getActivity(), BodyMain.class);
+                        /// startActivity(i);
+                        loadFragment(new Frag_Body_part());
                         break;
                     case 1:
-                      //  Intent i2=new Intent(getActivity(), question.class);
-                      //  startActivity(i2);
+                        //  Intent i2=new Intent(getActivity(), question.class);
+                        //  startActivity(i2);
 
                         loadFragment(Frag_Question_list.newInstance());
                         break;
@@ -120,12 +122,12 @@ static ArrayList<ReqQuestions> reqQuestionsArrayList=new ArrayList<>();
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      //  if (context instanceof OnFragmentInteractionListener) {
-      //      mListener = (OnFragmentInteractionListener) context;
-     //   } else {
-       //     throw new RuntimeException(context.toString()
-      //              + " must implement OnFragmentInteractionListener");
-     //   }
+        //  if (context instanceof OnFragmentInteractionListener) {
+        //      mListener = (OnFragmentInteractionListener) context;
+        //   } else {
+        //     throw new RuntimeException(context.toString()
+        //              + " must implement OnFragmentInteractionListener");
+        //   }
     }
 
     @Override
@@ -138,6 +140,7 @@ static ArrayList<ReqQuestions> reqQuestionsArrayList=new ArrayList<>();
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

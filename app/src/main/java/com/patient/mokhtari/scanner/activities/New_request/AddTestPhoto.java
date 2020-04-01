@@ -35,6 +35,9 @@ import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.New_request.select_photo.ImagePickerActivity;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
+
+import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
+import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
 import com.patient.mokhtari.scanner.activities.camera_tips.camera_tips_main;
 
 import java.io.IOException;
@@ -45,6 +48,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqQuestionsArrayList;
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqTestPhotosArrayList;
 
 
 public class AddTestPhoto extends myFragment implements View.OnClickListener {
@@ -233,6 +238,22 @@ public class AddTestPhoto extends myFragment implements View.OnClickListener {
         glist.get(position).setAddress(url);
         madapter.notifyDataSetChanged();
         madapter.notifyItemChanged(position);
+//
+        boolean dup=false;
+        for (ReqPhoto req : reqTestPhotosArrayList
+        ) {
+            if (req.getId() == position) {
+                dup=true;
+                reqTestPhotosArrayList.set(reqTestPhotosArrayList.indexOf(req),new ReqPhoto(position,url));
+                Log.d("behnamphoto",String.valueOf(reqTestPhotosArrayList.toString()));
+            }
+
+        }
+        if(!dup){
+            reqTestPhotosArrayList.add(new ReqPhoto(position,url));
+            Log.d("behnamphoto",String.valueOf(reqTestPhotosArrayList.toString()));
+        }
+      //  reqTestPhotosArrayList.add(new ReqPhoto(position,url));
     }
 
     @Override
