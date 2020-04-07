@@ -67,8 +67,9 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
         //  ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         //   ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnNewRequest.setOnClickListener(this);
+        bottomAppBar.setOnClickListener(this);
         //((AppCompatActivity)getActivity()).setSupportActionBar(bottomAppBar);
-        bottomAppBar.setOnClickListener(new View.OnClickListener() {
+        /*bottomAppBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "click", Toast.LENGTH_SHORT).show();
@@ -76,10 +77,10 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
 
                 MenuFrag dialogFragment = new MenuFrag();
                 dialogFragment.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "tag");
-                getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //    getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
                 //  fragment.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), fragment.getTag());
             }
-        });
+        });*/
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -164,15 +165,20 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.acount_btn:
 
-                break;
             case R.id.btnNewRequest:
                 Fragment fragment = Frag_new_request.newInstance();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
+                break;
+            case R.id.bottomAppBar:
+                Toast.makeText(getActivity(), "click", Toast.LENGTH_SHORT).show();
+
+
+                MenuFrag dialogFragment = new MenuFrag();
+                dialogFragment.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "tag");
                 break;
         }
     }

@@ -29,9 +29,9 @@ public class PrefManager {
     private static final String KEY_IS_WAITING_FOR_SMS = "IsWaitingForSms";
     private static final String KEY_MOBILE_NUMBER = "mobile_number";
     private static final String KEY_IS_LOGGED_IN = "isLoggedIn";
+    private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
-    private static final String KEY_USER_ID = "u_id";
-    private static final String KEY_MOBILE = "mobile";
+    private static final String KEY_USERNAME = "username";
 
     public PrefManager(Context context) {
         this._context = context;
@@ -57,11 +57,11 @@ public class PrefManager {
         return pref.getString(KEY_MOBILE_NUMBER, null);
     }
 
-    public void createLogin(String name ,String mobile,String u_id) {
-        editor.putString(KEY_NAME, name);
+    public void createLogin(String ID , String USERNAME, String NAME) {
+        editor.putString(KEY_ID, ID);
 
-        editor.putString(KEY_MOBILE, mobile);
-        editor.putString(KEY_USER_ID, u_id);
+        editor.putString(KEY_USERNAME, USERNAME);
+        editor.putString(KEY_NAME, NAME);
         editor.putBoolean(KEY_IS_LOGGED_IN, true);
         editor.commit();
     }
@@ -98,9 +98,10 @@ public class PrefManager {
     }
     public HashMap<String, String> getUserDetails() {
         HashMap<String, String> profile = new HashMap<>();
-        profile.put("name", pref.getString(KEY_NAME, null));
-        profile.put("mobile", pref.getString(KEY_MOBILE, null));
-        profile.put("u_id", pref.getString(KEY_USER_ID, null));
+        profile.put("u_id", pref.getString(KEY_ID, ""));
+        profile.put("username", pref.getString(KEY_USERNAME, ""));
+        profile.put("name", pref.getString(KEY_NAME, ""));
+        profile.put("session", pref.getString("session", ""));
         return profile;
     }
 }

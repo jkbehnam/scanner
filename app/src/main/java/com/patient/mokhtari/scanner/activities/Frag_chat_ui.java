@@ -102,9 +102,7 @@ chatView.addMessage(new ChatMessage("سلام",1548570748, ChatMessage.Type.SENT
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.acount_btn:
 
-                break;
 
 
         }

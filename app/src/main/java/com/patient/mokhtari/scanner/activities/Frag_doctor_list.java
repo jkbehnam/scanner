@@ -129,9 +129,7 @@ public class Frag_doctor_list extends myFragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.acount_btn:
 
-                break;
 
 
 

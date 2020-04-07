@@ -131,9 +131,7 @@ loadFragment(Frag_chat_ui.newInstance());
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.acount_btn:
 
-                break;
             case R.id.btnNewRequest:
 
                 break;

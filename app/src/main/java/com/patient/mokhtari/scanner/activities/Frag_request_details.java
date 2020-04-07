@@ -126,9 +126,7 @@ pat_det_tv.setOnClickListener(this::onClick);
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.acount_btn:
 
-                break;
             case R.id.pat_det_tv:
                 break;
             case R.id.tv_body_part:

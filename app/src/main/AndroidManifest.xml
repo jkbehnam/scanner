@@ -10,11 +10,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+
+
     <application
         android:name=".activities.base.Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:replace="android:appComponentFactory"
@@ -22,15 +25,16 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.patient.mokhtari.scanner.activities.Main" >
-        </activity>
-        <activity android:name="com.patient.mokhtari.scanner.activities.LoginRegistration.LoginActivity" />
-        <activity android:name="com.patient.mokhtari.scanner.activities.BodyPart.BodyMain" />
-        <activity android:name="com.patient.mokhtari.scanner.activities.walkthrough.WalkthroughStyle3Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.patient.mokhtari.scanner.activities.LoginRegistration.LoginActivity" />
+        <activity android:name="com.patient.mokhtari.scanner.activities.BodyPart.BodyMain" />
+        <activity android:name="com.patient.mokhtari.scanner.activities.walkthrough.WalkthroughStyle3Activity">
+
         </activity>
         <activity android:name="com.patient.mokhtari.scanner.activities.SignupActivity" />
         <activity android:name="com.patient.mokhtari.scanner.activities.New_request.select_photo.ImagePickerActivity"></activity>

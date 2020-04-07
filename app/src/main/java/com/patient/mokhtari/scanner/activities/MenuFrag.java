@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 
 import com.patient.mokhtari.scanner.R;
+import com.patient.mokhtari.scanner.activities.helper.PrefManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 public class MenuFrag extends BottomSheetDialogFragment implements View.OnClickListener {
 
 
-    @BindView(R.id.acount_btn)
+    @BindView(R.id.btn_logout)
     LinearLayout acount_btn;
 
 
@@ -63,8 +64,10 @@ public class MenuFrag extends BottomSheetDialogFragment implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.acount_btn:
-
+            case R.id.btn_logout:
+                PrefManager pm = new PrefManager(getActivity());
+                pm.clearSession();
+                getActivity().finish();
                 break;
 
         }

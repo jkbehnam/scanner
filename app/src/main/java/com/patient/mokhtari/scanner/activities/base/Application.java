@@ -11,6 +11,7 @@ import com.patient.mokhtari.scanner.activities.utils.ObjectBox;
 public class Application extends android.app.Application {
 
     public static Application application;
+    public static Context homecontext;
 
     @Override
     public void onCreate() {
@@ -18,7 +19,7 @@ public class Application extends android.app.Application {
         application=this;
         createNotificationChannel();
         ObjectBox.init(this);
-
+homecontext=this;
         super.onCreate();
     }
 
