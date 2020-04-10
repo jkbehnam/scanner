@@ -4,6 +4,8 @@ public class URLs {
     static String site = "http://scanner.beigzadeh4behnam.ir/new_app";
 
     public static final String URL_LOGIN = site +"/include/scanner_Login.php";
+    public static final String URL_GET_DOC_LIST=site +"/include/scanner_get_doc_list.php";
+    public static final String URL_UPLOAD_REQUEST=site +"/include/scanner_create_req.php";
 
 
 

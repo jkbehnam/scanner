@@ -46,7 +46,7 @@
     <!-- Other components and views -->
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/btnNewRequest"
+        android:id="@+id/btn_period"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="70dp"

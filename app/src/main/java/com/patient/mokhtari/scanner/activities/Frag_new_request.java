@@ -1,39 +1,67 @@
 package com.patient.mokhtari.scanner.activities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterRcycleMain;
+import com.patient.mokhtari.scanner.activities.BodyPart.view.BodyPointMain;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.New_request.AddSkinPhoto;
 import com.patient.mokhtari.scanner.activities.New_request.AddTestPhoto;
 import com.patient.mokhtari.scanner.activities.Objects.MainList;
 import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
 import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
+import com.patient.mokhtari.scanner.activities.utils.VolleyMultipartRequest;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_UPLOAD_REQUEST;
 
 
 public class Frag_new_request extends myFragment implements View.OnClickListener {
     public static ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
     public static ArrayList<ReqPhoto> reqTestPhotosArrayList = new ArrayList<>();
     public static ArrayList<ReqPhoto> reqBodyPhotosArrayList = new ArrayList<>();
+    public static String reqDuration = "";
+    public static String reqDoctor = "";
+    public static ArrayList<BodyPointMain> reqBodyPoints = new ArrayList<>();
     private OnFragmentInteractionListener mListener;
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
+    @BindView(R.id.btnSendRequest)
+    CardView btnSendRequest;
 
     // TODO: Rename and change types and number of parameters
     public static Frag_new_request newInstance() {
@@ -54,7 +82,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         ButterKnife.bind(this, rootView);
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "درخواست جدید");
-
+        btnSendRequest.setOnClickListener(this);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
         // rcleView.setLayoutManager(layoutManager);
@@ -67,11 +95,11 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
 
         mainActivity_recycle.setLayoutManager(layoutManager);
         ArrayList<MainList> glist = new ArrayList<>();
-        glist.add(new MainList("انتخاب محل ضایعه", "skin", true));
-        glist.add(new MainList("پاسخ به سوالات", "qu", false));
-        glist.add(new MainList("ارسال تصویر آزمایش", "test", false));
-        glist.add(new MainList("ارسال تصویر ضایعه", "skin", false));
-        glist.add(new MainList("انتخاب پزشک", "doc", false));
+        glist.add(new MainList("انتخاب محل ضایعه", "skin", (reqBodyPoints.size() != 0 && !reqDuration.equals(""))));
+        glist.add(new MainList("پاسخ به سوالات", "qu", (reqQuestionsArrayList.size() != 0)));
+        glist.add(new MainList("ارسال تصویر آزمایش", "test", (reqTestPhotosArrayList.size() != 0)));
+        glist.add(new MainList("ارسال تصویر ضایعه", "skin", (reqBodyPhotosArrayList.size() != 0)));
+        glist.add(new MainList("انتخاب پزشک", "doc", !reqDoctor.equals("")));
 
         adapterRcycleMain madapter = new adapterRcycleMain(glist);
         mainActivity_recycle.setAdapter(madapter);
@@ -82,27 +110,20 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
 
                 switch (position) {
                     case 0:
-                        // Intent i=new Intent(getActivity(), BodyMain.class);
-                        /// startActivity(i);
                         loadFragment(new Frag_Body_part());
                         break;
                     case 1:
-                        //  Intent i2=new Intent(getActivity(), question.class);
-                        //  startActivity(i2);
-
                         loadFragment(Frag_Question_list.newInstance());
                         break;
                     case 2:
                         loadFragment(AddTestPhoto.newInstance());
-
                         break;
                     case 3:
                         loadFragment(AddSkinPhoto.newInstance());
-                        //  loadFragment(new Fragment_ranking_list());
                         break;
                     case 4:
                         loadFragment(Frag_doctor_list.newInstance());
-                        // loadFragment(new Fragment_source_list());
+
                         break;
                 }
             }
@@ -115,6 +136,12 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
+           reqQuestionsArrayList.clear();
+           reqTestPhotosArrayList.clear();
+           reqBodyPhotosArrayList.clear();
+           reqDuration = "";
+           reqDoctor = "";
+           reqBodyPoints.clear();
             mListener.onFragmentInteraction(uri);
         }
     }
@@ -144,10 +171,13 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-
+            case R.id.btnSendRequest:
+                uploadBitmap();
+                break;
 
         }
     }
+
 
     private void loadFragment(Fragment fragment) {
         // load fragment
@@ -157,4 +187,137 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    private void uploadBitmap() {
+
+        int bodyPhotoSize = reqBodyPhotosArrayList.size();
+        int testPhotoSize = reqTestPhotosArrayList.size();
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL_UPLOAD_REQUEST,
+                new Response.Listener<NetworkResponse>() {
+
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        String s=new String(response.data);
+                        Toast.makeText(getActivity(), response.data.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+
+                params.put("questions", arrToJsonReqQuestions(reqQuestionsArrayList));
+                params.put("api_key", "2");
+                params.put("bodyPhotoSize", String.valueOf(bodyPhotoSize));
+                params.put("testPhotoSize", String.valueOf(testPhotoSize));
+                params.put("doctor", reqDoctor);
+                params.put("duration", reqDuration);
+                params.put("bodyPoint", arrToJsonBodyPointMain(reqBodyPoints));
+                return params;
+            }
+
+            /*
+             * Here we are passing image by renaming it with a unique name
+             * */
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+
+                for (int i = 0; i < bodyPhotoSize; i++) {
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(reqBodyPhotosArrayList.get(i).getUrl()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String uniqueID = UUID.randomUUID().toString();
+                    try {
+                        params.put("picbody" + i, new DataPart(uniqueID + ".jpg", getFileDataFromDrawable(bitmap)));
+                    } catch (Exception e) {
+                    }
+
+                }
+                for (int i = 0; i < testPhotoSize; i++) {
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), Uri.parse(reqTestPhotosArrayList.get(i).getUrl()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String uniqueID = UUID.randomUUID().toString();
+                    try {
+                        params.put("pictest" + i, new DataPart(uniqueID + ".jpg", getFileDataFromDrawable(bitmap)));
+                    } catch (Exception e) {
+                    }
+
+                }
+
+                return params;
+            }
+        };
+        volleyMultipartRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 50000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 50000;
+            }
+
+            @Override
+            public void retry(VolleyError error) throws VolleyError {
+
+            }
+        });
+        //adding the request to volley
+        Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
+        //showLoading_base();
+    }
+
+    public String arrToJsonReqQuestions(ArrayList<ReqQuestions> req) {
+        final GsonBuilder builder = new GsonBuilder();
+        final Gson gson = builder.create();
+        String x = gson.toJson(
+                req,
+                new TypeToken<ArrayList<Object>>() {
+                }.getType());
+        return x;
+    }
+
+    public String arrToJsonBodyPointMain(ArrayList<BodyPointMain> req) {
+        final GsonBuilder builder = new GsonBuilder();
+        final Gson gson = builder.create();
+        String x = gson.toJson(
+                req,
+                new TypeToken<ArrayList<Object>>() {
+                }.getType());
+        return x;
+    }
+
+    public String arrToJsonReqPhoto(ArrayList<ReqPhoto> req) {
+        final GsonBuilder builder = new GsonBuilder();
+        final Gson gson = builder.create();
+        String x = gson.toJson(
+                req,
+                new TypeToken<ArrayList<Object>>() {
+                }.getType());
+        return x;
+    }
+
+    public byte[] getFileDataFromDrawable(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+
 }

@@ -20,7 +20,7 @@ import java.util.List;
 
 public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     CardPagerAdapter.OnCardClickListner onCardClickListner;
-    Boolean YNQ=false;
+    String YNQ="no";
     private List<CardView> mViews;
     private List<CardItem> mData;
     private float mBaseElevation;
@@ -88,7 +88,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         cardNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                YNQ=false;
+                YNQ="no";
                 //  onCardClickListner.OnCardClicked(v, position);
                 expandableLayout.setVisibility(View.VISIBLE);
                 linearLayout.setVisibility(View.GONE);
@@ -97,7 +97,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         cardYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                YNQ=true;
+                YNQ="yes";
                 //  onCardClickListner.OnCardClicked(v, position);
                 expandableLayout.setVisibility(View.VISIBLE);
                 linearLayout.setVisibility(View.GONE);

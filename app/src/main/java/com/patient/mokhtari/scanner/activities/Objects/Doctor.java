@@ -1,9 +1,20 @@
 package com.patient.mokhtari.scanner.activities.Objects;
 
-public class Doctor {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class Doctor extends Object {
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("expert")
+    @Expose
     private String expert;
+    @SerializedName("photo")
+    @Expose
     private String img;
+    @SerializedName("api_key")
+    @Expose
     private String id;
 
    public Doctor (String name,String expert,String img,String id){

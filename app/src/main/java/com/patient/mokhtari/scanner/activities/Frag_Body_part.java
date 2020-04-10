@@ -27,12 +27,10 @@ import com.patient.mokhtari.scanner.activities.BodyPart.region.RegionView;
 import com.patient.mokhtari.scanner.activities.BodyPart.view.HumanBodyWidget;
 import com.patient.mokhtari.scanner.activities.BodyPart.view.WaveEffectLayout;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPoints;
 
 public class Frag_Body_part extends myFragment {
 
@@ -163,6 +161,7 @@ public class Frag_Body_part extends myFragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
+            reqBodyPoints.clear();
             mListener.onFragmentInteraction(uri);
         }
     }

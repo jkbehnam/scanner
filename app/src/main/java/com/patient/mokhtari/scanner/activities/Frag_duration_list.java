@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,20 +17,22 @@ import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterdurationList;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.Duration;
-
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqDuration;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class Frag_duration_list extends myFragment {
+public class Frag_duration_list extends myFragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
 
+    @BindView(R.id.btn_period)
+    CardView btn_period;
     // TODO: Rename and change types and number of parameters
     public static Frag_duration_list newInstance() {
         Frag_duration_list fragment = new Frag_duration_list();
@@ -63,11 +67,11 @@ public class Frag_duration_list extends myFragment {
 
         mainActivity_recycle.setLayoutManager(layoutManager);
         ArrayList<Duration> glist = new ArrayList<>();
-        glist.add(new Duration("کمتر از یک روز",""));
-        glist.add(new Duration("کمتر از یک هفته",""));
-        glist.add(new Duration("کمتر از یک سال",""));
-        glist.add(new Duration("کمتر از یک ماه",""));
-        glist.add(new Duration("بیشتر از یک سال",""));
+        glist.add(new Duration("کمتر از یک روز","LessDay"));
+        glist.add(new Duration("کمتر از یک هفته","LessWeek"));
+        glist.add(new Duration("کمتر از یک سال","LessMonth"));
+        glist.add(new Duration("کمتر از یک ماه","LessYear"));
+        glist.add(new Duration("بیشتر از یک سال","MoreYear"));
 
 
         adapterdurationList madapter = new adapterdurationList(glist);
@@ -77,34 +81,18 @@ public class Frag_duration_list extends myFragment {
             @Override
             public void OnCardClicked(View view, int position) {
 
-                switch (position) {
-                    case 0:
-                        //   loadFragment(new BuyQuestionFragment());
-                        break;
-                    case 1:
-
-                        break;
-                    case 2:
-
-                        //  loadFragment(new solvingListFragment());
-                        break;
-                    case 3:
-                        //  loadFragment(new Fragment_ranking_list());
-                        break;
-                    case 4:
-                        // loadFragment(new Fragment_source_list());
-                        break;
-                }
+                reqDuration =String.valueOf(glist.get(position).getId());
             }
         });
 
-
+        btn_period.setOnClickListener(this);
         return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
+            reqDuration ="";
             mListener.onFragmentInteraction(uri);
         }
     }
@@ -124,6 +112,18 @@ public class Frag_duration_list extends myFragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_period:
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack();
+                fm.popBackStack();
+                break;
+        }
+
     }
 
     public interface OnFragmentInteractionListener {

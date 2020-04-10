@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Objects.Doctor;
 
@@ -54,9 +55,7 @@ public class adapterDocotrList extends RecyclerView.Adapter<adapterDocotrList.My
                 @Override
                 public void onClick(View view) {
                     lastCheckedPosition = getAdapterPosition();
-                    //because of this blinking problem occurs so
-                    //i have a suggestion to add notifyDataSetChanged();
-                    //   notifyItemRangeChanged(0, list.length);//blink list problem
+                    onCardClickListner.OnCardClicked(view, getAdapterPosition());
                     notifyDataSetChanged();
                 }
             });
@@ -83,7 +82,7 @@ public class adapterDocotrList extends RecyclerView.Adapter<adapterDocotrList.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Doctor data_service = data_services_list.get(position);
-
+        Glide.with(context).load(data_service.getImg()).into(holder.iv_doctor);
         holder.tv_doctor_name.setText(data_service.getName());
         holder.tv_doctor_expert.setText(data_service.getExpert());
         if (position == lastCheckedPosition) {

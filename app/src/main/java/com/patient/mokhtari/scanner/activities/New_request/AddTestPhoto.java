@@ -21,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +49,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPoints;
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqQuestionsArrayList;
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqTestPhotosArrayList;
 
@@ -61,6 +63,8 @@ public class AddTestPhoto extends myFragment implements View.OnClickListener {
     TextView explain;
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
+    @BindView(R.id.btnTest)
+            CardView btnTest;
     int position;
     ArrayList<AddImage> glist;
     adapterAddPhoto madapter;
@@ -82,7 +86,7 @@ public class AddTestPhoto extends myFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_add_test_photo, container, false);
         ButterKnife.bind(this, rootView);
-
+btnTest.setOnClickListener(this);
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "ارسال تصویر آزمایش");
         explain.setText("حد اکثر 5 تصویر از آزمایش انتخاب کنید");
@@ -148,6 +152,7 @@ public class AddTestPhoto extends myFragment implements View.OnClickListener {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
+            reqTestPhotosArrayList.clear();
             mListener.onFragmentInteraction(uri);
         }
     }
@@ -174,6 +179,11 @@ public class AddTestPhoto extends myFragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.btn_camera_tips:
                 loadFragment(camera_tips_main.newInstance());
+                break;
+
+            case R.id.btnTest:
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack();
                 break;
         }
     }

@@ -1,13 +1,13 @@
 package com.patient.mokhtari.scanner.activities.Objects;
 
-public class ReqQuestions {
+public class ReqQuestions extends Object {
 
 
     private int q_id;
-    private boolean YNQ;
+    private String YNQ;
     private String Desc;
 
-    public ReqQuestions(int q_id, boolean YNQ, String desc) {
+    public ReqQuestions(int q_id, String YNQ, String desc) {
         this.q_id = q_id;
         this.YNQ = YNQ;
         Desc = desc;
@@ -22,11 +22,11 @@ public class ReqQuestions {
         this.q_id = q_id;
     }
 
-    public boolean isYNQ() {
+    public String isYNQ() {
         return YNQ;
     }
 
-    public void setYNQ(boolean YNQ) {
+    public void setYNQ(String YNQ) {
         this.YNQ = YNQ;
     }
 

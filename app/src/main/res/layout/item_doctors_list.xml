@@ -85,7 +85,6 @@ android:layout_marginLeft="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                app:cardBackgroundColor="@color/second_color"
                 app:cardCornerRadius="8dp"
                 app:elevation="0dp"
                 app:cardElevation="0dp"
@@ -100,7 +99,8 @@ android:layout_marginLeft="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/doc_face" />
+                    android:src="@drawable/img_doc_def"
+                    />
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

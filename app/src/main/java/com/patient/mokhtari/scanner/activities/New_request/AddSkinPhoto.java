@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +57,8 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
     CardView btn_camera_tips;
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
+    @BindView(R.id.btnSkin)
+            CardView btnSkin;
     int position;
     ArrayList<AddImage> glist;
     adapterAddPhoto madapter;
@@ -77,7 +80,7 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_add_skin_photo, container, false);
         ButterKnife.bind(this, rootView);
-
+btnSkin.setOnClickListener(this);
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "ارسال تصویر ضایعه");
         RtlGridLayoutManager layoutManager = new RtlGridLayoutManager(getActivity(), 3);
@@ -168,6 +171,10 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.btn_camera_tips:
                 loadFragment(camera_tips_main.newInstance());
+                break;
+            case R.id.btnSkin:
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.popBackStack();
                 break;
         }
     }

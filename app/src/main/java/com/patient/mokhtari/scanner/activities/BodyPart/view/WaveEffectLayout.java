@@ -21,6 +21,7 @@ import com.patient.mokhtari.scanner.activities.BodyPart.region.Region;
 import com.patient.mokhtari.scanner.activities.BodyPart.region.RegionParam;
 import com.patient.mokhtari.scanner.activities.BodyPart.region.RegionPathView;
 import com.patient.mokhtari.scanner.activities.BodyPart.region.RegionView;
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPoints;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
     private View mTouchTarget;
     private DispatchUpTouchEventRunnable mDispatchUpTouchEventRunnable = new DispatchUpTouchEventRunnable();
 
-    ArrayList<BodyPoint> bodyPoints = new ArrayList<>();
+
 
     private RegionView regionView;
     private RegionPathView regionPathView;
@@ -138,7 +139,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
         bodyImageViewHeight = bodyImageView.getHeight();*/
       float pleft=  (float) (left+(right-left)*pwidth);
       float pright=(float)(top+(bottom-top)*pheight);
-        for (BodyPoint f : bodyPoints
+        for (BodyPointMain f : reqBodyPoints
         ) {
 
             canvas.drawCircle((float) (left+(right-left)*f.fx),(float)(top+(bottom-top)*f.fy), mRevealRadius, mPaint);
@@ -146,9 +147,8 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
         if (location[0] < location2[0]) {
         } else {
             canvas.drawCircle(pleft, pright, mRevealRadius, mPaint);
-            bodyPoints.add(new BodyPoint((float)(pwidth) , (float)pheight));
+            reqBodyPoints.add(new BodyPointMain((float)(pwidth) , (float)pheight,HumanBodyWidget.mShowingBack));
         }
-
 
         //      canvas.restore();
 

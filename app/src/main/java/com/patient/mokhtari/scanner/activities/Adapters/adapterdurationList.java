@@ -51,6 +51,7 @@ public class adapterdurationList extends RecyclerView.Adapter<adapterdurationLis
                 @Override
                 public void onClick(View view) {
                     lastCheckedPosition = getAdapterPosition();
+                    onCardClickListner.OnCardClicked(view, getAdapterPosition());
                     //because of this blinking problem occurs so
                     //i have a suggestion to add notifyDataSetChanged();
                     //   notifyItemRangeChanged(0, list.length);//blink list problem

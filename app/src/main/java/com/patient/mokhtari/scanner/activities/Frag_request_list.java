@@ -129,9 +129,6 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
             @Override
             public void OnCardClicked(View view, int position) {
 
-
-                // Intent i=new Intent(Mainskin.this, question.class);
-                //startActivity(i);
                 loadFragment(Frag_request_details.newInstance());
 
 
@@ -143,12 +140,7 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //  if (context instanceof OnFragmentInteractionListener) {
-        //      mListener = (OnFragmentInteractionListener) context;
-        //   } else {
-        //     throw new RuntimeException(context.toString()
-        //              + " must implement OnFragmentInteractionListener");
-        //   }
+
     }
 
     @Override
@@ -174,9 +166,6 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
                 transaction.commit();
                 break;
             case R.id.bottomAppBar:
-                Toast.makeText(getActivity(), "click", Toast.LENGTH_SHORT).show();
-
-
                 MenuFrag dialogFragment = new MenuFrag();
                 dialogFragment.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "tag");
                 break;
