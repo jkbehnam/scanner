@@ -171,12 +171,12 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
             public void onSuccess(String result) throws JSONException {
                 if(reqListSwipeContainer.isRefreshing()){reqListSwipeContainer.setRefreshing(false);}
 
-                reciveRequeset(result);
+                reciveRequest(result);
             }
         }, param, URL_GET_REQUEST_LIST);
     }
 
-    public void reciveRequeset(String response) throws JSONException {
+    public void reciveRequest(String response) throws JSONException {
 
         final GsonBuilder builder = new GsonBuilder();
 
@@ -203,9 +203,10 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
         mainActivity_recycle.setAdapter(madapter);
         madapter.setOnCardClickListner(new adapterRcycleMain2.OnCardClickListner() {
             @Override
-            public void OnCardClicked(View view, int position, String req_id) {
-                loadFragment(Frag_request_details.newInstance(req_id));
+            public void OnCardClicked(View view, int position, Request req) {
+                loadFragment(Frag_request_details.newInstance(req));
             }
+
 
         });
 

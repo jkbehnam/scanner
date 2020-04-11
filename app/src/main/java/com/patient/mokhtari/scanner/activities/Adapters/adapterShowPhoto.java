@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.patient.mokhtari.scanner.R;
+import com.patient.mokhtari.scanner.activities.New_request.select_photo.GlideApp;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
 
 import java.util.ArrayList;
@@ -66,7 +67,10 @@ public class adapterShowPhoto extends RecyclerView.Adapter<adapterShowPhoto.MyVi
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final AddImage data_service = data_services_list.get(position);
         if (!data_service.getAddress().equals("")) {
-           // GlideApp.with(context).load(getImage("doc_face")).into(holder.iv_add_photo);
+            GlideApp.with(context)
+                    .load(data_service.getAddress())
+                    .thumbnail(.005f)
+                    .into(holder.iv_add_photo);
          //  holder.iv_add_photo.setImageResource(R.drawable.doc_face);
         }
         // write code

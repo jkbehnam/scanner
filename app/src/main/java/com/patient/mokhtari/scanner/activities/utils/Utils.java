@@ -14,7 +14,13 @@ import com.patient.mokhtari.scanner.R;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
+
+import saman.zamani.persiandate.PersianDate;
 
 import static android.content.pm.PackageManager.GET_META_DATA;
 import static android.os.Build.VERSION_CODES.P;
@@ -135,7 +141,28 @@ public class Utils {
             e.printStackTrace();
         }
     }
+    public static String getRequestState(String s){
+        switch (s){
+            case "progress":
+                return " در حال بررسی";
+        }
+        return "";
+    }
+ public static String getPersianDate(String str_date){
 
+     DateFormat formatter;
+     Date date = null;
+     formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+     try {
+         date = formatter.parse(str_date);
+     } catch (ParseException e) {
+         e.printStackTrace();
+     }
+     PersianDate pd=new PersianDate(date);
+     return pd.getShYear()+"/"+pd.getShMonth()+"/"+pd.getShDay();
+
+
+ }
     @SuppressWarnings("unchecked")
     public static String getTitleCache() {
         // https://developer.android.com/about/versions/pie/restrictions-non-sdk-interfaces

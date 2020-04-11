@@ -30,8 +30,6 @@
         tools:ignore="MissingConstraints">
         <ImageView
             android:id="@+id/iv_add_photo"
-            android:padding="10dp"
-            android:tint="@color/allOkButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/image" />
