@@ -197,6 +197,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
 
                     @Override
                     public void onResponse(NetworkResponse response) {
+                        hideLoading_base();
                         String s=new String(response.data);
                         Toast.makeText(getActivity(), response.data.toString(), Toast.LENGTH_SHORT).show();
                     }
@@ -281,7 +282,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         });
         //adding the request to volley
         Volley.newRequestQueue(getActivity()).add(volleyMultipartRequest);
-        //showLoading_base();
+        showLoading_base();
     }
 
     public String arrToJsonReqQuestions(ArrayList<ReqQuestions> req) {

@@ -21,6 +21,7 @@ import com.patient.mokhtari.scanner.activities.Adapters.adapterShowPhoto;
 import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
+import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
 
 import java.util.ArrayList;
 
@@ -44,11 +45,13 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     @BindView(R.id.tv_body_part)
     TextView tv_body_part;
     int position;
-
+    String RequestId;
     // TODO: Rename and change types and number of parameters
-    public static Frag_request_details newInstance() {
-        Frag_request_details fragment = new Frag_request_details();
-
+    public Frag_request_details (String RequestId){
+        this.RequestId=RequestId;
+    }
+    public static Frag_request_details newInstance(String RequestId) {
+        Frag_request_details fragment = new Frag_request_details(RequestId);
         return fragment;
     }
 
@@ -64,7 +67,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         ButterKnife.bind(this, rootView);
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView,"خلاصه درخواست");
-
+        Toast.makeText(getActivity(), RequestId, Toast.LENGTH_SHORT).show();
 
         RtlGridLayoutManager layoutManager = new RtlGridLayoutManager(getActivity(), 5);
         RtlGridLayoutManager layoutManager2 = new RtlGridLayoutManager(getActivity(), 5);

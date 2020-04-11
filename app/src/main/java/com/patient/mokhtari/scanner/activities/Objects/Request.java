@@ -1,28 +1,50 @@
 package com.patient.mokhtari.scanner.activities.Objects;
 
-public class requests {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class Request {
+    public String getRequest_id() {
+        return request_id;
+    }
 
-    private String reqiest_bodypart;
+    public void setRequest_id(String request_id) {
+        this.request_id = request_id;
+    }
+
+    @SerializedName("request_id")
+    @Expose
+    private String request_id;
+    @SerializedName("bodypart")
+    @Expose
+    private String request_bodypart;
+    @SerializedName("time")
+    @Expose
     private String request_date;
+    @SerializedName("doctor")
+    @Expose
     private String request_doctor;
+    @SerializedName("state")
+    @Expose
     private String request_state;
+    @SerializedName("photo")
+    @Expose
     private String request_img;
 
-    public requests(String reqiest_bodypart, String request_date, String request_doctor, String request_state, String request_img){
-        this.reqiest_bodypart=reqiest_bodypart;
+    public Request(String reqiest_bodypart, String request_date, String request_doctor, String request_state, String request_img){
+        this.request_bodypart =reqiest_bodypart;
         this.request_date=request_date;
         this.request_doctor=request_doctor;
         this.request_state=request_state;
         this.request_img=request_img;
     }
 
-    public String getReqiest_bodypart() {
-        return reqiest_bodypart;
+    public String getRequest_bodypart() {
+        return request_bodypart;
     }
 
-    public void setReqiest_bodypart(String reqiest_bodypart) {
-        this.reqiest_bodypart = reqiest_bodypart;
+    public void setRequest_bodypart(String request_bodypart) {
+        this.request_bodypart = request_bodypart;
     }
 
     public String getRequest_date() {

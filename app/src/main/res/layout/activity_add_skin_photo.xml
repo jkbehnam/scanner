@@ -36,8 +36,8 @@
         app:cardCornerRadius="24dp"
         app:cardElevation="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnNewRequest"
-        app:layout_constraintStart_toStartOf="@+id/btnNewRequest"
+        app:layout_constraintEnd_toEndOf="@+id/btnSkin"
+        app:layout_constraintStart_toStartOf="@+id/btnSkin"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
         app:layout_constraintVertical_bias="0.837">
 

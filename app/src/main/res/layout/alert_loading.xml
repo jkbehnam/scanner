@@ -18,6 +18,8 @@
             android:layout_width="400sp"
             android:layout_height="300sp"
             app:lottie_autoPlay="true"
+            app:lottie_colorFilter="@color/colorPrimaryDark"
+            app:tint="@color/colorPrimaryDark"
             app:lottie_fileName="loading.json"
             app:lottie_loop="true" />
 

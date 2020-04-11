@@ -6,12 +6,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.patient.mokhtari.scanner.R;
+import com.patient.mokhtari.scanner.activities.base.LoadingMain.Dialog_loading;
 
 
 public abstract class myFragment extends Fragment {
@@ -19,8 +21,25 @@ public abstract class myFragment extends Fragment {
 
 
 
+    AlertDialog ad;
+
+    public void showLoading_base() {
+        ad.show();
+
+    }
+
+
+    public void hideLoading_base() {
+       /* if (mProgressDialog != null && mProgressDialog.isShowing())
+            mProgressDialog.dismiss();*/
+        ad.hide();
+
+    }
     public void setFragmentActivity(FragmentActivity a){
 this.a=a;
+        Dialog_loading aa;
+        aa = new Dialog_loading();
+        ad = aa.qrcode_reader(a);
     }
     public void setToolbar(View rootView,String title){
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);

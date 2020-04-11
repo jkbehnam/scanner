@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.patient.mokhtari.scanner.R;
-import com.patient.mokhtari.scanner.activities.Objects.requests;
+import com.patient.mokhtari.scanner.activities.Objects.Request;
 
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterChatList extends RecyclerView.Adapter<adapterChatList.MyViewHolder> {
-    private List<requests> data_services_list;
+    private List<Request> data_services_list;
 
     Context context;
     OnCardClickListner onCardClickListner;
@@ -59,7 +59,7 @@ public class adapterChatList extends RecyclerView.Adapter<adapterChatList.MyView
     }
 
 
-    public adapterChatList(ArrayList<requests> data_services_list) {
+    public adapterChatList(ArrayList<Request> data_services_list) {
         this.data_services_list = data_services_list;
     }
 
@@ -75,9 +75,9 @@ public class adapterChatList extends RecyclerView.Adapter<adapterChatList.MyView
     @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final requests data_service = data_services_list.get(position);
+        final Request data_service = data_services_list.get(position);
 
-        holder.tv_reqiest_bodypart.setText(data_service.getReqiest_bodypart());
+        holder.tv_reqiest_bodypart.setText(data_service.getRequest_bodypart());
         holder.tv_request_doctor.setText(data_service.getRequest_doctor());
         holder.tv_request_state.setText(data_service.getRequest_state());
         holder.tv_request_date.setText(data_service.getRequest_date());

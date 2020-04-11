@@ -56,10 +56,6 @@ public class Dialog_loading {
         ald_exit.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ButterKnife.bind(this, view_alert_dialog_exit);
 
-        final int min = 0;
-        final int max = 13;
-        final int random = new Random().nextInt((max - min) + 1) + min;
-        loading_text.setText(array_title_place[random]);
      /*   dialog = new Dialog(context, android.R.style.Theme_Translucent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.alert_location_searching);

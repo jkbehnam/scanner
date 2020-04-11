@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.patient.mokhtari.scanner.R;
-import com.patient.mokhtari.scanner.activities.Objects.requests;
+import com.patient.mokhtari.scanner.activities.Objects.Request;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.MyViewHolder> {
-    private List<requests> data_services_list;
+    private List<Request> data_services_list;
 
     Context context;
     OnCardClickListner onCardClickListner;
@@ -58,7 +58,7 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
     }
 
 
-    public adapterRcycleMain2(ArrayList<requests> data_services_list) {
+    public adapterRcycleMain2(ArrayList<Request> data_services_list) {
         this.data_services_list = data_services_list;
     }
 
@@ -74,9 +74,9 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
     @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final requests data_service = data_services_list.get(position);
+        final Request data_service = data_services_list.get(position);
 
-        holder.tv_reqiest_bodypart.setText(data_service.getReqiest_bodypart());
+        holder.tv_reqiest_bodypart.setText(data_service.getRequest_bodypart());
         holder.tv_request_doctor.setText(data_service.getRequest_doctor());
         holder.tv_request_state.setText(data_service.getRequest_state());
         holder.tv_request_date.setText(data_service.getRequest_date());
@@ -87,11 +87,11 @@ if(data_service.getRequest_state().equals("دریافت پاسخ")){
         Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
         holder.tv_request_state.setTypeface(typeface3, Typeface.BOLD);
 
-        Glide.with(context).load(getImage(data_service.getRequest_img())).into(holder.iv_requet);
+        Glide.with(context).load(data_service.getRequest_img()).into(holder.iv_requet);
         holder.cv_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCardClickListner.OnCardClicked(v, position);
+                onCardClickListner.OnCardClicked(v, position,data_service.getRequest_id());
             }
         });
 
@@ -103,7 +103,7 @@ if(data_service.getRequest_state().equals("دریافت پاسخ")){
     }
 
     public interface OnCardClickListner {
-        void OnCardClicked(View view, int position);
+        void OnCardClicked(View view, int position,String req_id);
     }
 
     public void setOnCardClickListner(OnCardClickListner onCardClickListner) {

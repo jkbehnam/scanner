@@ -116,14 +116,12 @@ public class Frag_doctor_list extends myFragment implements View.OnClickListener
 
     public void getEventList() {
         Map<String, String> param = new HashMap<String, String>();
-
         ConnectToServer.any_send(new VolleyCallback() {
             @Override
             public void onSuccess(String result) throws JSONException {
                 reciveRequeset(result);
             }
         }, param, URL_GET_DOC_LIST);
-
     }
     public void reciveRequeset(String response) throws JSONException {
 
@@ -135,15 +133,12 @@ public class Frag_doctor_list extends myFragment implements View.OnClickListener
         ArrayList<Doctor> doctors = new ArrayList<>();
         try {
             final Doctor[] events = gson.fromJson(obj.getString("doctors"), Doctor[].class);
-
             doctors.addAll(Arrays.asList(events));
         } catch (Exception e) {
-
         }
-
         setitem(doctors);
-
     }
+
     public void setitem(ArrayList<Doctor> doctors){
 
         adapterDocotrList madapter = new adapterDocotrList(doctors);
@@ -156,7 +151,5 @@ public class Frag_doctor_list extends myFragment implements View.OnClickListener
                 reqDoctor =doctors.get(position).getId();
             }
         });
-
-
     }
 }

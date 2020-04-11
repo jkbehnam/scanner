@@ -47,7 +47,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/reqListSwipeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/MainActivity_recycle"
             android:layout_width="match_parent"
@@ -62,7 +65,7 @@
 
         </androidx.recyclerview.widget.RecyclerView>
         <!-- Other components and views -->
-
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
