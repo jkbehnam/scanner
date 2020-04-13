@@ -7,28 +7,43 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
-
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
+import com.patient.mokhtari.scanner.activities.Objects.Doctor;
+import com.patient.mokhtari.scanner.activities.Objects.Request;
+import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
+import com.patient.mokhtari.scanner.activities.utils.chatMessage;
+import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.models.ChatMessage;
 
+import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_CHAT;
+import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_REQUEST_LIST;
+import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_SEND_CHAT;
+import static com.patient.mokhtari.scanner.activities.utils.Utils.getTimeStamp;
 
-public class Frag_chat_ui extends myFragment implements View.OnClickListener{
+
+public class Frag_chat_ui extends myFragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
-@BindView(R.id.chat_view)
-ChatView chatView;
+    @BindView(R.id.chat_view)
+    ChatView chatView;
     ArrayList<ChatMessage> chat_list;
+
     // TODO: Rename and change types and number of parameters
     public static Frag_chat_ui newInstance() {
         Frag_chat_ui fragment = new Frag_chat_ui();
@@ -44,17 +59,18 @@ ChatView chatView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView= inflater.inflate(R.layout.fragment_chat_ui, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_chat_ui, container, false);
         ButterKnife.bind(this, rootView);
         setFragmentActivity(getActivity());
-        setToolbar_notmain(rootView,"ارتباط با پزشک");
+        setToolbar_notmain(rootView, "ارتباط با پزشک");
 
-chatView.addMessage(new ChatMessage("سلام",1548570748, ChatMessage.Type.SENT,"دکتر یوسفی"));
-            chatView.addMessage(new ChatMessage("سلام",1548550748, ChatMessage.Type.RECEIVED,"حسن حسن زاده"));
-        chatView.setOnSentMessageListener(new ChatView.OnSentMessageListener(){
+        //chatView.addMessage(new ChatMessage("سلام", 1548570748, ChatMessage.Type.SENT, "دکتر یوسفی"));
+        //chatView.addMessage(new ChatMessage("سلام", 1548550748, ChatMessage.Type.RECEIVED, "حسن حسن زاده"));
+        chatView.setOnSentMessageListener(new ChatView.OnSentMessageListener() {
             @Override
-            public boolean sendMessage(ChatMessage chatMessage){
+            public boolean sendMessage(ChatMessage chatMessage) {
                 // perform actual message sending
+                sendMessageServer(chatMessage);
                 return true;
             }
         });
@@ -65,9 +81,7 @@ chatView.addMessage(new ChatMessage("سلام",1548570748, ChatMessage.Type.SENT
         */
         //  rcleView.setLayoutManager(new HiveLayoutManager(HiveLayoutManager.VERTICAL));
 
-
-
-
+        getMessageServer();
         return rootView;
     }
 
@@ -81,12 +95,12 @@ chatView.addMessage(new ChatMessage("سلام",1548570748, ChatMessage.Type.SENT
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      //  if (context instanceof OnFragmentInteractionListener) {
-      //      mListener = (OnFragmentInteractionListener) context;
-     //   } else {
-       //     throw new RuntimeException(context.toString()
-      //              + " must implement OnFragmentInteractionListener");
-     //   }
+        //  if (context instanceof OnFragmentInteractionListener) {
+        //      mListener = (OnFragmentInteractionListener) context;
+        //   } else {
+        //     throw new RuntimeException(context.toString()
+        //              + " must implement OnFragmentInteractionListener");
+        //   }
     }
 
     @Override
@@ -99,21 +113,77 @@ chatView.addMessage(new ChatMessage("سلام",1548570748, ChatMessage.Type.SENT
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
 
-
-
         }
     }
-
-    private void loadFragment(Fragment fragment) {
-        // load fragment
-
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    public void sendMessageServer(ChatMessage chatMessage) {
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("request_key", "2");
+        param.put("content", chatMessage.getMessage());
+        param.put("sender", "user");
+        param.put("user_id", "2");
+        param.put("doc_id", "2");
+        ConnectToServer.any_send(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) throws JSONException {
+               // reciveRequest(result);
+            }
+        }, param, URL_SEND_CHAT);
     }
+    public void getMessageServer() {
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("request_key", "2");
+
+        ConnectToServer.any_send(new VolleyCallback() {
+            @Override
+            public void onSuccess(String result) throws JSONException {
+                 reciveRequest(result);
+            }
+        }, param, URL_GET_CHAT);
+    }
+
+    public void reciveRequest(String response) throws JSONException {
+
+        final GsonBuilder builder = new GsonBuilder();
+
+        final Gson gson = builder.create();
+        // final Reader data = new InputStreamReader(LoginActivity.class.getResourceAsStream("user"), "UTF-8");
+        JSONObject obj = new JSONObject(response);
+        ArrayList<chatMessage> requests = new ArrayList<>();
+        try {
+            final chatMessage[] request = gson.fromJson(obj.getString("chat"), chatMessage[].class);
+            requests.addAll(Arrays.asList(request));
+        } catch (Exception e) {
+            String s = e.getLocalizedMessage();
+
+        }
+        addtochat(requests);
+    }
+
+        public void addtochat(ArrayList<chatMessage> glist) {
+
+
+            {
+                //extract data from fired event
+
+                for (chatMessage cm : glist
+                ) {
+                    if (!cm.getSender().equals("user")) {
+                        chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.RECEIVED, "user"));
+                    } else {
+                        chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.SENT, "doc"));
+
+
+                    }
+                }
+
+
+            }
+
+    }
+
 }

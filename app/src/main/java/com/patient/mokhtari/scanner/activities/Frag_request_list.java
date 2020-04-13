@@ -90,6 +90,8 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
         reqListSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+                requests=new ArrayList<>();
                 getRequestList();
             }
         });

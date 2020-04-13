@@ -149,7 +149,6 @@ public class Utils {
         return "";
     }
  public static String getPersianDate(String str_date){
-
      DateFormat formatter;
      Date date = null;
      formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -160,9 +159,19 @@ public class Utils {
      }
      PersianDate pd=new PersianDate(date);
      return pd.getShYear()+"/"+pd.getShMonth()+"/"+pd.getShDay();
-
-
  }
+    public static Long getTimeStamp(String str_date){
+        DateFormat formatter;
+        Date date = null;
+        formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        try {
+            date = formatter.parse(str_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date.getTime();
+    }
     @SuppressWarnings("unchecked")
     public static String getTitleCache() {
         // https://developer.android.com/about/versions/pie/restrictions-non-sdk-interfaces

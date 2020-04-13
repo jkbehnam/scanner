@@ -1,12 +1,18 @@
 package com.patient.mokhtari.scanner.activities.utils;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
 import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
@@ -40,7 +46,8 @@ public class ConnectToServer {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
-                        Toast.makeText(homecontext, error.getMessage(), Toast.LENGTH_LONG).show();
+                        show_error_warning(error, homecontext);
+                        error.getMessage();
                     }
                 }) {
 
@@ -84,5 +91,26 @@ public class ConnectToServer {
         });
         //adding the request to volley
         Volley.newRequestQueue(homecontext).add(volleyMultipartRequest);
+    }
+    public static void show_error_warning(VolleyError error, Context context) {
+
+        String message = null;
+        if (error instanceof NetworkError) {
+            message = "Cannot connect to Internet...Please check your connection!";
+        } else if (error instanceof ServerError) {
+            message = "The server could not be found. Please try again after some time!!";
+        } else if (error instanceof AuthFailureError) {
+            message = "Cannot connect to Internet...Please check your connection!";
+        } else if (error instanceof ParseError) {
+            message = "Parsing error! Please try again after some time!!";
+        } else if (error instanceof NoConnectionError) {
+            message = "Cannot connect to Internet...Please check your connection!";
+        } else if (error instanceof TimeoutError) {
+            message = "Connection TimeOut! Please check your internet connection.";
+        }
+
+
+         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
     }
 }

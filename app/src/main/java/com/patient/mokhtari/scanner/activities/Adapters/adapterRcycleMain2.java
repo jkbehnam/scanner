@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getPersianDate;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestState;
 
-
 /**
  * Created by behnam_b on 7/5/2016.
  */
@@ -39,7 +38,6 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
     public class MyViewHolder extends RecyclerView.ViewHolder {
         //  public TextView card_title;
         ////   public ImageView img;
-
         @BindView(R.id.cv_request)
         CardView cv_request;
         @BindView(R.id.tv_reqiest_bodypart)
@@ -60,8 +58,6 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
             // img = (ImageView) view.findViewById(R.id.itemImage);
         }
     }
-
-
     public adapterRcycleMain2(ArrayList<Request> data_services_list) {
         this.data_services_list = data_services_list;
     }
@@ -79,18 +75,15 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final Request data_service = data_services_list.get(position);
-
         holder.tv_reqiest_bodypart.setText(data_service.getRequest_bodypart());
         holder.tv_request_doctor.setText(data_service.getRequest_doctor());
         holder.tv_request_state.setText(getRequestState(data_service.getRequest_state()));
         holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
-
         if (data_service.getRequest_state().equals("دریافت پاسخ")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.correctItem));
         }
         Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
         holder.tv_request_state.setTypeface(typeface3, Typeface.BOLD);
-
         Glide.with(context)
                 .load(data_service.getRequest_img())
                 .thumbnail(.005f)
@@ -101,9 +94,7 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
                 onCardClickListner.OnCardClicked(v, position, data_service);
             }
         });
-
     }
-
     @Override
     public int getItemCount() {
         return data_services_list.size();

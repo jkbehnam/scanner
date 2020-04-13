@@ -10,8 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.patient.mokhtari.scanner.R;
-import com.patient.mokhtari.scanner.activities.New_request.select_photo.GlideApp;
+
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class adapterAddPhoto extends RecyclerView.Adapter<adapterAddPhoto.MyView
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final AddImage data_service = data_services_list.get(position);
         if (!data_service.getAddress().equals("")) {
-            GlideApp.with(context).load(data_service.getAddress())
+            Glide.with(context).load(data_service.getAddress())
                     .into(holder.iv_add_photo);
             holder.iv_add_photo.setColorFilter(ContextCompat.getColor(context, android.R.color.transparent));
         }
