@@ -71,32 +71,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout10"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="48dp"
 
-        android:background="@drawable/back_et_white"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-        <EditText
-            android:id="@+id/editText10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/et_nothing"
-            android:ems="10"
-            android:gravity="center"
-
-            android:inputType="textPersonName"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textCursorDrawable="@null" />
-
-    </LinearLayout>
     <androidx.cardview.widget.CardView
         android:id="@+id/button2"
         android:layout_width="0dp"
@@ -127,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="نام و نام خانوادگی"
+        android:text="نام کاربری"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="@+id/textView2" />
 
@@ -137,46 +112,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
-        android:text="تاریخ تولد"
+        android:text="رمز عبور"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout3" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="0dp"
 
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-        <com.flyco.tablayout.SegmentTabLayout
-            android:id="@+id/tl"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1.5"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-            app:tl_bar_stroke_color="@color/second_color"
-            app:tl_bar_stroke_width="2dp"
-            app:tl_textUnselectColor="@color/text_color_all"
-            tl:tl_indicator_anim_enable="true"
-            tl:tl_indicator_bounce_enable="false"
-            tl:tl_indicator_color="@color/allOkButton"
-
-            tl:tl_tab_space_equal="true" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:visibility="gone" />
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/textView10"

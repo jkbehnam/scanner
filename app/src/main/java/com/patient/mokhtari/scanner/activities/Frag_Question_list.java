@@ -45,6 +45,17 @@ public class Frag_Question_list extends myFragment implements View.OnClickListen
     @BindView(R.id.tv_qnumber)
     TextView tv_qnumber;
 
+public  static String[] ql={"آیا محل ضایعه بیمار همراه با درد است؟ ",
+        "آیا محل ضایعه بیمار همراه با خارش است؟ ",
+        "آیا بیمار تب دارد؟ ",
+        "آیا بیمار در حال حاضر داروی خاصی مصرف می کند؟ در صورت استفاده از دارو نام آن را وارد کنید.",
+        "آیا بیماری خاصی مانند( ایدز- هپاتیت - دیابت - سل) دارید. در صورت داشتن بیماری، نام بیماری خود را وارد کنید ",
+        "آیا بیمار حامله است؟ ",
+        "آیا در خانواده بیمار کسی شرایط مشابه بیمار را داشته است؟",
+        "اولین منطقه ای که ضایعه ظهور پیدا کرد کدام قسمت بدن بود؟ ",
+        "آیا ضایعه قابل لمس (برجستگی، خشکی یا زبری) است؟ ",
+        "در این قسمت اگر تاریچه پزشکی خاصی (دوره درمانی قبلی، بیماری¬های مشابه) برای بیمار وجود دارد ذکر کنید. "
+        };
     // TODO: Rename and change types and number of parameters
     public static Frag_Question_list newInstance() {
         Frag_Question_list fragment = new Frag_Question_list();

@@ -7,11 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.patient.mokhtari.scanner.R;
-import com.patient.mokhtari.scanner.activities.LoginRegistration.LoginActivity;
 import com.patient.mokhtari.scanner.activities.helper.PrefManager;
 import com.patient.mokhtari.scanner.activities.walkthrough.WalkthroughStyle3Activity;
-
-import static com.patient.mokhtari.scanner.activities.base.Application.homecontext;
 
 public class Main extends BaseActivity {
     public static String user_id;

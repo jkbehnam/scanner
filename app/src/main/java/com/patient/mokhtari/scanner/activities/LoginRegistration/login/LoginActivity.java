@@ -1,6 +1,5 @@
-package com.patient.mokhtari.scanner.activities.LoginRegistration;
+package com.patient.mokhtari.scanner.activities.LoginRegistration.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.BaseActivity;
-import com.patient.mokhtari.scanner.activities.LoginRegistration.login.LoginPresenter;
 import com.patient.mokhtari.scanner.activities.Main;
 
 import butterknife.BindView;

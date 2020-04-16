@@ -7,13 +7,6 @@ public class ReqQuestions extends Object {
     private String YNQ;
     private String Desc;
 
-    public ReqQuestions(int q_id, String YNQ, String desc) {
-        this.q_id = q_id;
-        this.YNQ = YNQ;
-        Desc = desc;
-    }
-
-
     public int getQ_id() {
         return q_id;
     }
@@ -22,7 +15,7 @@ public class ReqQuestions extends Object {
         this.q_id = q_id;
     }
 
-    public String isYNQ() {
+    public String getYNQ() {
         return YNQ;
     }
 
@@ -37,4 +30,17 @@ public class ReqQuestions extends Object {
     public void setDesc(String desc) {
         Desc = desc;
     }
+
+    public ReqQuestions(int q_id, String YNQ, String desc) {
+        this.q_id = q_id;
+        this.YNQ = YNQ;
+        Desc = desc;
+    }
+    public ReqQuestions( String YNQ, String desc) {
+        this.q_id = q_id;
+        this.YNQ = YNQ;
+        Desc = desc;
+    }
+
+
 }

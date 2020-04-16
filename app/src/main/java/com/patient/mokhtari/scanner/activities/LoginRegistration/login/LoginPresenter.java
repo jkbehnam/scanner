@@ -1,25 +1,20 @@
 package com.patient.mokhtari.scanner.activities.LoginRegistration.login;
 
 
-import com.patient.mokhtari.scanner.activities.LoginRegistration.LoginActivity;
 import com.patient.mokhtari.scanner.activities.helper.PrefManager;
 import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.utils.URLs;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class LoginPresenter {
     LoginActivity loginActivity;
     String url;
     public LoginPresenter(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
-
     }
 
     public void login(String username, String password) {

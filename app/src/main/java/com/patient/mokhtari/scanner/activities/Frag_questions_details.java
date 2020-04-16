@@ -6,47 +6,40 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.patient.mokhtari.scanner.R;
-import com.patient.mokhtari.scanner.activities.Adapters.adapterChatList;
+import com.patient.mokhtari.scanner.activities.Adapters.adapterPatientDetails;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
-import com.patient.mokhtari.scanner.activities.Objects.Request;
+import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.patient.mokhtari.scanner.activities.Frag_request_list.requests;
 
-
-public class Frag_chat_lists extends myFragment implements View.OnClickListener {
-
+public class Frag_questions_details extends myFragment implements View.OnClickListener{
+    ArrayList<ReqQuestions> reqQuestionsArrayList;
     private OnFragmentInteractionListener mListener;
 
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
 
-    @BindView(R.id.iv_empty_state)
-    ImageView iv_empty_state;
-
-    @BindView(R.id.tv_empty_state)
-    TextView tv_empty_state;
-
     // TODO: Rename and change types and number of parameters
-    public static Frag_chat_lists newInstance() {
-        Frag_chat_lists fragment = new Frag_chat_lists();
+    public static Frag_questions_details newInstance(ArrayList<ReqQuestions> reqQuestionsArrayList) {
+        Frag_questions_details fragment = new Frag_questions_details( reqQuestionsArrayList);
 
         return fragment;
     }
-
+public Frag_questions_details(ArrayList<ReqQuestions> reqQuestionsArrayList){
+        this.reqQuestionsArrayList=reqQuestionsArrayList;
+}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,21 +48,37 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_chat_list, container, false);
+        View rootView= inflater.inflate(R.layout.fragment_questions_details, container, false);
         ButterKnife.bind(this, rootView);
-
         setFragmentActivity(getActivity());
-        setToolbar_notmain(rootView, "ارتباط با پزشک");
+        setToolbar_notmain(rootView,"مشخصات هویتی بیمار");
 
-        //  ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //   ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
+        // rcleView.setLayoutManager(layoutManager);
+     /*   rouchuan.circlelayoutmanager.CircleLayoutManager circleLayoutManager = new rouchuan.circlelayoutmanager.CircleLayoutManager(getActivity());
+        rcleView.setLayoutManager(circleLayoutManager);
+        rcleView.addOnScrollListener(new rouchuan.circlelayoutmanager.CenterScrollListener());
+        */
+        //  rcleView.setLayoutManager(new HiveLayoutManager(HiveLayoutManager.VERTICAL));
+
+
         mainActivity_recycle.setLayoutManager(layoutManager);
+        ArrayList<ReqQuestions> glist = new ArrayList<>();
+        glist.add(new ReqQuestions("حسن حسن زاده", "(مرد)"));
+        glist.add(new ReqQuestions("سن", "48/3/7   (50)"));
+        glist.add(new ReqQuestions("محل زندگی", "خراسان رضوی_مشهد"));
+        glist.add(new ReqQuestions("تعداد درخواست ها", "10"));
 
-        // glist.add(new requests("پشت دست", "97/3/2", "دکتر یوسفی", "دریافت پاسخ", "transaction"));
+        adapterPatientDetails madapter = new adapterPatientDetails(reqQuestionsArrayList);
+        mainActivity_recycle.setAdapter(madapter);
 
-        settitems(requests);
+        madapter.setOnCardClickListner(new adapterPatientDetails.OnCardClickListner() {
+            @Override
+            public void OnCardClicked(View view, int position) {
+
+            }
+        });
 
 
         return rootView;
@@ -82,37 +91,15 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
         }
     }
 
-    public void settitems(ArrayList<Request> glist) {
-        if (glist.size() != 0) {
-            tv_empty_state.setVisibility(View.GONE);
-            iv_empty_state.setVisibility(View.GONE);
-        }
-        adapterChatList madapter = new adapterChatList(glist);
-        mainActivity_recycle.setAdapter(madapter);
-        madapter.setOnCardClickListner(new adapterChatList.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position) {
-
-                loadFragment(Frag_chat_ui.newInstance(glist.get(position)));
-                // Intent i=new Intent(Mainskin.this, question.class);
-                //startActivity(i);
-                //   loadFragment(new BuyQuestionFragment());
-
-
-            }
-        });
-
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //  if (context instanceof OnFragmentInteractionListener) {
-        //      mListener = (OnFragmentInteractionListener) context;
-        //   } else {
-        //     throw new RuntimeException(context.toString()
-        //              + " must implement OnFragmentInteractionListener");
-        //   }
+      //  if (context instanceof OnFragmentInteractionListener) {
+      //      mListener = (OnFragmentInteractionListener) context;
+     //   } else {
+       //     throw new RuntimeException(context.toString()
+      //              + " must implement OnFragmentInteractionListener");
+     //   }
     }
 
     @Override
@@ -125,14 +112,12 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.btnNewRequest:
 
-                break;
+
         }
     }
 
@@ -144,6 +129,4 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
-
 }

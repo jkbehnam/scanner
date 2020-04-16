@@ -12,8 +12,8 @@ import android.view.View;
 
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.BaseActivity;
-import com.patient.mokhtari.scanner.activities.LoginRegistration.LoginActivity;
-import com.patient.mokhtari.scanner.activities.SignupActivity;
+import com.patient.mokhtari.scanner.activities.LoginRegistration.login.LoginActivity;
+import com.patient.mokhtari.scanner.activities.LoginRegistration.SignupActivity;
 
 
 public class WalkthroughStyle3Activity extends BaseActivity implements View.OnClickListener {

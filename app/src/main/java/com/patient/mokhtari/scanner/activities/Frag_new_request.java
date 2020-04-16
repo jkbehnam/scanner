@@ -47,6 +47,7 @@ import java.util.UUID;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.patient.mokhtari.scanner.activities.Main.user_id;
 import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_UPLOAD_REQUEST;
 
 
@@ -216,7 +217,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
 
 
                 params.put("questions", arrToJsonReqQuestions(reqQuestionsArrayList));
-                params.put("api_key", "2");
+                params.put("api_key", user_id);
                 params.put("bodyPhotoSize", String.valueOf(bodyPhotoSize));
                 params.put("testPhotoSize", String.valueOf(testPhotoSize));
                 params.put("doctor", reqDoctor);

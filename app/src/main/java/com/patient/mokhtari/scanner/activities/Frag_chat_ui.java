@@ -30,6 +30,7 @@ import butterknife.ButterKnife;
 import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.models.ChatMessage;
 
+import static com.patient.mokhtari.scanner.activities.Main.user_id;
 import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_CHAT;
 import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_REQUEST_LIST;
 import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_SEND_CHAT;
@@ -43,14 +44,16 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     @BindView(R.id.chat_view)
     ChatView chatView;
     ArrayList<ChatMessage> chat_list;
-
+Request request;
     // TODO: Rename and change types and number of parameters
-    public static Frag_chat_ui newInstance() {
-        Frag_chat_ui fragment = new Frag_chat_ui();
+    public static Frag_chat_ui newInstance(Request request) {
+        Frag_chat_ui fragment = new Frag_chat_ui(request);
 
         return fragment;
     }
-
+public Frag_chat_ui(Request request){
+        this.request=request;
+}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,11 +125,11 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     }
     public void sendMessageServer(ChatMessage chatMessage) {
         Map<String, String> param = new HashMap<String, String>();
-        param.put("request_key", "2");
+        param.put("request_key", request.getRequest_id());
         param.put("content", chatMessage.getMessage());
         param.put("sender", "user");
-        param.put("user_id", "2");
-        param.put("doc_id", "2");
+        param.put("user_id", user_id);
+        param.put("doc_id", request.getRequest_doctor());
         ConnectToServer.any_send(new VolleyCallback() {
             @Override
             public void onSuccess(String result) throws JSONException {
@@ -136,7 +139,7 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     }
     public void getMessageServer() {
         Map<String, String> param = new HashMap<String, String>();
-        param.put("request_key", "2");
+        param.put("request_key", request.getRequest_id());
 
         ConnectToServer.any_send(new VolleyCallback() {
             @Override

@@ -31,12 +31,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.patient.mokhtari.scanner.activities.LoginRegistration.LoginActivity" />
+        <activity android:name="com.patient.mokhtari.scanner.activities.LoginRegistration.login.LoginActivity" />
         <activity android:name="com.patient.mokhtari.scanner.activities.BodyPart.BodyMain" />
         <activity android:name="com.patient.mokhtari.scanner.activities.walkthrough.WalkthroughStyle3Activity">
 
         </activity>
-        <activity android:name="com.patient.mokhtari.scanner.activities.SignupActivity" />
+        <activity android:name="com.patient.mokhtari.scanner.activities.LoginRegistration.SignupActivity" />
         <activity android:name="com.patient.mokhtari.scanner.activities.New_request.select_photo.ImagePickerActivity"></activity>
 
         <provider

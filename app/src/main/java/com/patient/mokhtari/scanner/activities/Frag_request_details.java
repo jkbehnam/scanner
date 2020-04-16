@@ -25,6 +25,7 @@ import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
 import com.patient.mokhtari.scanner.activities.Objects.Doctor;
+import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
 import com.patient.mokhtari.scanner.activities.Objects.Request;
 import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
@@ -71,7 +72,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     TextView reqDate;
     int position;
     Request request;
-
+    public  ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
     // TODO: Rename and change types and number of parameters
     public Frag_request_details(Request RequestId) {
         this.request = RequestId;
@@ -106,7 +107,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         reqDocName.setText(request.getRequest_doctor());
         reqProgress.setText(getRequestState(request.getRequest_state()));
         reqChat.setOnClickListener(this);
-        reqChat.setOnClickListener(this);
+        ReqQuestions.setOnClickListener(this);
         tv_body_part.setOnClickListener(this);
         getRequestDetail();
         return rootView;
@@ -149,7 +150,9 @@ public class Frag_request_details extends myFragment implements View.OnClickList
             case R.id.tv_body_part:
                 loadFragment(Frag_Body_part_2.newInstance());
                 break;
-
+            case R.id.ReqQuestions:
+                loadFragment(Frag_questions_details.newInstance(reqQuestionsArrayList));
+                break;
         }
     }
 
@@ -186,7 +189,6 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     public void reciveRequest(String response) throws JSONException {
 
       final GsonBuilder builder = new GsonBuilder();
-
         final Gson gson = builder.create();
         // final Reader data = new InputStreamReader(LoginActivity.class.getResourceAsStream("user"), "UTF-8");
         JSONObject obj = new JSONObject(response);
@@ -197,6 +199,8 @@ public class Frag_request_details extends myFragment implements View.OnClickList
             bodyphotos.addAll(Arrays.asList(request));
              request = gson.fromJson(obj.getString("testphotos"), AddImage[].class);
             testphotos.addAll(Arrays.asList(request));
+            ReqQuestions[] request2 = gson.fromJson(obj.getString("questions"), ReqQuestions[].class);
+            reqQuestionsArrayList.addAll(Arrays.asList(request2));
         } catch (Exception e) {
         }
       settitems(bodyphotos,testphotos);
@@ -231,6 +235,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
                 shortAnswerAlert.show();
             }
         });
+
     }
 
 

@@ -40,6 +40,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.patient.mokhtari.scanner.activities.Main.user_id;
 import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_REQUEST_LIST;
 
 
@@ -167,7 +168,7 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
 
     public void getRequestList() {
         Map<String, String> param = new HashMap<String, String>();
-        param.put("user_id", "2");
+        param.put("user_id", user_id);
         ConnectToServer.any_send(new VolleyCallback() {
             @Override
             public void onSuccess(String result) throws JSONException {
