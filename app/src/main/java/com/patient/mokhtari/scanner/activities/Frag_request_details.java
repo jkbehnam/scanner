@@ -10,17 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.patient.mokhtari.scanner.R;
-import com.patient.mokhtari.scanner.activities.Adapters.adapterDocotrList;
-import com.patient.mokhtari.scanner.activities.Adapters.adapterRcycleMain2;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterShowPhoto;
+import com.patient.mokhtari.scanner.activities.BodyPart.view.BodyPointMain;
 import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
@@ -30,18 +28,15 @@ import com.patient.mokhtari.scanner.activities.Objects.Request;
 import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqDoctor;
 import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_REQUEST_DETAIL;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getPersianDate;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestState;
@@ -72,7 +67,10 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     TextView reqDate;
     int position;
     Request request;
+    JSONObject jsonObject;
     public  ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
+    public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
+
     // TODO: Rename and change types and number of parameters
     public Frag_request_details(Request RequestId) {
         this.request = RequestId;
@@ -151,7 +149,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
                 loadFragment(Frag_Body_part_2.newInstance());
                 break;
             case R.id.ReqQuestions:
-                loadFragment(Frag_questions_details.newInstance(reqQuestionsArrayList));
+                loadFragment(Frag_questions_details.newInstance(jsonObject));
                 break;
         }
     }
@@ -199,8 +197,12 @@ public class Frag_request_details extends myFragment implements View.OnClickList
             bodyphotos.addAll(Arrays.asList(request));
              request = gson.fromJson(obj.getString("testphotos"), AddImage[].class);
             testphotos.addAll(Arrays.asList(request));
-            ReqQuestions[] request2 = gson.fromJson(obj.getString("questions"), ReqQuestions[].class);
-            reqQuestionsArrayList.addAll(Arrays.asList(request2));
+            JSONArray ja=obj.getJSONArray("questions");
+             jsonObject= (JSONObject) ja.get(0);
+
+            reqBodyPoints2.clear();
+            BodyPointMain[] request2 = gson.fromJson(obj.getString("bodypoints"), BodyPointMain[].class);
+            reqBodyPoints2.addAll(Arrays.asList(request2));
         } catch (Exception e) {
         }
       settitems(bodyphotos,testphotos);

@@ -144,7 +144,15 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
         switch (view.getId()) {
 
             case R.id.btnNewRequest:
+
                 Fragment fragment = Frag_new_request.newInstance();
+                Frag_new_request.reqQuestionsArrayList.clear();
+                Frag_new_request.reqTestPhotosArrayList.clear();
+                Frag_new_request.reqBodyPhotosArrayList.clear();
+                Frag_new_request.reqDuration = "";
+                Frag_new_request.reqDoctor = "";
+                Frag_new_request.useDrug="";
+                Frag_new_request.reqBodyPoints.clear();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, fragment);
                 transaction.addToBackStack(null);

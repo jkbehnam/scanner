@@ -52,6 +52,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     }
     public void loginSuccessful() {
         Intent intent = new Intent(LoginActivity.this, Main.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         Bundle b = new Bundle();
         b.putInt("EXTRA_SESSION_ID", 2); //Your id
         intent.putExtras(b);

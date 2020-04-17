@@ -1,6 +1,8 @@
 package com.patient.mokhtari.scanner.activities.BodyPart.region;
 
 import android.graphics.Path;
+import android.os.SystemClock;
+import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
@@ -34,6 +36,8 @@ public class RegionPathView {
         pathView = (AnimatedPathView) container.findViewById(R.id.animatedPathView);
         regionRadius = UIUtil.dip2px(RegionParam.REGION_WIDTH / 2f);
         pathOffsetX = UIUtil.dip2px(RegionParam.PATH_OFFSET_X / 2f);
+
+// Dispatch touch event to view
     }
 
     public void setAdapter(int regionType){

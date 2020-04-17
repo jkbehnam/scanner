@@ -19,6 +19,8 @@ import com.patient.mokhtari.scanner.activities.helper.PrefManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.patient.mokhtari.scanner.activities.Frag_request_list.requests;
+
 
 public class MenuFrag extends BottomSheetDialogFragment implements View.OnClickListener {
 
@@ -65,6 +67,7 @@ public class MenuFrag extends BottomSheetDialogFragment implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_logout:
+                requests.clear();
                 PrefManager pm = new PrefManager(getActivity());
                 pm.clearSession();
                 getActivity().finish();

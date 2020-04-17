@@ -37,7 +37,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -111,13 +111,14 @@
                 android:layout_marginStart="@dimen/spacing_large"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:text="صدا"
+                android:visibility="gone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textColor="@color/grey_40" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:cardCornerRadius="0dp"
                 app:cardElevation="2dp">
 
@@ -174,6 +175,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:clickable="true"
+
                         android:gravity="center_vertical"
                         android:minHeight="@dimen/spacing_xxlarge"
                         android:orientation="horizontal"
@@ -218,16 +220,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/spacing_large" />
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_large"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:layout_marginBottom="@dimen/spacing_middle"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@color/grey_40" />
+
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

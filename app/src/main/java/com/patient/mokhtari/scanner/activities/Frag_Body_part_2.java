@@ -47,7 +47,6 @@ public class Frag_Body_part_2 extends myFragment {
     private TextView manTv, womanTv, flipFrontTv, flipBackTv;
     private String[] mTitles = {"جلو","پشت" };
     private ArrayList<MyTouchListener> mTouchListeners = new ArrayList<>();
-
     // TODO: Rename and change types and number of parameters
     public static Frag_Body_part_2 newInstance() {
         Frag_Body_part_2 fragment = new Frag_Body_part_2();
@@ -72,6 +71,7 @@ public class Frag_Body_part_2 extends myFragment {
 
         View myLayout = rootView.findViewById(R.id.toolbar); // root View id from that link
         ImageView myView = (ImageView) myLayout.findViewById(R.id.imageView3);
+        myView.setVisibility(View.GONE);
         myView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

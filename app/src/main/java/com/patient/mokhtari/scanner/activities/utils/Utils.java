@@ -148,6 +148,15 @@ public class Utils {
         }
         return "";
     }
+    public static String getRequestQues(String s){
+        switch (s){
+            case "yes":
+                return "بله";
+            case "no":
+                return "خیر";
+        }
+        return "";
+    }
  public static String getPersianDate(String str_date){
      DateFormat formatter;
      Date date = null;

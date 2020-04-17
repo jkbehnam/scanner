@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.patient.mokhtari.scanner.activities.Frag_Question_list.ql;
+import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestQues;
 
 
 /**
@@ -71,7 +72,7 @@ TextView item_datail;
         final ReqQuestions data_service = data_services_list.get(position);
 
         holder.item_name.setText(ql[position]);
-        holder.item_datail.setText(data_service.getYNQ()+"\n"+data_service.getDesc());
+        holder.item_datail.setText(getRequestQues(data_service.getYNQ())+"\n"+data_service.getDesc());
         ColorMatrix matrix = new ColorMatrix();
         matrix.setSaturation(0);
 

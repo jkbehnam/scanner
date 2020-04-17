@@ -81,7 +81,8 @@ public class adapterChatList extends RecyclerView.Adapter<adapterChatList.MyView
 
         holder.tv_reqiest_bodypart.setText(data_service.getRequest_bodypart());
         holder.tv_request_doctor.setText(data_service.getRequest_doctor());
-        holder.tv_request_state.setText(data_service.getRequest_state());
+       // holder.tv_request_state.setText(data_service.getRequest_state());
+        holder.tv_request_state.setVisibility(View.GONE);
         holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
 
 

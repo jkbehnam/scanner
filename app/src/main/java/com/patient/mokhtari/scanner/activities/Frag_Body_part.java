@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -96,6 +98,7 @@ public class Frag_Body_part extends myFragment {
 
 
 
+
         return rootView;
     }
     public void initViews(Bundle savedInstanceState){
@@ -138,7 +141,6 @@ public class Frag_Body_part extends myFragment {
         });
         bodyWidget = new HumanBodyWidget(getActivity(), container, savedInstanceState);
         container.setRegionView(new RegionView(container, getActivity()));
-
         Toolbar toolbar;
         toolbar=(Toolbar)rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
@@ -154,6 +156,70 @@ public class Frag_Body_part extends myFragment {
         });
         ((AppCompatActivity)getActivity()). getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()). getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                long downTime = SystemClock.uptimeMillis();
+                long eventTime = SystemClock.uptimeMillis() + 100;
+                float x = 0.50f;
+                float y = 0.50f;
+// List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
+                int metaState = 0;
+                MotionEvent motionEvent = MotionEvent.obtain(
+                        downTime,
+                        eventTime,
+                        MotionEvent.ACTION_UP,
+                        x,
+                        y,
+                        metaState
+                );
+
+// Dispatch touch event to view
+                motionEvent.setAction(0);
+                container.dispatchTouchEvent(motionEvent);
+
+                 downTime = SystemClock.uptimeMillis();
+                 eventTime = SystemClock.uptimeMillis() + 100;
+                 x = 0.50f;
+                 y = 0.50f;
+// List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
+                 metaState = 0;
+                 motionEvent = MotionEvent.obtain(
+                        downTime,
+                        eventTime,
+                        MotionEvent.ACTION_MOVE,
+                        x,
+                        y,
+                        metaState
+                );
+
+// Dispatch touch event to view
+                motionEvent.setAction(0);
+                container.dispatchTouchEvent(motionEvent);
+
+                downTime = SystemClock.uptimeMillis();
+                eventTime = SystemClock.uptimeMillis() + 100;
+                x = 0.50f;
+                y = 0.50f;
+// List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
+                metaState = 0;
+                motionEvent = MotionEvent.obtain(
+                        downTime,
+                        eventTime,
+                        MotionEvent.ACTION_UP,
+                        x,
+                        y,
+                        metaState
+                );
+motionEvent.setAction(0);
+// Dispatch touch event to view
+                container.dispatchTouchEvent(motionEvent);
+            }
+        }, 1000);
+
+
 
 
 

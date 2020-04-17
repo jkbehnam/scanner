@@ -51,9 +51,6 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
 
     private View mTouchTarget;
     private DispatchUpTouchEventRunnable mDispatchUpTouchEventRunnable = new DispatchUpTouchEventRunnable();
-
-
-
     private RegionView regionView;
     private RegionPathView regionPathView;
     private ImageView bodyImageView;
@@ -114,8 +111,26 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         if (!mShouldDoAnimation || mTargetWidth <= 0 || mTouchTarget == null || !"root".equals(mTag)) {
+          //  int[] location2 = new int[2];
+       //    bodyImageView = getBodyImageView();
+          //  bodyImageView.getLocationOnScreen(location2);
+      /*      try {
+                this.getLocationOnScreen(mLocationInScreen);
+                bodyImageView = getBodyImageView();
+                int[] location2 = new int[2];
+                bodyImageView.getLocationOnScreen(location2);
+                int left = location2[0] - mLocationInScreen[0];
+                int top = location2[1] - mLocationInScreen[1];
+                int right = left + bodyImageView.getMeasuredWidth();
+                int bottom = top + bodyImageView.getMeasuredHeight();
+                for (BodyPointMain f : reqBodyPoints
+                ) {
+                    canvas.drawCircle((float) (left+(right-left)*f.fx),(float)(top+(bottom-top)*f.fy), mRevealRadius, mPaint);
+                }
+            }catch (Exception e){return;}*/
             return;
-        }
+
+        }else {
 
         mRevealRadius = 15;
         this.getLocationOnScreen(mLocationInScreen);
@@ -159,10 +174,11 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
             postInvalidateDelayed(INVALIDATE_DURATION, left, top, right, bottom);
         }
         */
-    }
+    }}
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
+      //  bodyImageView = getBodyImageView();
         int x = (int) event.getRawX();
         int y = (int) event.getRawY();
         int action = event.getAction();
@@ -178,7 +194,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
             bodyImageView = getBodyImageView();
 
 
-            refresh(regionType);
+         //   refresh(regionType);
 
             if (touchTarget != null && touchTarget.isClickable() && touchTarget.isEnabled()) {
                 mTouchTarget = touchTarget;

@@ -176,9 +176,9 @@ public Frag_chat_ui(Request request){
                 for (chatMessage cm : glist
                 ) {
                     if (!cm.getSender().equals("user")) {
-                        chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.RECEIVED, "user"));
+                        chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.RECEIVED, request.getRequest_doctor()));
                     } else {
-                        chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.SENT, "doc"));
+                        chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.SENT, "شما"));
 
 
                     }
