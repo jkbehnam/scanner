@@ -5,8 +5,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
 
-import com.patient.mokhtari.scanner.activities.utils.ObjectBox;
-
 
 public class Application extends android.app.Application {
 
@@ -18,7 +16,7 @@ public class Application extends android.app.Application {
 
         application=this;
         createNotificationChannel();
-        ObjectBox.init(this);
+
 homecontext=this;
         super.onCreate();
     }

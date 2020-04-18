@@ -52,7 +52,6 @@ import id.zelory.compressor.Compressor;
 
 import static com.patient.mokhtari.scanner.activities.Main.user_id;
 import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_UPLOAD_REQUEST;
-import static io.objectbox.BoxStore.context;
 
 
 public class Frag_new_request extends myFragment implements View.OnClickListener {

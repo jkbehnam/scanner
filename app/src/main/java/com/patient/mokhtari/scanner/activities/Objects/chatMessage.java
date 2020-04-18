@@ -5,14 +5,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-import io.objectbox.annotation.Id;
-import io.objectbox.annotation.Entity;
 
-@Entity
+
 public class chatMessage implements Serializable {
 
-    @Id
-     Long cid;
+
     @SerializedName("id")
     @Expose
     private int id;
