@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 
 
 public class Frag_Body_part_2 extends myFragment {
@@ -68,6 +70,7 @@ public class Frag_Body_part_2 extends myFragment {
         setFragmentActivity(getActivity());
         fragment_body_part=getActivity();
        getActivity(). setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+        Toasty.info(getActivity(), "برای نمایش نقاط صفحه را لمس نمایید", Toast.LENGTH_SHORT, true).show();
 
         View myLayout = rootView.findViewById(R.id.toolbar); // root View id from that link
         ImageView myView = (ImageView) myLayout.findViewById(R.id.imageView3);
