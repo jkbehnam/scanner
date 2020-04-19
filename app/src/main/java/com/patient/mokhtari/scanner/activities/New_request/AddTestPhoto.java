@@ -244,7 +244,6 @@ btnTest.setOnClickListener(this);
 
     private void loadProfile(String url) {
         Log.d(TAG, "Image cache path: " + url);
-        Toast.makeText(getActivity(), url, Toast.LENGTH_SHORT).show();
         glist.get(position).setAddress(url);
         madapter.notifyDataSetChanged();
         madapter.notifyItemChanged(position);
@@ -275,10 +274,8 @@ btnTest.setOnClickListener(this);
                     // You can update this bitmap to your server
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
 
-
                     // loading profile image from local cache
                     loadProfile(uri.toString());
-                    Toast.makeText(getActivity(), String.valueOf(isDark(bitmap)), Toast.LENGTH_LONG).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

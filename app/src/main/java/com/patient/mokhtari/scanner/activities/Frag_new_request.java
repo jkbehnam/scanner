@@ -1,15 +1,19 @@
 package com.patient.mokhtari.scanner.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -47,8 +51,7 @@ import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.pedant.SweetAlert.SweetAlertDialog;
-import id.zelory.compressor.Compressor;
+
 
 import static com.patient.mokhtari.scanner.activities.Main.user_id;
 import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_UPLOAD_REQUEST;
@@ -143,6 +146,52 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
             }
         });
         if(useDrug.equals("")){
+
+      /*      new AlertDialog.Builder(getActivity())
+                    .setMessage("آیا این درخواست را بعد از مصرف دارو انجام می\u200Cدهید؟")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton("بله، مصرف کرده\u200Cام", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            useDrug="true";
+
+                        }})
+                    .setNegativeButton("خیر", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+
+
+                        }})
+
+                    .show();*/
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("آیا این درخواست را بعد از مصرف دارو انجام می\u200Cدهید؟");
+            builder.setCancelable(false);
+            builder.setNegativeButton("خیر", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    useDrug="false";
+                    dialog.cancel();
+                }
+            });
+
+            builder.setPositiveButton("بله، مصرف کرده\u200Cام", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    useDrug="true";
+                    dialog.cancel();
+
+
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+            Button nbutton = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
+            nbutton.setTextColor(getResources().getColor(R.color.black));
+            Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
+            pbutton.setTextColor(getResources().getColor(R.color.allOkButton));
+
+      /*
         SweetAlertDialog a = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
         a.setTitleText("آیا این درخواست را بعد از مصرف دارو انجام می\u200Cدهید؟");
         a.setConfirmText("بله، مصرف کرده\u200Cام");
@@ -156,12 +205,13 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         a.setCancelButton("خیر", new SweetAlertDialog.OnSweetClickListener() {
             @Override
             public void onClick(SweetAlertDialog sDialog) {
-                useDrug="false";
                 sDialog.dismissWithAnimation();
             }
         });
         a.setCancelable(false);
-        a.show();}
+        a.show();
+        */
+        }
 
         return rootView;
     }

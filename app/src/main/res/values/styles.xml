@@ -15,7 +15,10 @@
     <style name="ButtonWhite" parent="@android:style/Widget.Button">
         <item name="android:background">@color/button_white</item>
     </style>
-
+    <style name="DialogeTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:background">@color/allOkButton</item>
+        <item name="colorAccent">@android:color/white</item>
+    </style>
     <style name="ButtonMagenta" parent="@android:style/Widget.Button">
         <item name="android:background">@color/allOkButton</item>
     </style>
