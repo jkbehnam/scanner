@@ -42,6 +42,9 @@ import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
 import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
 import com.patient.mokhtari.scanner.activities.utils.VolleyMultipartRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -112,10 +115,10 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         glist.add(new MainList("ارسال تصویر ضایعه", "skin", (reqBodyPhotosArrayList.size() != 0)));
         glist.add(new MainList("انتخاب پزشک", "doc", !reqDoctor.equals("")));
 
-        if((reqBodyPoints.size() != 0 && !reqDuration.equals(""))&&(reqQuestionsArrayList.size() != 0)&&(reqTestPhotosArrayList.size() != 0)
+/*        if((reqBodyPoints.size() != 0 && !reqDuration.equals(""))&&(reqQuestionsArrayList.size() != 0)&&(reqTestPhotosArrayList.size() != 0)
         &&(reqBodyPhotosArrayList.size() != 0)&&!reqDoctor.equals("")){
             btnSendRequest.setClickable(true);
-        }else { btnSendRequest.setClickable(false);}
+        }else { btnSendRequest.setClickable(false);}*/
 
 
         adapterRcycleMain madapter = new adapterRcycleMain(glist);
@@ -300,6 +303,8 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
                 Map<String, String> params = new HashMap<>();
 
 
+
+
                 params.put("questions", arrToJsonReqQuestions(reqQuestionsArrayList));
                 params.put("api_key", user_id);
                 params.put("bodyPhotoSize", String.valueOf(bodyPhotoSize));
@@ -372,11 +377,20 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
     }
 
     public String arrToJsonReqQuestions(ArrayList<ReqQuestions> req) {
+        JSONObject JSONcontacts = new JSONObject();
+        for (int i = 0; i < req.size(); i++) {
+            try {
+                JSONcontacts.put("Count:" + String.valueOf(i + 1),req.get(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
         String x = gson.toJson(
                 req,
-                new TypeToken<ArrayList<Object>>() {
+                new TypeToken<ArrayList<ReqQuestions>>() {
                 }.getType());
         return x;
     }
@@ -386,7 +400,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         final Gson gson = builder.create();
         String x = gson.toJson(
                 req,
-                new TypeToken<ArrayList<Object>>() {
+                new TypeToken<ArrayList<BodyPointMain>>() {
                 }.getType());
         return x;
     }
@@ -396,7 +410,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         final Gson gson = builder.create();
         String x = gson.toJson(
                 req,
-                new TypeToken<ArrayList<Object>>() {
+                new TypeToken<ArrayList<ReqPhoto>>() {
                 }.getType());
         return x;
     }

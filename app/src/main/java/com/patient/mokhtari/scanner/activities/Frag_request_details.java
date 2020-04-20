@@ -74,6 +74,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     // TODO: Rename and change types and number of parameters
     public Frag_request_details(Request RequestId) {
         this.request = RequestId;
+        getRequestDetail();
     }
 
     public static Frag_request_details newInstance(Request RequestId) {
@@ -107,7 +108,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         reqChat.setOnClickListener(this);
         ReqQuestions.setOnClickListener(this);
         tv_body_part.setOnClickListener(this);
-        getRequestDetail();
+      //  getRequestDetail();
         return rootView;
 
 
@@ -150,6 +151,9 @@ public class Frag_request_details extends myFragment implements View.OnClickList
                 break;
             case R.id.ReqQuestions:
                 loadFragment(Frag_questions_details.newInstance(jsonObject));
+                break;
+            case R.id.ReqChat:
+                loadFragment(Frag_chat_ui.newInstance(request));
                 break;
         }
     }
@@ -198,8 +202,8 @@ public class Frag_request_details extends myFragment implements View.OnClickList
              request = gson.fromJson(obj.getString("testphotos"), AddImage[].class);
             testphotos.addAll(Arrays.asList(request));
             JSONArray ja=obj.getJSONArray("questions");
+           if(ja.length()!=0)
              jsonObject= (JSONObject) ja.get(0);
-
             reqBodyPoints2.clear();
             BodyPointMain[] request2 = gson.fromJson(obj.getString("bodypoints"), BodyPointMain[].class);
             reqBodyPoints2.addAll(Arrays.asList(request2));

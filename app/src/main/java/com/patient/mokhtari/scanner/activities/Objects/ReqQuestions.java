@@ -1,10 +1,15 @@
 package com.patient.mokhtari.scanner.activities.Objects;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ReqQuestions extends Object {
 
-
+    @SerializedName("q_id")
     private int q_id;
+    @SerializedName("YNQ")
     private String YNQ;
+    @SerializedName("Desc")
     private String Desc;
 
     public int getQ_id() {

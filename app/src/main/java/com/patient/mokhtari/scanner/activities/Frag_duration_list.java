@@ -67,11 +67,15 @@ public class Frag_duration_list extends myFragment implements View.OnClickListen
 
         mainActivity_recycle.setLayoutManager(layoutManager);
         ArrayList<Duration> glist = new ArrayList<>();
+        glist.add(new Duration("کمتر از ۶ ماه","Less6month"));
         glist.add(new Duration("کمتر از یک روز","LessDay"));
         glist.add(new Duration("کمتر از یک هفته","LessWeek"));
         glist.add(new Duration("کمتر از یک سال","LessMonth"));
         glist.add(new Duration("کمتر از یک ماه","LessYear"));
         glist.add(new Duration("بیشتر از یک سال","MoreYear"));
+        glist.add(new Duration("از بدو تولد","FromBDay"));
+        glist.add(new Duration("از کودکی","FromChildhood"));
+        glist.add(new Duration("از بلوغ","FromMaturity"));
 
 
         adapterdurationList madapter = new adapterdurationList(glist);
