@@ -3,7 +3,6 @@ package com.patient.mokhtari.scanner.activities;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -40,7 +39,7 @@ import com.patient.mokhtari.scanner.activities.New_request.AddTestPhoto;
 import com.patient.mokhtari.scanner.activities.Objects.MainList;
 import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
 import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
-import com.patient.mokhtari.scanner.activities.utils.VolleyMultipartRequest;
+import com.patient.mokhtari.scanner.activities.webservice.VolleyMultipartRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,7 +56,7 @@ import butterknife.ButterKnife;
 
 
 import static com.patient.mokhtari.scanner.activities.Main.user_id;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_UPLOAD_REQUEST;
+import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_UPLOAD_REQUEST;
 
 
 public class Frag_new_request extends myFragment implements View.OnClickListener {

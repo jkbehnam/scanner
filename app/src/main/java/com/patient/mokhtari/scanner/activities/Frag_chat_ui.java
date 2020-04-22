@@ -11,10 +11,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
-import com.patient.mokhtari.scanner.activities.Objects.Doctor;
 import com.patient.mokhtari.scanner.activities.Objects.Request;
-import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
-import com.patient.mokhtari.scanner.activities.utils.chatMessage;
+import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
+import com.patient.mokhtari.scanner.activities.Objects.chatMessage;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 
 import org.json.JSONException;
@@ -31,9 +30,8 @@ import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.models.ChatMessage;
 
 import static com.patient.mokhtari.scanner.activities.Main.user_id;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_CHAT;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_REQUEST_LIST;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_SEND_CHAT;
+import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_CHAT;
+import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_SEND_CHAT;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getTimeStamp;
 
 

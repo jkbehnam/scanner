@@ -2,7 +2,7 @@ package com.patient.mokhtari.scanner.activities.LoginRegistration;
 
 import android.content.Context;
 
-import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
+import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 
 import org.json.JSONException;
@@ -10,9 +10,7 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.patient.mokhtari.scanner.activities.Main.user_id;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_REQUEST_LIST;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_SIGNUP;
+import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_SIGNUP;
 
 public class SignupPresenter {
     SignupActivity signupActivity;

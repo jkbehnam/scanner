@@ -18,7 +18,7 @@ import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterDocotrList;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.Doctor;
-import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
+import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 
 import org.json.JSONException;
@@ -32,7 +32,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqDoctor;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_DOC_LIST;
+import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_DOC_LIST;
 
 public class Frag_doctor_list extends myFragment implements View.OnClickListener {
 

@@ -1,4 +1,4 @@
-package com.patient.mokhtari.scanner.activities.utils;
+package com.patient.mokhtari.scanner.activities.webservice;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;

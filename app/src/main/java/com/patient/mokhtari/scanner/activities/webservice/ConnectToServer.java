@@ -1,4 +1,4 @@
-package com.patient.mokhtari.scanner.activities.utils;
+package com.patient.mokhtari.scanner.activities.webservice;
 
 import android.content.Context;
 import android.widget.Toast;
@@ -15,7 +15,6 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 
 import org.json.JSONException;
 

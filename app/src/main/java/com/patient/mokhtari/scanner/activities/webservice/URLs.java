@@ -1,4 +1,4 @@
-package com.patient.mokhtari.scanner.activities.utils;
+package com.patient.mokhtari.scanner.activities.webservice;
 
 public class URLs {
     static String site = "http://scanner.beigzadeh4behnam.ir/new_app";

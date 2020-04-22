@@ -1,7 +1,6 @@
 package com.patient.mokhtari.scanner.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,17 +14,15 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterShowPhoto;
 import com.patient.mokhtari.scanner.activities.BodyPart.view.BodyPointMain;
 import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
-import com.patient.mokhtari.scanner.activities.Objects.Doctor;
 import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
 import com.patient.mokhtari.scanner.activities.Objects.Request;
-import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
+import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 
 import org.json.JSONArray;
@@ -37,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_REQUEST_DETAIL;
+import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_REQUEST_DETAIL;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getPersianDate;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestState;
 import static com.yalantis.ucrop.UCropFragment.TAG;

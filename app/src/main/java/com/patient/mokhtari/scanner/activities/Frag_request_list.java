@@ -26,7 +26,7 @@ import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterRcycleMain2;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.Request;
-import com.patient.mokhtari.scanner.activities.utils.ConnectToServer;
+import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 
 import org.json.JSONException;
@@ -41,7 +41,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.patient.mokhtari.scanner.activities.Main.user_id;
-import static com.patient.mokhtari.scanner.activities.utils.URLs.URL_GET_REQUEST_LIST;
+import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_REQUEST_LIST;
 
 
 public class Frag_request_list extends myFragment implements View.OnClickListener {
