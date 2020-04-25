@@ -144,7 +144,11 @@ public class Utils {
     public static String getRequestState(String s){
         switch (s){
             case "progress":
-                return " در حال بررسی";
+                return "در انتظار بررسی";
+            case "answerd":
+                return "بررسی شده";
+            case "endchat":
+                return "پایان یافته";
         }
         return "";
     }

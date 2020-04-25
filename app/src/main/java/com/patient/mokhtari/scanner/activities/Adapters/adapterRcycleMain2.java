@@ -78,6 +78,16 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
         holder.tv_reqiest_bodypart.setText("دکتر "+data_service.getRequest_doctor());
         holder.tv_request_doctor.setText("");
         holder.tv_request_state.setText(getRequestState(data_service.getRequest_state()));
+
+        if (data_service.getRequest_state().equals("answerd")) {
+            holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.correctItem));
+        } else if (data_service.getRequest_state().equals("progress")) {
+            holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.button_magenta));
+        } else if (data_service.getRequest_state().equals("encchat")) {
+            holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.allOkButton));
+            holder.cv_request.setCardBackgroundColor(ContextCompat.getColor(context, R.color.grey_20));
+        }
+
         holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
         if (data_service.getRequest_state().equals("دریافت پاسخ")) {
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.correctItem));

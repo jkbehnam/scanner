@@ -134,7 +134,6 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
 
         mRevealRadius = 15;
         this.getLocationOnScreen(mLocationInScreen);
-
         int[] location = new int[2];
         int[] location2 = new int[2];
         bodyImageView.getLocationOnScreen(location2);

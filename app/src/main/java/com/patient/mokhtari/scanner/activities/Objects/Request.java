@@ -30,6 +30,12 @@ public class Request {
     @SerializedName("photo")
     @Expose
     private String request_img;
+    @SerializedName("diagnosis")
+    @Expose
+    private String diagnosis;
+    @SerializedName("treatment")
+    @Expose
+    private String treatment;
 
     public Request(String reqiest_bodypart, String request_date, String request_doctor, String request_state, String request_img){
         this.request_bodypart =reqiest_bodypart;
@@ -77,5 +83,21 @@ public class Request {
 
     public void setRequest_img(String request_img) {
         this.request_img = request_img;
+    }
+
+    public String getDiagnosis() {
+        return diagnosis;
+    }
+
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
     }
 }

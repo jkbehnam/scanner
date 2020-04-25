@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.patient.mokhtari.scanner.R;
@@ -28,15 +31,18 @@ import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_REQUEST_DETAIL;
+
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getPersianDate;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestState;
+import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_REQUEST_DETAIL;
 import static com.yalantis.ucrop.UCropFragment.TAG;
 
 
@@ -62,10 +68,14 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     TextView ReqQuestions;
     @BindView(R.id.ReqDate)
     TextView reqDate;
+    @BindView(R.id.ReqDiagnosis)
+    EditText ReqDiagnosis;
+    @BindView(R.id.ReqTreatment)
+    EditText ReqTreatment;
     int position;
     Request request;
     JSONObject jsonObject;
-    public  ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
+    public ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
     public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
 
     // TODO: Rename and change types and number of parameters
@@ -105,7 +115,11 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         reqChat.setOnClickListener(this);
         ReqQuestions.setOnClickListener(this);
         tv_body_part.setOnClickListener(this);
-      //  getRequestDetail();
+
+
+        ReqDiagnosis.setText("تشخیص پزشک: "+request.getDiagnosis());
+        ReqTreatment.setText("پلن درمانی: "+request.getTreatment());
+        //  getRequestDetail();
         return rootView;
 
 
@@ -187,34 +201,35 @@ public class Frag_request_details extends myFragment implements View.OnClickList
 
     public void reciveRequest(String response) throws JSONException {
 
-      final GsonBuilder builder = new GsonBuilder();
+        final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
         // final Reader data = new InputStreamReader(LoginActivity.class.getResourceAsStream("user"), "UTF-8");
         JSONObject obj = new JSONObject(response);
         ArrayList<AddImage> bodyphotos = new ArrayList<>();
         ArrayList<AddImage> testphotos = new ArrayList<>();
         try {
-             AddImage[] request = gson.fromJson(obj.getString("bodyphotos"), AddImage[].class);
+            AddImage[] request = gson.fromJson(obj.getString("bodyphotos"), AddImage[].class);
             bodyphotos.addAll(Arrays.asList(request));
-             request = gson.fromJson(obj.getString("testphotos"), AddImage[].class);
+            request = gson.fromJson(obj.getString("testphotos"), AddImage[].class);
             testphotos.addAll(Arrays.asList(request));
-            JSONArray ja=obj.getJSONArray("questions");
-           if(ja.length()!=0)
-             jsonObject= (JSONObject) ja.get(0);
+            JSONArray ja = obj.getJSONArray("questions");
+            if (ja.length() != 0)
+                jsonObject = (JSONObject) ja.get(0);
             reqBodyPoints2.clear();
             BodyPointMain[] request2 = gson.fromJson(obj.getString("bodypoints"), BodyPointMain[].class);
             reqBodyPoints2.addAll(Arrays.asList(request2));
         } catch (Exception e) {
         }
-      settitems(bodyphotos,testphotos);
+        settitems(bodyphotos, testphotos);
     }
-    public void settitems(ArrayList<AddImage> bodyphotos,ArrayList<AddImage> testphotos){
+
+    public void settitems(ArrayList<AddImage> bodyphotos, ArrayList<AddImage> testphotos) {
 
 
         madapter = new adapterShowPhoto(bodyphotos);
         test_img_recycle.setAdapter(madapter);
-       madapter2 = new adapterShowPhoto(testphotos);
-       scan_img_recycle.setAdapter(madapter2);
+        madapter2 = new adapterShowPhoto(testphotos);
+        scan_img_recycle.setAdapter(madapter2);
 
         madapter.setOnCardClickListner(new adapterShowPhoto.OnCardClickListner() {
             @Override
@@ -223,18 +238,18 @@ public class Frag_request_details extends myFragment implements View.OnClickList
 //                getActivity().startActivity(intent);
 
                 showphoto shortAnswerAlert = new showphoto();
-                shortAnswerAlert.init_dialog(getActivity(),(bodyphotos.get(position).getAddress()));
+                shortAnswerAlert.init_dialog(getActivity(), (bodyphotos.get(position).getAddress()));
                 shortAnswerAlert.show();
             }
         });
         madapter2.setOnCardClickListner(new adapterShowPhoto.OnCardClickListner() {
             @Override
             public void OnCardClicked(View view, int position) {
-               // Intent intent = new Intent(getActivity(), imageSampleActivity.class);
-              //  getActivity().startActivity(intent);
+                // Intent intent = new Intent(getActivity(), imageSampleActivity.class);
+                //  getActivity().startActivity(intent);
 
                 showphoto shortAnswerAlert = new showphoto();
-                shortAnswerAlert.init_dialog(getActivity(),(testphotos.get(position).getAddress()));
+                shortAnswerAlert.init_dialog(getActivity(), (testphotos.get(position).getAddress()));
                 shortAnswerAlert.show();
             }
         });

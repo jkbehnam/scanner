@@ -134,30 +134,13 @@ public class WaveEffectLayout2 extends FrameLayout implements Runnable {
         int width = this.getWidth();
         int height = this.getHeight();
 
-
-      //  canvas.drawCircle(width/2+100, height/2, 15, mPaint);
-     //   canvas.drawCircle(width/2+100, height/2+150, 15, mPaint);
-
-
         for (BodyPointMain f : reqBodyPoints2
         ) {
-          //  float pleft=  (float) (left+(right-left)*0.4992843568325043);
-          //  float pright=(float)(top+(bottom-top)*0.06609989702701569);
-
-         //   canvas.drawCircle(pleft, pright, mRevealRadius, mPaint);
 
             canvas.drawCircle((float) (left+(right-left)*f.fx),(float)(top+(bottom-top)*f.fy), mRevealRadius, mPaint);
         }
 
-  //      canvas.restore();
 
-     /*   if (mRevealRadius <= mMaxRevealRadius) {
-            postInvalidateDelayed(INVALIDATE_DURATION, left, top, right, bottom);
-        } else if (!mIsPressed) {
-            mShouldDoAnimation = false;
-            postInvalidateDelayed(INVALIDATE_DURATION, left, top, right, bottom);
-        }
-        */
     }
 
     @Override

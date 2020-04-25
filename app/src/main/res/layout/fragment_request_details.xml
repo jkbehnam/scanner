@@ -431,7 +431,55 @@ android:drawableRight="@drawable/conversation"
 
 
             </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
 
+                android:gravity="right"
+                android:minHeight="@dimen/emailthread_subject_textize_with_photo_attachments">
+
+                <EditText
+                    android:id="@+id/ReqDiagnosis"
+                    android:layout_width="match_parent"
+android:editable="false"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/answer_edittext"
+                    android:ems="10"
+                    android:gravity="top|right"
+                    android:textColor="@color/text_color_all"
+                    android:hint="تشخیص پزشک"
+                    android:inputType="textMultiLine"
+                    android:minHeight="100dp"
+                    android:padding="10dp"
+                    android:textColorHint="#9F9F9F" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                android:gravity="right"
+                android:minHeight="@dimen/emailthread_subject_textize_with_photo_attachments">
+
+                <EditText
+                    android:id="@+id/ReqTreatment"
+                    android:layout_width="match_parent"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/answer_edittext"
+                    android:ems="10"
+                    android:gravity="top|right"
+                    android:textColor="@color/text_color_all"
+                    android:hint="پلن درمانی پزشک"
+                    android:inputType="textMultiLine"
+                    android:minHeight="100dp"
+                    android:padding="10dp"
+                    android:textColorHint="#9F9F9F" />
+            </TableRow>
         </LinearLayout>
     </ScrollView>
 
