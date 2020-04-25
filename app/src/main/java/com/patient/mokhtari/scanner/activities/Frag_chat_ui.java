@@ -12,8 +12,8 @@ import com.google.gson.GsonBuilder;
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.Request;
-import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.Objects.chatMessage;
+import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
 import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
 
 import org.json.JSONException;
@@ -30,9 +30,9 @@ import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.models.ChatMessage;
 
 import static com.patient.mokhtari.scanner.activities.Main.user_id;
+import static com.patient.mokhtari.scanner.activities.utils.Utils.getTimeStamp;
 import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_CHAT;
 import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_SEND_CHAT;
-import static com.patient.mokhtari.scanner.activities.utils.Utils.getTimeStamp;
 
 
 public class Frag_chat_ui extends myFragment implements View.OnClickListener {
@@ -42,16 +42,19 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     @BindView(R.id.chat_view)
     ChatView chatView;
     ArrayList<ChatMessage> chat_list;
-Request request;
+    Request request;
+
     // TODO: Rename and change types and number of parameters
     public static Frag_chat_ui newInstance(Request request) {
         Frag_chat_ui fragment = new Frag_chat_ui(request);
 
         return fragment;
     }
-public Frag_chat_ui(Request request){
-        this.request=request;
-}
+
+    public Frag_chat_ui(Request request) {
+        this.request = request;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +124,7 @@ public Frag_chat_ui(Request request){
 
         }
     }
+
     public void sendMessageServer(ChatMessage chatMessage) {
         Map<String, String> param = new HashMap<String, String>();
         param.put("request_key", request.getRequest_id());
@@ -131,10 +135,11 @@ public Frag_chat_ui(Request request){
         ConnectToServer.any_send(new VolleyCallback() {
             @Override
             public void onSuccess(String result) throws JSONException {
-               // reciveRequest(result);
+                // reciveRequest(result);
             }
         }, param, URL_SEND_CHAT);
     }
+
     public void getMessageServer() {
         Map<String, String> param = new HashMap<String, String>();
         param.put("request_key", request.getRequest_id());
@@ -142,7 +147,7 @@ public Frag_chat_ui(Request request){
         ConnectToServer.any_send(new VolleyCallback() {
             @Override
             public void onSuccess(String result) throws JSONException {
-                 reciveRequest(result);
+                reciveRequest(result);
             }
         }, param, URL_GET_CHAT);
     }
@@ -165,25 +170,25 @@ public Frag_chat_ui(Request request){
         addtochat(requests);
     }
 
-        public void addtochat(ArrayList<chatMessage> glist) {
+    public void addtochat(ArrayList<chatMessage> glist) {
 
 
-            {
-                //extract data from fired event
+        {
+            //extract data from fired event
 
-                for (chatMessage cm : glist
-                ) {
-                    if (!cm.getSender().equals("user")) {
-                        chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.RECEIVED, request.getRequest_doctor()));
-                    } else {
-                        chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.SENT, "شما"));
+            for (chatMessage cm : glist
+            ) {
+                if (!cm.getSender().equals("user")) {
+                    chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.RECEIVED, request.getRequest_doctor()));
+                } else {
+                    chatView.addMessage(new ChatMessage(cm.getContent(), getTimeStamp(cm.getTime()) * 1000, ChatMessage.Type.SENT, "شما"));
 
 
-                    }
                 }
-
-
             }
+
+
+        }
 
     }
 
