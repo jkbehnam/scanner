@@ -30,6 +30,9 @@ public class Request {
     @SerializedName("photo")
     @Expose
     private String request_img;
+    @SerializedName("duration")
+    @Expose
+    private String duration;
     @SerializedName("diagnosis")
     @Expose
     private String diagnosis;
@@ -52,6 +55,15 @@ public class Request {
         this.request_state=request_state;
         this.request_img=request_img;
     }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
     public int getReshot_body() {
         return reshot_body;
     }

@@ -175,6 +175,7 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
     }
 
     public void getRequestList() {
+        showLoading_base();
         Map<String, String> param = new HashMap<String, String>();
         param.put("user_id", user_id);
         ConnectToServer.any_send(new VolleyCallback() {
@@ -183,6 +184,7 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
                 if(reqListSwipeContainer.isRefreshing()){reqListSwipeContainer.setRefreshing(false);}
 
                 reciveRequest(result);
+                hideLoading_base();
             }
         }, param, URL_GET_REQUEST_LIST);
     }

@@ -44,6 +44,7 @@ import butterknife.ButterKnife;
 
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPhotosArrayList;
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqTestPhotosArrayList;
+import static com.patient.mokhtari.scanner.activities.utils.Utils.getDurationList;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getPersianDate;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestState;
 import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_REQUEST_DETAIL;
@@ -80,6 +81,8 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     TextView retryPhotoExam;
     @BindView(R.id.retryPhoto)
     TextView retryPhoto;
+    @BindView(R.id.tv_duration)
+    TextView tv_duration;
     int position;
     Request request;
     JSONObject jsonObject;
@@ -126,6 +129,7 @@ public static Frag_request_details frag_request_details;
 
         reqDate.setText(getPersianDate(request.getRequest_date()));
         reqDocName.setText(request.getRequest_doctor());
+        tv_duration.setText(getDurationList(request.getDuration()));
         reqProgress.setText(getRequestState(request.getRequest_state()));
         reqChat.setOnClickListener(this);
         ReqQuestions.setOnClickListener(this);

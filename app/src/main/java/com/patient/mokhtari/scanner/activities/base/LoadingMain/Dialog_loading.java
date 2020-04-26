@@ -10,10 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
-
 import com.patient.mokhtari.scanner.R;
-
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +35,7 @@ public class Dialog_loading {
         ald_exit.setView(view_alert_dialog_exit);
         ald_exit.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         ButterKnife.bind(this, view_alert_dialog_exit);
-
+        //loading_text = (TextView) ald_exit.findViewById(R.id.loading_text);
      /*   dialog = new Dialog(context, android.R.style.Theme_Translucent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.alert_location_searching);

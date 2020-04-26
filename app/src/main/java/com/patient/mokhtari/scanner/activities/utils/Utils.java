@@ -139,6 +139,30 @@ public class Utils {
         }
         return "";
     }
+
+    public static String getDurationList(String s){
+        switch (s){
+            case "Less6month":
+                return "کمتر از ۶ ماه";
+            case "LessDay":
+                return "کمتر از یک روز";
+            case "LessWeek":
+                return "کمتر از یک هفته";
+            case "LessYear":
+                return "کمتر از یک سال";
+            case "LessMonth":
+                return "کمتر از یک ماه";
+            case "MoreYear":
+                return "بیشتر از یک سال";
+            case "FromBDay":
+                return "از بدو تولد";
+            case "FromChildhood":
+                return "از کودکی";
+            case "FromMaturity":
+                return "از بلوغ";
+        }
+        return "";
+    }
     public static String getRequestQues(String s){
         switch (s){
             case "yes":

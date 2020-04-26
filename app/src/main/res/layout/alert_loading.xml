@@ -34,7 +34,7 @@
                 android:id="@+id/loading_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="در حال ارسال درخواست"
+                android:text="لطفا صبر کنید"
                 android:textColor="@color/white" />
         </TableRow>
 

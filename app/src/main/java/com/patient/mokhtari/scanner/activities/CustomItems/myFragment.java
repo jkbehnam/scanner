@@ -26,6 +26,10 @@ public abstract class myFragment extends Fragment {
         ad.show();
 
     }
+    public void showLoading_base(String message) {
+        ad.show();
+
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
