@@ -89,9 +89,7 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
         }
 
         holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
-        if (data_service.getRequest_state().equals("دریافت پاسخ")) {
-            holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.correctItem));
-        }
+
         Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
         holder.tv_request_state.setTypeface(typeface3, Typeface.BOLD);
         Glide.with(context)

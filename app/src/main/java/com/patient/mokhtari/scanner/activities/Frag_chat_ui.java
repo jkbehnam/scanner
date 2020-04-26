@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.onurkagan.ksnack_lib.Animations.Slide;
+import com.onurkagan.ksnack_lib.KSnack.KSnack;
+import com.onurkagan.ksnack_lib.KSnack.KSnackBarEventListener;
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.Request;
@@ -74,17 +77,15 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
             @Override
             public boolean sendMessage(ChatMessage chatMessage) {
                 // perform actual message sending
-                sendMessageServer(chatMessage);
-                return true;
+                if(!request.getRequest_state().equals("endchat")) {
+
+                    sendMessageServer(chatMessage);
+                    return true;
+                }return false;
             }
         });
-        // rcleView.setLayoutManager(layoutManager);
-     /*   rouchuan.circlelayoutmanager.CircleLayoutManager circleLayoutManager = new rouchuan.circlelayoutmanager.CircleLayoutManager(getActivity());
-        rcleView.setLayoutManager(circleLayoutManager);
-        rcleView.addOnScrollListener(new rouchuan.circlelayoutmanager.CenterScrollListener());
-        */
-        //  rcleView.setLayoutManager(new HiveLayoutManager(HiveLayoutManager.VERTICAL));
 
+        showEndedSnackbar(request.getRequest_state());
         getMessageServer();
         return rootView;
     }
@@ -190,6 +191,37 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
 
         }
 
+    }
+    public void showEndedSnackbar(String s){
+        if(s.equals("endchat")){
+
+            KSnack kSnack = new KSnack(getActivity());
+            kSnack
+                    .setListener(new KSnackBarEventListener() { // listener
+                        @Override
+                        public void showedSnackBar() {
+                            System.out.println("Showed");
+                        }
+
+                        @Override
+                        public void stoppedSnackBar() {
+                            System.out.println("Stopped");
+                        }
+                    })
+                    .setAction("Text", new View.OnClickListener() { // name and clicklistener
+                        @Override
+                        public void onClick(View v) {
+                            System.out.println("Your action !");
+                        }
+                    })
+                    .setMessage("مکالمه به درخواست شما با پایان رسیده است") // message
+                    .setTextColor(R.color.white) // message text color
+                    .setBackColor(R.color.red_600) // background color
+                    .setButtonTextColor(R.color.white) // action button text color
+                    .setAnimation(Slide.Up.getAnimation(kSnack.getSnackView()), Slide.Down.getAnimation(kSnack.getSnackView()))
+                    .setDuration(4000) // you can use for auto close.
+                    .show();
+        }
     }
 
 }

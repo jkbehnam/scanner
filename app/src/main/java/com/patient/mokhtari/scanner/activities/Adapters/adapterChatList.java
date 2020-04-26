@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -89,8 +90,18 @@ public class adapterChatList extends RecyclerView.Adapter<adapterChatList.MyView
 
         Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
         holder.tv_request_state.setTypeface(typeface3, Typeface.BOLD);
-
         Glide.with(context).load(data_service.getRequest_img()).into(holder.iv_requet);
+
+        if (data_service.getRequest_state().equals("answerd")) {
+            holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.correctItem));
+        } else if (data_service.getRequest_state().equals("progress")) {
+            holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.button_magenta));
+        } else if (data_service.getRequest_state().equals("endchat")) {
+            holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.allOkButton));
+            holder.cv_request.setCardBackgroundColor(ContextCompat.getColor(context, R.color.grey_20));
+        }
+
+
         holder.cv_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

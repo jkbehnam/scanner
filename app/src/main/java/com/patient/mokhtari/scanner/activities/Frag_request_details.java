@@ -75,6 +75,8 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     int position;
     Request request;
     JSONObject jsonObject;
+    ArrayList<AddImage> bodyphotos=new ArrayList<>();
+    ArrayList<AddImage> testphotos=new ArrayList<>();
     public ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
     public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
 
@@ -120,6 +122,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         ReqDiagnosis.setText("تشخیص پزشک: "+request.getDiagnosis());
         ReqTreatment.setText("پلن درمانی: "+request.getTreatment());
         //  getRequestDetail();
+        settitems(bodyphotos,testphotos);
         return rootView;
 
 
@@ -205,8 +208,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         final Gson gson = builder.create();
         // final Reader data = new InputStreamReader(LoginActivity.class.getResourceAsStream("user"), "UTF-8");
         JSONObject obj = new JSONObject(response);
-        ArrayList<AddImage> bodyphotos = new ArrayList<>();
-        ArrayList<AddImage> testphotos = new ArrayList<>();
+
         try {
             AddImage[] request = gson.fromJson(obj.getString("bodyphotos"), AddImage[].class);
             bodyphotos.addAll(Arrays.asList(request));
