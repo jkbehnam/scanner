@@ -64,7 +64,7 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/btnSignUp"
+            android:id="@+id/btntips"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:foreground="?android:attr/selectableItemBackground"
@@ -73,7 +73,6 @@
             android:layout_marginRight="24dp"
 
             android:layout_weight="1"
-            android:onClick="onClick"
 
             app:cardBackgroundColor="@color/button_white"
             app:cardCornerRadius="24dp"

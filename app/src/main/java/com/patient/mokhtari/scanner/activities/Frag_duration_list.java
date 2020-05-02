@@ -56,7 +56,6 @@ public class Frag_duration_list extends myFragment implements View.OnClickListen
 
         setToolbar_notmain(rootView,"انتخاب محل ضایعه");
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-
         // rcleView.setLayoutManager(layoutManager);
      /*   rouchuan.circlelayoutmanager.CircleLayoutManager circleLayoutManager = new rouchuan.circlelayoutmanager.CircleLayoutManager(getActivity());
         rcleView.setLayoutManager(circleLayoutManager);
@@ -88,7 +87,9 @@ public class Frag_duration_list extends myFragment implements View.OnClickListen
                 reqDuration =String.valueOf(glist.get(position).getId());
             }
         });
-
+        //mainActivity_recycle.scrollTo(0);
+        mainActivity_recycle.scrollToPosition(glist.size() - 1);
+        mainActivity_recycle.smoothScrollToPosition(0);
         btn_period.setOnClickListener(this);
         return rootView;
     }

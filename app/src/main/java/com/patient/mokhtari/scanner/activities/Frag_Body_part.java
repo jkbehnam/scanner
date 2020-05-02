@@ -115,7 +115,7 @@ public class Frag_Body_part extends myFragment {
             @Override
             public void onTabSelect(int position) {
                 switch (position){
-                    case 0:
+                   /* case 0:
                         if(bodyWidget.flipBody(false)) {
                             flipFrontTv.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
                             flipBackTv.setBackgroundColor(Color.TRANSPARENT);
@@ -130,7 +130,7 @@ public class Frag_Body_part extends myFragment {
                             flipFrontTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
                             flipBackTv.setTextColor(Color.WHITE);
                         }
-                        break;
+                        break;*/
                 }
             }
 

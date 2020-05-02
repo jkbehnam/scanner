@@ -2,6 +2,8 @@ package com.patient.mokhtari.scanner.activities.walkthrough;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -15,6 +17,9 @@ import com.patient.mokhtari.scanner.activities.BaseActivity;
 import com.patient.mokhtari.scanner.activities.LoginRegistration.login.LoginActivity;
 import com.patient.mokhtari.scanner.activities.LoginRegistration.SignupActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class WalkthroughStyle3Activity extends BaseActivity implements View.OnClickListener {
     private ViewPager viewPager;
@@ -22,11 +27,13 @@ public class WalkthroughStyle3Activity extends BaseActivity implements View.OnCl
     private View indicator2;
     private View indicator3;
     private View indicator4;
-
+@BindView(R.id.btnSignUp)
+    CardView btnSignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.walkthrough3_layout);
+        ButterKnife.bind(this);
 
         indicator1 = findViewById(R.id.indicator1);
         indicator2 = findViewById(R.id.indicator2);
@@ -36,7 +43,7 @@ public class WalkthroughStyle3Activity extends BaseActivity implements View.OnCl
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         viewPager.addOnPageChangeListener(new WizardPageChangeListener());
-
+        btnSignUp.setOnClickListener(this);
         updateIndicators(0);
     }
 
