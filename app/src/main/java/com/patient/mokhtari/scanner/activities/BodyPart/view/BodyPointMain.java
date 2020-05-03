@@ -13,7 +13,7 @@ public class BodyPointMain {
     @SerializedName("show_back")
     @Expose
     public boolean mShowingBack;
-    BodyPointMain(float fx, float fy,Boolean isFront){
+    public BodyPointMain(float fx, float fy, Boolean isFront){
         this.fx=fx;
         this.fy=fy;
         this.mShowingBack =isFront;

@@ -29,7 +29,7 @@ public class HumanBodyWidget {
     static public boolean isAPI11 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
     public static boolean mShowingBack = false;
     public static boolean isMan = true;
-
+public static ImageView body2;
     private BodyFrontFragment bodyFrontFragment = new BodyFrontFragment();
     private BodyBackFragment bodyBackFragment = new BodyBackFragment();
 //    private FragmentManager.OnBackStackChangedListener onBackStackChangedListener;
@@ -72,6 +72,7 @@ public class HumanBodyWidget {
                     .beginTransaction()
                     .add(R.id.body_container, bodyFrontFragment)//container.getId()
                     .commit();
+
         } else {
             mShowingBack = (activity.getFragmentManager().getBackStackEntryCount() > 0);
         }
@@ -181,6 +182,7 @@ public class HumanBodyWidget {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             bodyImageView = (ImageView) view.findViewById(R.id.body_front);
+            body2=bodyImageView;
         }
 
         @Override
@@ -209,6 +211,8 @@ public class HumanBodyWidget {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             bodyImageView = (ImageView) view.findViewById(R.id.body_back);
+            body2=bodyImageView;
+
         }
 
         @Override

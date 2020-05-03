@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -114,8 +115,9 @@ public class Frag_Body_part extends myFragment {
         segmentTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
+                Toast.makeText(getActivity(), "hii", Toast.LENGTH_SHORT).show();
                 switch (position){
-                   /* case 0:
+                    case 0:
                         if(bodyWidget.flipBody(false)) {
                             flipFrontTv.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
                             flipBackTv.setBackgroundColor(Color.TRANSPARENT);
@@ -130,7 +132,7 @@ public class Frag_Body_part extends myFragment {
                             flipFrontTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
                             flipBackTv.setTextColor(Color.WHITE);
                         }
-                        break;*/
+                        break;
                 }
             }
 
@@ -213,13 +215,11 @@ public class Frag_Body_part extends myFragment {
                         y,
                         metaState
                 );
-motionEvent.setAction(0);
+       motionEvent.setAction(0);
 // Dispatch touch event to view
                 container.dispatchTouchEvent(motionEvent);
             }
         }, 1000);
-
-
 
 
 
