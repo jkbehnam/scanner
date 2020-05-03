@@ -6,6 +6,15 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.os.Handler;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,26 +23,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.patient.mokhtari.scanner.R;
+
 import com.patient.mokhtari.scanner.activities.Bodypart2.region.RegionView;
 import com.patient.mokhtari.scanner.activities.Bodypart2.view.HumanBodyWidget;
 import com.patient.mokhtari.scanner.activities.Bodypart2.view.WaveEffectLayout2;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import es.dmoral.toasty.Toasty;
-
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPoints;
 
 public class Frag_Body_part_2 extends myFragment {
 
@@ -49,6 +50,7 @@ public class Frag_Body_part_2 extends myFragment {
     private TextView manTv, womanTv, flipFrontTv, flipBackTv;
     private String[] mTitles = {"جلو","پشت" };
     private ArrayList<MyTouchListener> mTouchListeners = new ArrayList<>();
+
     // TODO: Rename and change types and number of parameters
     public static Frag_Body_part_2 newInstance() {
         Frag_Body_part_2 fragment = new Frag_Body_part_2();
@@ -64,17 +66,15 @@ public class Frag_Body_part_2 extends myFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-         rootView= inflater.inflate(R.layout.activity_bodypart_2, container, false);
+        rootView= inflater.inflate(R.layout.activity_bodypart_2, container, false);
 
         super.onCreate(savedInstanceState);
-        setFragmentActivity(getActivity());
+       setFragmentActivity(getActivity());
         fragment_body_part=getActivity();
-       getActivity(). setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-        Toasty.info(getActivity(), "برای نمایش نقاط صفحه را لمس نمایید", Toast.LENGTH_SHORT, true).show();
+        getActivity(). setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         View myLayout = rootView.findViewById(R.id.toolbar); // root View id from that link
         ImageView myView = (ImageView) myLayout.findViewById(R.id.imageView3);
-        myView.setVisibility(View.GONE);
         myView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,7 +97,6 @@ public class Frag_Body_part_2 extends myFragment {
                 return true;
             }
         });
-        segmentTabLayout.setVisibility(View.INVISIBLE);
 
 
         return rootView;
@@ -112,9 +111,11 @@ public class Frag_Body_part_2 extends myFragment {
         flipFrontTv = (TextView)rootView.findViewById(R.id.flipFront);
         flipBackTv = (TextView)rootView. findViewById(R.id.flipBack);
         segmentTabLayout.setTabData(mTitles);
+
         segmentTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
+
                 switch (position){
                     case 0:
                         if(bodyWidget.flipBody(false)) {
@@ -140,14 +141,16 @@ public class Frag_Body_part_2 extends myFragment {
 
             }
         });
+
         bodyWidget = new HumanBodyWidget(getActivity(), container, savedInstanceState);
         container.setRegionView(new RegionView(container, getActivity()));
-
         Toolbar toolbar;
         toolbar=(Toolbar)rootView.findViewById(R.id.toolbar);
+        ImageView myView = (ImageView) toolbar.findViewById(R.id.imageView3);
+        myView.setVisibility(View.INVISIBLE);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         TextView txttoolbar=(TextView)rootView.findViewById(R.id.txttoolbar);
-        txttoolbar.setText("محل ضایعه");
+        txttoolbar.setText("مشاهده محل ضایعه");
         Typeface typeface3 = Typeface.createFromAsset(getActivity().getAssets(), "font/vazirbold.ttf");
         txttoolbar.setTypeface(typeface3, Typeface.BOLD);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -159,12 +162,75 @@ public class Frag_Body_part_2 extends myFragment {
         ((AppCompatActivity)getActivity()). getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()). getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                long downTime = SystemClock.uptimeMillis();
+                long eventTime = SystemClock.uptimeMillis() + 100;
+                float x = 0.50f;
+                float y = 0.50f;
+// List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
+                int metaState = 0;
+                MotionEvent motionEvent = MotionEvent.obtain(
+                        downTime,
+                        eventTime,
+                        MotionEvent.ACTION_UP,
+                        x,
+                        y,
+                        metaState
+                );
+
+// Dispatch touch event to view
+                motionEvent.setAction(0);
+                container.dispatchTouchEvent(motionEvent);
+
+                downTime = SystemClock.uptimeMillis();
+                eventTime = SystemClock.uptimeMillis() + 100;
+                x = 0.50f;
+                y = 0.50f;
+// List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
+                metaState = 0;
+                motionEvent = MotionEvent.obtain(
+                        downTime,
+                        eventTime,
+                        MotionEvent.ACTION_MOVE,
+                        x,
+                        y,
+                        metaState
+                );
+
+// Dispatch touch event to view
+                motionEvent.setAction(0);
+                container.dispatchTouchEvent(motionEvent);
+
+                downTime = SystemClock.uptimeMillis();
+                eventTime = SystemClock.uptimeMillis() + 100;
+                x = 0.50f;
+                y = 0.50f;
+// List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
+                metaState = 0;
+                motionEvent = MotionEvent.obtain(
+                        downTime,
+                        eventTime,
+                        MotionEvent.ACTION_UP,
+                        x,
+                        y,
+                        metaState
+                );
+                motionEvent.setAction(0);
+// Dispatch touch event to view
+                container.dispatchTouchEvent(motionEvent);
+            }
+        }, 1000);
+
 
 
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
+            reqBodyPoints.clear();
             mListener.onFragmentInteraction(uri);
         }
     }
@@ -192,55 +258,6 @@ public class Frag_Body_part_2 extends myFragment {
     public void unRegisterTouchListener(MyTouchListener listener){
         mTouchListeners.remove(listener);
     }
-
-
-    public void genderClick(View view){
-        switch (view.getId()){
-            case R.id.man_btn:
-                if(bodyWidget.toggleBodyGenderImage(true)) {
-                    rootView. findViewById(R.id.man_btn).setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
-                    rootView. findViewById(R.id.woman_btn).setBackgroundColor(Color.TRANSPARENT);
-                    manIv.setImageResource(R.mipmap.icon_man_pressed);
-                    manTv.setTextColor(Color.WHITE);
-                    womanIv.setImageResource(R.mipmap.icon_woman);
-                    womanTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
-                }
-                break;
-            case R.id.woman_btn:
-                if(bodyWidget.toggleBodyGenderImage(false)) {
-                    rootView.findViewById(R.id.man_btn).setBackgroundColor(Color.TRANSPARENT);
-                    rootView.findViewById(R.id.woman_btn).setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
-                    manIv.setImageResource(R.mipmap.icon_man);
-                    manTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
-                    womanIv.setImageResource(R.mipmap.icon_woman_pressed);
-                    womanTv.setTextColor(Color.WHITE);
-                }
-                break;
-        }
-    }
-
-    public void sideClick(View view){
-
-        switch (view.getId()){
-            case R.id.flipFront:
-                if(bodyWidget.flipBody(false)) {
-                    flipFrontTv.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
-                    flipBackTv.setBackgroundColor(Color.TRANSPARENT);
-                    flipFrontTv.setTextColor(Color.WHITE);
-                    flipBackTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
-                }
-                break;
-            case R.id.flipBack:
-                if(bodyWidget.flipBody(true)) {
-                    flipFrontTv.setBackgroundColor(Color.TRANSPARENT);
-                    flipBackTv.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
-                    flipFrontTv.setTextColor(getResources().getColor(R.color.colorLightBlue));
-                    flipBackTv.setTextColor(Color.WHITE);
-                }
-                break;
-        }
-    }
-
     public interface MyTouchListener
     {
         void onTouchEvent(MotionEvent event);

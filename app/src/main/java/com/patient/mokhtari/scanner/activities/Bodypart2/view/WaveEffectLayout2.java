@@ -26,6 +26,8 @@ import com.patient.mokhtari.scanner.activities.Bodypart2.region.RegionView;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static com.patient.mokhtari.scanner.activities.BodyPart.view.WaveEffectLayout.location_copy3;
+import static com.patient.mokhtari.scanner.activities.Bodypart2.view.HumanBodyWidget.body3;
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPoints;
 import static com.patient.mokhtari.scanner.activities.Frag_request_details.reqBodyPoints2;
 
@@ -116,12 +118,43 @@ public class WaveEffectLayout2 extends FrameLayout implements Runnable {
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
         if (!mShouldDoAnimation || mTargetWidth <= 0 || mTouchTarget == null || !"root".equals(mTag)) {
+            ImageView imageView = body3;
+            if (imageView != null) {
+
+
+                // bodyImageView = getBodyImageView();
+                mRevealRadius = 15;
+                this.getLocationOnScreen(mLocationInScreen);
+
+                int[] location2 = new int[2];
+                imageView.getLocationOnScreen(location2);
+                if (location2[1] < location2[0]) {
+                    location2=location_copy3;
+                } else {
+                    location_copy3 = location2;
+                }
+
+
+                if (location2[0] != 0 && location2[1] != 0) {
+                    int left = location2[0] - mLocationInScreen[0];
+                    int top = location2[1] - mLocationInScreen[1];
+                    int right = left + imageView.getMeasuredWidth();
+                    int bottom = top + imageView.getMeasuredHeight();
+
+
+                    for (BodyPointMain f : reqBodyPoints2
+                    ) {
+                        if (HumanBodyWidget.mShowingBack == f.mShowingBack)
+                            canvas.drawCircle((float) (left + (right - left) * f.fx), (float) (top + (bottom - top) * f.fy), mRevealRadius, mPaint);
+                    }
+                }
+
+            }
             return;
         }
-  bodyImageView = getBodyImageView();
+        bodyImageView = getBodyImageView();
 
-
-          refresh(regionType);
+        refresh(regionType);
         mRevealRadius = 15;
         this.getLocationOnScreen(mLocationInScreen);
 
@@ -136,7 +169,7 @@ public class WaveEffectLayout2 extends FrameLayout implements Runnable {
 
         for (BodyPointMain f : reqBodyPoints2
         ) {
-
+            if (HumanBodyWidget.mShowingBack == f.mShowingBack)
             canvas.drawCircle((float) (left+(right-left)*f.fx),(float)(top+(bottom-top)*f.fy), mRevealRadius, mPaint);
         }
 

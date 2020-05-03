@@ -30,6 +30,7 @@ public class HumanBodyWidget {
     static public boolean isAPI11 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
     public static boolean mShowingBack = false;
     public static boolean isMan = true;
+    public static ImageView body3;
 
     private BodyFrontFragment bodyFrontFragment = new BodyFrontFragment();
     private BodyBackFragment bodyBackFragment = new BodyBackFragment();
@@ -182,6 +183,7 @@ public class HumanBodyWidget {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             bodyImageView = (ImageView) view.findViewById(R.id.body_front);
+            body3=bodyImageView;
         }
 
         @Override
@@ -210,6 +212,8 @@ public class HumanBodyWidget {
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             bodyImageView = (ImageView) view.findViewById(R.id.body_back);
+            body3=bodyImageView;
+
         }
 
         @Override

@@ -115,7 +115,6 @@ public class Frag_Body_part extends myFragment {
         segmentTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                Toast.makeText(getActivity(), "hii", Toast.LENGTH_SHORT).show();
                 switch (position){
                     case 0:
                         if(bodyWidget.flipBody(false)) {
