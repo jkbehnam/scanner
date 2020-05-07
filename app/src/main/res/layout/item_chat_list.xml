@@ -132,7 +132,7 @@ android:textColor="@color/text_color_all"
                     android:id="@+id/iv_requet"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:srcCompat="@drawable/skin_" />
+                    />
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

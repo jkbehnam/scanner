@@ -34,6 +34,7 @@ import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterAddPhoto;
 import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
+import com.patient.mokhtari.scanner.activities.Frag_doctor_list;
 import com.patient.mokhtari.scanner.activities.New_request.select_photo.ImagePickerActivity;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
 
@@ -178,6 +179,7 @@ btnTest.setOnClickListener(this);
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_camera_tips:
+              //  loadFragment(Frag_doctor_list.newInstance());
                 loadFragment(camera_tips_main.newInstance());
                 break;
 

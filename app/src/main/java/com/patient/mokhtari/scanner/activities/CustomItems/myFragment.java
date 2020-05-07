@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.patient.mokhtari.scanner.R;
+import com.patient.mokhtari.scanner.activities.Frag_doctor_list;
 import com.patient.mokhtari.scanner.activities.base.LoadingMain.Dialog_loading;
 
 
@@ -63,12 +64,14 @@ this.a=a;
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 ((AppCompatActivity) getActivity()).onBackPressed();
             }
         });
         Typeface typeface3 = Typeface.createFromAsset(a.getAssets(), "font/vazirbold.ttf");
         tvToolbarTitle.setTypeface(typeface3, Typeface.BOLD);
         tvToolbarTitle.setText(title);
+
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

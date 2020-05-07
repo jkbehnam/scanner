@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
+import com.patient.mokhtari.scanner.activities.helper.PrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +41,14 @@ public class adapterPatientDetails extends RecyclerView.Adapter<adapterPatientDe
 
         @BindView(R.id.item_name)
         TextView item_name;
-@BindView(R.id.item_datail)
-TextView item_datail;
+        @BindView(R.id.item_datail)
+        TextView item_datail;
+
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-           // Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
-           // tv.setTypeface(typeface3, Typeface.BOLD);
+            // Typeface typeface3 = Typeface.createFromAsset(context.getAssets(), "font/iran_sans.ttf");
+            // tv.setTypeface(typeface3, Typeface.BOLD);
             // img = (ImageView) view.findViewById(R.id.itemImage);
         }
     }
@@ -71,15 +72,22 @@ TextView item_datail;
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final ReqQuestions data_service = data_services_list.get(position);
 
-        holder.item_name.setText(ql[position]);
-        holder.item_datail.setText(getRequestQues(data_service.getYNQ())+"\n"+data_service.getDesc());
-        ColorMatrix matrix = new ColorMatrix();
-        matrix.setSaturation(0);
 
-        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        PrefManager pm = new PrefManager(context);
+        String gender = pm.getUserDetails().get("gender");
+        if (!(position == 5 && gender.equals("مرد"))) {
+            holder.item_name.setText(ql[position]);
+            holder.item_datail.setText(getRequestQues(data_service.getYNQ()) + "\n" + data_service.getDesc());
+            ColorMatrix matrix = new ColorMatrix();
+            matrix.setSaturation(0);
 
-       // holder.iv.setImageResource(R.drawable.transaction);
-     //   Glide.with(context).load(getImage(data_service.getImg())).into(holder.iv);
+            ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        } else {
+            holder.item_name.setText("");
+            holder.item_datail.setText("");
+        }
+        // holder.iv.setImageResource(R.drawable.transaction);
+        //   Glide.with(context).load(getImage(data_service.getImg())).into(holder.iv);
 
 
     }
@@ -96,6 +104,7 @@ TextView item_datail;
     public void setOnCardClickListner(OnCardClickListner onCardClickListner) {
         this.onCardClickListner = onCardClickListner;
     }
+
     public int getImage(String imageName) {
 
         int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());

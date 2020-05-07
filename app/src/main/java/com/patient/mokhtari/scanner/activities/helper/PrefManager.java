@@ -57,11 +57,13 @@ public class PrefManager {
         return pref.getString(KEY_MOBILE_NUMBER, null);
     }
 
-    public void createLogin(String ID , String USERNAME, String NAME) {
+    public void createLogin(String ID , String USERNAME, String NAME,String gender) {
         editor.putString(KEY_ID, ID);
 
         editor.putString(KEY_USERNAME, USERNAME);
         editor.putString(KEY_NAME, NAME);
+        editor.putString("gender", gender);
+
         editor.putBoolean(KEY_IS_LOGGED_IN, true);
         editor.commit();
     }
@@ -102,6 +104,8 @@ public class PrefManager {
         profile.put("username", pref.getString(KEY_USERNAME, ""));
         profile.put("name", pref.getString(KEY_NAME, ""));
         profile.put("session", pref.getString("session", ""));
+        profile.put("gender", pref.getString("gender", ""));
+
         return profile;
     }
 }

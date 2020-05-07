@@ -50,26 +50,10 @@ public class ConnectToServer {
                     }
                 }) {
 
-            /*
-             * If you want to add more parameters with the image
-             * you can do it here
-             * here we have only one parameter with the image
-             * which is tags
-             * */
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
-
-
-
-
-
                 return params;
             }
-
-            /*
-             * Here we are passing image by renaming it with a unique name
-             * */
 
         };
         volleyMultipartRequest.setRetryPolicy(new RetryPolicy() {
@@ -95,17 +79,22 @@ public class ConnectToServer {
 
         String message = null;
         if (error instanceof NetworkError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+          //  message = "Cannot connect to Internet...Please check your connection!";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         } else if (error instanceof ServerError) {
-            message = "The server could not be found. Please try again after some time!!";
+         //   message = "The server could not be found. Please try again after some time!!";
+            message = "سرور یافت نشد. لطفا بهد از چند لحظه دوباره تلاش کنید";
         } else if (error instanceof AuthFailureError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+           // message = "Cannot connect to Internet...Please check your connection!";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         } else if (error instanceof ParseError) {
-            message = "Parsing error! Please try again after some time!!";
+           // message = "Parsing error! Please try again after some time!!";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         } else if (error instanceof NoConnectionError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         } else if (error instanceof TimeoutError) {
-            message = "Connection TimeOut! Please check your internet connection.";
+           // message = "Connection TimeOut! Please check your internet connection.";
+            message = "اشکار در اتصال به اینترنت...لطفا وضعیت اتصال خود را بررسی کنید";
         }
 
 

@@ -42,7 +42,7 @@ public class LoginPresenter {
            // Toasty.success(loginActivity, "ورود", Toast.LENGTH_SHORT, true).show();
             obj = new JSONObject(obj.getString("user"));
             PrefManager pm = new PrefManager(loginActivity.getBaseContext());
-            pm.createLogin(obj.getString("u_id"), obj.getString("phone"), obj.getString("Name"));
+            pm.createLogin(obj.getString("u_id"), obj.getString("phone"), obj.getString("Name"), obj.getString("gender"));
 
             loginActivity.loginSuccessful();
         }

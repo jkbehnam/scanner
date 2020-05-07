@@ -401,6 +401,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
                 req,
                 new TypeToken<ArrayList<BodyPointMain>>() {
                 }.getType());
+
         return x;
     }
 

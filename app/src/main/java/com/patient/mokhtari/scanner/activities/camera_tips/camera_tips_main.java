@@ -4,30 +4,37 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class camera_tips_main extends myFragment implements View.OnClickListener{
+public class camera_tips_main extends myFragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private ViewPager viewPager;
+    ViewPagerAdapter vp;
     private View indicator1;
     private View indicator2;
     private View indicator3;
     private View indicator4;
+    @BindView(R.id.btntips)
+    CardView btntips;
 
     // TODO: Rename and change types and number of parameters
     public static camera_tips_main newInstance() {
@@ -44,27 +51,43 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView= inflater.inflate(R.layout.camera_tips_layout, container, false);
+        View rootView = inflater.inflate(R.layout.camera_tips_layout, container, false);
         ButterKnife.bind(this, rootView);
 
 
-        setFragmentActivity(getActivity());
+        //setToolbar_notmain(rootView, "نکات عکس برداری");
 
-        setToolbar_notmain(rootView,"نکات عکس برداری");
-
-        indicator1 =rootView. findViewById(R.id.indicator1);
-        indicator2 =rootView. findViewById(R.id.indicator2);
+        indicator1 = rootView.findViewById(R.id.indicator1);
+        indicator2 = rootView.findViewById(R.id.indicator2);
         indicator3 = rootView.findViewById(R.id.indicator3);
         indicator4 = rootView.findViewById(R.id.indicator4);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
-        viewPager.setAdapter(new ViewPagerAdapter(((AppCompatActivity)getActivity()).getSupportFragmentManager()));
+        vp = new ViewPagerAdapter(((AppCompatActivity) getActivity()).getSupportFragmentManager());
+        viewPager.setAdapter(vp);
         viewPager.addOnPageChangeListener(new camera_tips_main.WizardPageChangeListener());
 
         updateIndicators(0);
+        btntips.setOnClickListener(this);
+
+
+        setFragmentActivity(getActivity());
+        setToolbar_notmain(rootView, "نکات عکس برداری");
 
         return rootView;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            Toast.makeText(getActivity(), "Backarrow pressed", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return false;
+    }
+
     private class WizardPageChangeListener implements ViewPager.OnPageChangeListener {
 
         @Override
@@ -115,7 +138,7 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
         }
     }
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         private int WIZARD_PAGES_COUNT = 4;
 
@@ -134,6 +157,7 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
         }
 
     }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -144,12 +168,12 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-      //  if (context instanceof OnFragmentInteractionListener) {
-      //      mListener = (OnFragmentInteractionListener) context;
-     //   } else {
-       //     throw new RuntimeException(context.toString()
-      //              + " must implement OnFragmentInteractionListener");
-     //   }
+        //  if (context instanceof OnFragmentInteractionListener) {
+        //      mListener = (OnFragmentInteractionListener) context;
+        //   } else {
+        //     throw new RuntimeException(context.toString()
+        //              + " must implement OnFragmentInteractionListener");
+        //   }
     }
 
     @Override
@@ -162,8 +186,21 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btntips:
 
+                int x = viewPager.getCurrentItem();
+                if (x == vp.getCount() - 1) {
+                    ((AppCompatActivity) getActivity()).onBackPressed();
+
+                } else {
+                    viewPager.setCurrentItem(++x);
+                }
+
+                break;
+        }
     }
 }

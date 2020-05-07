@@ -64,11 +64,11 @@ switch (wizard_page_position){
         break;
     case 2:
         tv.setText("");
-        img_id=  getImage("");
+        img_id=  getImage("fasele");
         break;
     case 3:
         tv.setText("");
-        img_id=  getImage("");
+        img_id= getImage("tar");
         break;
 }
         Glide.with(getActivity()).load(img_id).into(img);
@@ -77,11 +77,7 @@ switch (wizard_page_position){
         return view;
     }
 
-    private void loadImageRequest(ImageView img, String url) {
 
-
-        Glide.with(getActivity()).load(url).into(img);
-    }
     public int getImage(String imageName) {
 
         int drawableResourceId = getActivity().getResources().getIdentifier(imageName, "drawable", getActivity().getPackageName());

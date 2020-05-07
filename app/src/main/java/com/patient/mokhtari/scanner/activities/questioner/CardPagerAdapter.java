@@ -24,7 +24,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     private List<CardView> mViews;
     private List<CardItem> mData;
     private float mBaseElevation;
-
+int Qid;
     public CardPagerAdapter() {
         mData = new ArrayList<>();
         mViews = new ArrayList<>();
@@ -80,6 +80,11 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         CardView cardNext = (CardView) view.findViewById(R.id.btn_next);
         EditText et_more_desc = (EditText) view.findViewById(R.id.et_more_desc);
 
+        if (!mData.get(position).isYesNo()){
+            expandableLayout.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.GONE);
+            YNQ="yes";
+        }
 
         if (mBaseElevation == 0) {
             mBaseElevation = cardView.getCardElevation();
@@ -106,7 +111,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         cardNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCardClickListner.OnCardClicked(view, position, new ReqQuestions(position, YNQ, et_more_desc.getText().toString()));
+                onCardClickListner.OnCardClicked(view, position, new ReqQuestions(mData.get(position).getId(), YNQ, et_more_desc.getText().toString()));
             }
         });
 
