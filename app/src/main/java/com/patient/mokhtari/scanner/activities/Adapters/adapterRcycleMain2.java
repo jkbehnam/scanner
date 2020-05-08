@@ -87,6 +87,11 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
             holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.allOkButton));
             holder.cv_request.setCardBackgroundColor(ContextCompat.getColor(context, R.color.grey_20));
         }
+        if(data_service.getReshot_test()==1||data_service.getReshot_body()==1){
+            holder.tv_request_state.setText("تجدید تصاویر");
+            holder.tv_request_state.setTextColor(ContextCompat.getColor(context, R.color.colorLightBlue));
+
+        }
 
         holder.tv_request_date.setText(getPersianDate(data_service.getRequest_date()));
 

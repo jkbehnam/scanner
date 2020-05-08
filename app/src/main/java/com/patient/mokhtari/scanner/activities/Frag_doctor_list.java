@@ -51,6 +51,7 @@ public class Frag_doctor_list extends myFragment implements View.OnClickListener
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

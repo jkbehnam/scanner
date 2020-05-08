@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -34,13 +33,15 @@ import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterAddPhoto;
 import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
-import com.patient.mokhtari.scanner.activities.Frag_doctor_list;
 import com.patient.mokhtari.scanner.activities.New_request.select_photo.ImagePickerActivity;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
-
 import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
-import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
+import com.patient.mokhtari.scanner.activities.Objects.Request;
 import com.patient.mokhtari.scanner.activities.camera_tips.camera_tips_main;
+import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
+import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,8 +51,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
-import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPoints;
-import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqQuestionsArrayList;
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqTestPhotosArrayList;
 
 
@@ -65,15 +64,22 @@ public class AddTestPhoto extends myFragment implements View.OnClickListener {
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
     @BindView(R.id.btnTest)
-            CardView btnTest;
+    CardView btnTest;
     int position;
     ArrayList<AddImage> glist;
     adapterAddPhoto madapter;
+    public Request request = null;
 
     // TODO: Rename and change types and number of parameters
     public static AddTestPhoto newInstance() {
         AddTestPhoto fragment = new AddTestPhoto();
 
+        return fragment;
+    }
+
+    public static AddTestPhoto newInstance(Request request) {
+        AddTestPhoto fragment = new AddTestPhoto();
+        fragment.request = request;
         return fragment;
     }
 
@@ -87,7 +93,7 @@ public class AddTestPhoto extends myFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_add_test_photo, container, false);
         ButterKnife.bind(this, rootView);
-btnTest.setOnClickListener(this);
+        btnTest.setOnClickListener(this);
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "ارسال تصویر آزمایش");
         explain.setText("حد اکثر 5 تصویر از آزمایش انتخاب کنید");
@@ -179,13 +185,26 @@ btnTest.setOnClickListener(this);
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_camera_tips:
-              //  loadFragment(Frag_doctor_list.newInstance());
+                //  loadFragment(Frag_doctor_list.newInstance());
                 loadFragment(camera_tips_main.newInstance());
                 break;
 
             case R.id.btnTest:
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack();
+                if (request != null) {
+                    showLoading_base();
+                    ConnectToServer.uploadBitmap(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) throws JSONException {
+                            hideLoading_base();
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            fm.popBackStack();
+                            // reciveRequest(result);
+                        }
+                    }, reqTestPhotosArrayList, request, "test");
+                } else {
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack();
+                }
                 break;
         }
     }
@@ -250,21 +269,21 @@ btnTest.setOnClickListener(this);
         madapter.notifyDataSetChanged();
         madapter.notifyItemChanged(position);
 //
-        boolean dup=false;
+        boolean dup = false;
         for (ReqPhoto req : reqTestPhotosArrayList
         ) {
             if (req.getId() == position) {
-                dup=true;
-                reqTestPhotosArrayList.set(reqTestPhotosArrayList.indexOf(req),new ReqPhoto(position,url));
-                Log.d("behnamphoto",String.valueOf(reqTestPhotosArrayList.toString()));
+                dup = true;
+                reqTestPhotosArrayList.set(reqTestPhotosArrayList.indexOf(req), new ReqPhoto(position, url));
+                Log.d("behnamphoto", String.valueOf(reqTestPhotosArrayList.toString()));
             }
 
         }
-        if(!dup){
-            reqTestPhotosArrayList.add(new ReqPhoto(position,url));
-            Log.d("behnamphoto",String.valueOf(reqTestPhotosArrayList.toString()));
+        if (!dup) {
+            reqTestPhotosArrayList.add(new ReqPhoto(position, url));
+            Log.d("behnamphoto", String.valueOf(reqTestPhotosArrayList.toString()));
         }
-      //  reqTestPhotosArrayList.add(new ReqPhoto(position,url));
+        //  reqTestPhotosArrayList.add(new ReqPhoto(position,url));
     }
 
     @Override

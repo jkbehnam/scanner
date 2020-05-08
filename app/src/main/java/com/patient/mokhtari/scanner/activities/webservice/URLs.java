@@ -11,6 +11,6 @@ public class URLs {
     public static final String URL_SEND_CHAT=site +"/include/scanner_send_chat.php";
     public static final String URL_GET_CHAT=site +"/include/scanner_chat_get.php";
     public static final String URL_SIGNUP=site +"/include/scanner_signup.php";
-
+    public static final String URL_UPLOAD_Photo=site +"/include/scanner_upload_photo.php";
 
 }

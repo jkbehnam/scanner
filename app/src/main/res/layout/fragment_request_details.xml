@@ -318,7 +318,7 @@ android:drawableRight="@drawable/conversation"
                     android:gravity="right">
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/retryPhotoExam"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -341,7 +341,7 @@ android:drawableRight="@drawable/conversation"
                         android:textColor="@color/text_color_all"
 
                         app:layout_constraintHorizontal_weight="3"
-                        app:layout_constraintLeft_toRightOf="@id/textView13"
+                        app:layout_constraintLeft_toRightOf="@id/retryPhotoExam"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -363,7 +363,7 @@ android:drawableRight="@drawable/conversation"
                         android:id="@+id/test_img_recycle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                        app:layout_constraintTop_toBottomOf="@+id/retryPhotoExam" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -380,7 +380,7 @@ android:drawableRight="@drawable/conversation"
                     android:gravity="right">
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/retryPhoto"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -401,7 +401,7 @@ android:drawableRight="@drawable/conversation"
                         android:text="عکس های عارضه"
                         android:textSize="16dp"
                         app:layout_constraintHorizontal_weight="3"
-                        app:layout_constraintLeft_toRightOf="@id/textView13"
+                        app:layout_constraintLeft_toRightOf="@id/retryPhoto"
                         app:layout_constraintRight_toRightOf="parent"
                         android:textColor="@color/text_color_all"
 
@@ -426,7 +426,7 @@ android:drawableRight="@drawable/conversation"
 
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                        app:layout_constraintTop_toBottomOf="@+id/retryPhoto" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

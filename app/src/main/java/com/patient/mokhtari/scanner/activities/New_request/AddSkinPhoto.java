@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -36,7 +35,12 @@ import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.New_request.select_photo.ImagePickerActivity;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
 import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
+import com.patient.mokhtari.scanner.activities.Objects.Request;
 import com.patient.mokhtari.scanner.activities.camera_tips.camera_tips_main;
+import com.patient.mokhtari.scanner.activities.webservice.ConnectToServer;
+import com.patient.mokhtari.scanner.activities.webservice.VolleyCallback;
+
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,7 +50,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPhotosArrayList;
-import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqTestPhotosArrayList;
+
 import static com.yalantis.ucrop.UCropFragment.TAG;
 
 
@@ -58,15 +62,22 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
     @BindView(R.id.btnSkin)
-            CardView btnSkin;
+    CardView btnSkin;
     int position;
     ArrayList<AddImage> glist;
     adapterAddPhoto madapter;
+    Request request;
 
     // TODO: Rename and change types and number of parameters
     public static AddSkinPhoto newInstance() {
         AddSkinPhoto fragment = new AddSkinPhoto();
 
+        return fragment;
+    }
+
+    public static AddSkinPhoto newInstance(Request request) {
+        AddSkinPhoto fragment = new AddSkinPhoto();
+        fragment.request = request;
         return fragment;
     }
 
@@ -80,7 +91,7 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_add_skin_photo, container, false);
         ButterKnife.bind(this, rootView);
-btnSkin.setOnClickListener(this);
+        btnSkin.setOnClickListener(this);
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "ارسال تصویر ضایعه");
         RtlGridLayoutManager layoutManager = new RtlGridLayoutManager(getActivity(), 3);
@@ -171,10 +182,21 @@ btnSkin.setOnClickListener(this);
         switch (view.getId()) {
             case R.id.btn_camera_tips:
                 loadFragment(camera_tips_main.newInstance());
+
                 break;
             case R.id.btnSkin:
+                if (request != null) {
+                    showLoading_base();
+                    ConnectToServer.uploadBitmap(new VolleyCallback() {
+                        @Override
+                        public void onSuccess(String result) throws JSONException {
+                            hideLoading_base();
+                            // reciveRequest(result);
+                        }
+                    }, reqBodyPhotosArrayList, request, "body");
+                } else {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack();
+                fm.popBackStack();}
                 break;
         }
     }
@@ -238,21 +260,22 @@ btnSkin.setOnClickListener(this);
         glist.get(position).setAddress(url);
         madapter.notifyDataSetChanged();
         madapter.notifyItemChanged(position);
-        boolean dup=false;
+        boolean dup = false;
         for (ReqPhoto req : reqBodyPhotosArrayList
         ) {
             if (req.getId() == position) {
-                dup=true;
-                reqBodyPhotosArrayList.set(reqBodyPhotosArrayList.indexOf(req),new ReqPhoto(position,url));
-                Log.d("behnamBodyphoto",String.valueOf(reqBodyPhotosArrayList.toString()));
+                dup = true;
+                reqBodyPhotosArrayList.set(reqBodyPhotosArrayList.indexOf(req), new ReqPhoto(position, url));
+                Log.d("behnamBodyphoto", String.valueOf(reqBodyPhotosArrayList.toString()));
             }
 
         }
-        if(!dup){
-            reqBodyPhotosArrayList.add(new ReqPhoto(position,url));
-            Log.d("behnamBodyphoto",String.valueOf(reqBodyPhotosArrayList.toString()));
+        if (!dup) {
+            reqBodyPhotosArrayList.add(new ReqPhoto(position, url));
+            Log.d("behnamBodyphoto", String.valueOf(reqBodyPhotosArrayList.toString()));
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUEST_IMAGE) {
@@ -261,8 +284,6 @@ btnSkin.setOnClickListener(this);
                 try {
                     // You can update this bitmap to your server
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uri);
-
-
                     // loading profile image from local cache
                     loadProfile(uri.toString());
                 } catch (IOException e) {

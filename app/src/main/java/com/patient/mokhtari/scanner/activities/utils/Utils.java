@@ -25,10 +25,6 @@ import saman.zamani.persiandate.PersianDate;
 import static android.content.pm.PackageManager.GET_META_DATA;
 import static android.os.Build.VERSION_CODES.P;
 
-/**
- * Created by cstudioo on 06/01/17.
- */
-
 public class Utils {
 
     /**
@@ -45,14 +41,6 @@ public class Utils {
         }
     }
 
-
-    /**
-     * Method is used for checking network availability.
-     *
-     * @param context
-     * @return isNetAvailable: boolean true for Internet availability, false
-     * otherwise
-     */
     public static boolean isNetworkAvailable(Context context) {
 
         boolean isNetAvailable = false;
@@ -95,7 +83,6 @@ public class Utils {
 
         return isNetAvailable;
     }
-
 
     /**
      * Common AppCompat Alert Dialog to be used in the Application everywhere

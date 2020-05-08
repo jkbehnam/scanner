@@ -54,7 +54,7 @@ public class showphoto {
 
         //  et_answer = dialog.findViewById(R.id.txt_pin_entry);
         Toolbar toolbar = dialog.findViewById(R.id.toolbar);
-        toolbar.setTitle("تصویر عارضه");
+        toolbar.setTitle("تصویر ");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

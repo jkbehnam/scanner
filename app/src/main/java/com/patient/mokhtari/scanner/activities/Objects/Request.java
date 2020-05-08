@@ -36,6 +36,14 @@ public class Request {
     @SerializedName("treatment")
     @Expose
     private String treatment;
+    @SerializedName("reshot_test")
+    @Expose
+    private int reshot_test;
+    @SerializedName("reshot_body")
+    @Expose
+    private int reshot_body;
+
+
 
     public Request(String reqiest_bodypart, String request_date, String request_doctor, String request_state, String request_img){
         this.request_bodypart =reqiest_bodypart;
@@ -44,7 +52,20 @@ public class Request {
         this.request_state=request_state;
         this.request_img=request_img;
     }
+    public int getReshot_body() {
+        return reshot_body;
+    }
 
+    public void setReshot_body(int reshot_body) {
+        this.reshot_body = reshot_body;
+    }
+    public int getReshot_test() {
+        return reshot_test;
+    }
+
+    public void setReshot_test(int reshot_test) {
+        this.reshot_test = reshot_test;
+    }
     public String getRequest_bodypart() {
         return request_bodypart;
     }

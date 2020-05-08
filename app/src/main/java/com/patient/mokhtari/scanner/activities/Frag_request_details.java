@@ -22,6 +22,8 @@ import com.patient.mokhtari.scanner.activities.Adapters.adapterShowPhoto;
 import com.patient.mokhtari.scanner.activities.BodyPart.view.BodyPointMain;
 import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
+import com.patient.mokhtari.scanner.activities.New_request.AddSkinPhoto;
+import com.patient.mokhtari.scanner.activities.New_request.AddTestPhoto;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
 import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
 import com.patient.mokhtari.scanner.activities.Objects.Request;
@@ -40,6 +42,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPhotosArrayList;
+import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqTestPhotosArrayList;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getPersianDate;
 import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestState;
 import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_GET_REQUEST_DETAIL;
@@ -72,11 +76,15 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     EditText ReqDiagnosis;
     @BindView(R.id.ReqTreatment)
     EditText ReqTreatment;
+    @BindView(R.id.retryPhotoExam)
+    TextView retryPhotoExam;
+    @BindView(R.id.retryPhoto)
+    TextView retryPhoto;
     int position;
     Request request;
     JSONObject jsonObject;
-    ArrayList<AddImage> bodyphotos=new ArrayList<>();
-    ArrayList<AddImage> testphotos=new ArrayList<>();
+    ArrayList<AddImage> bodyphotos = new ArrayList<>();
+    ArrayList<AddImage> testphotos = new ArrayList<>();
     public ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
     public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
 
@@ -117,12 +125,20 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         reqChat.setOnClickListener(this);
         ReqQuestions.setOnClickListener(this);
         tv_body_part.setOnClickListener(this);
+        retryPhotoExam.setOnClickListener(this);
+        retryPhoto.setOnClickListener(this);
+        ReqDiagnosis.setText("تشخیص پزشک: " + request.getDiagnosis());
+        ReqTreatment.setText("پلن درمانی: " + request.getTreatment());
+        if(request.getReshot_test()==0){
 
+            retryPhotoExam.setVisibility(View.INVISIBLE);
+        }
+        if(request.getReshot_body()==0){
 
-        ReqDiagnosis.setText("تشخیص پزشک: "+request.getDiagnosis());
-        ReqTreatment.setText("پلن درمانی: "+request.getTreatment());
+            retryPhoto.setVisibility(View.INVISIBLE);
+        }
         //  getRequestDetail();
-        settitems(bodyphotos,testphotos);
+        settitems(bodyphotos, testphotos);
         return rootView;
 
 
@@ -168,6 +184,14 @@ public class Frag_request_details extends myFragment implements View.OnClickList
                 break;
             case R.id.ReqChat:
                 loadFragment(Frag_chat_ui.newInstance(request));
+                break;
+            case R.id.retryPhoto:
+                reqBodyPhotosArrayList=new ArrayList<>();
+                loadFragment(AddSkinPhoto.newInstance(request));
+                break;
+            case R.id.retryPhotoExam:
+                reqTestPhotosArrayList=new ArrayList<>();
+                loadFragment(AddTestPhoto.newInstance(request));
                 break;
         }
     }
@@ -229,9 +253,9 @@ public class Frag_request_details extends myFragment implements View.OnClickList
 
 
         madapter = new adapterShowPhoto(bodyphotos);
-        test_img_recycle.setAdapter(madapter);
+        scan_img_recycle.setAdapter(madapter);
         madapter2 = new adapterShowPhoto(testphotos);
-        scan_img_recycle.setAdapter(madapter2);
+        test_img_recycle.setAdapter(madapter2);
 
         madapter.setOnCardClickListner(new adapterShowPhoto.OnCardClickListner() {
             @Override
