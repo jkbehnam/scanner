@@ -32,7 +32,7 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
     private View indicator1;
     private View indicator2;
     private View indicator3;
-    private View indicator4;
+  //  private View indicator4;
     @BindView(R.id.btntips)
     CardView btntips;
 
@@ -60,7 +60,7 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
         indicator1 = rootView.findViewById(R.id.indicator1);
         indicator2 = rootView.findViewById(R.id.indicator2);
         indicator3 = rootView.findViewById(R.id.indicator3);
-        indicator4 = rootView.findViewById(R.id.indicator4);
+     //   indicator4 = rootView.findViewById(R.id.indicator4);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
         vp = new ViewPagerAdapter(((AppCompatActivity) getActivity()).getSupportFragmentManager());
@@ -115,32 +115,27 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
                 indicator1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot));
                 indicator2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
                 indicator3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
-                indicator4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
+              //  indicator4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
                 break;
             case 1:
                 indicator1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
                 indicator2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot));
                 indicator3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
-                indicator4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
+             //   indicator4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
                 break;
             case 2:
                 indicator1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
                 indicator2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
                 indicator3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot));
-                indicator4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
+             //   indicator4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
                 break;
-            case 3:
-                indicator1.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
-                indicator2.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
-                indicator3.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot_grey));
-                indicator4.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.ic_dot));
-                break;
+
         }
     }
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-        private int WIZARD_PAGES_COUNT = 4;
+        private int WIZARD_PAGES_COUNT = 3;
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);

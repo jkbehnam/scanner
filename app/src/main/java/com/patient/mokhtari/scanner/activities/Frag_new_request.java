@@ -79,46 +79,36 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
 
         return fragment;
     }
-
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+    }
+    @SuppressWarnings("unused")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
 
+    }
+    @SuppressWarnings("unused")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_new_request, container, false);
         ButterKnife.bind(this, rootView);
-
-
 
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "درخواست جدید");
         btnSendRequest.setOnClickListener(this);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
-        // rcleView.setLayoutManager(layoutManager);
-     /*   rouchuan.circlelayoutmanager.CircleLayoutManager circleLayoutManager = new rouchuan.circlelayoutmanager.CircleLayoutManager(getActivity());
-        rcleView.setLayoutManager(circleLayoutManager);
-        rcleView.addOnScrollListener(new rouchuan.circlelayoutmanager.CenterScrollListener());
-        */
-        //  rcleView.setLayoutManager(new HiveLayoutManager(HiveLayoutManager.VERTICAL));
-
 
         mainActivity_recycle.setLayoutManager(layoutManager);
         ArrayList<MainList> glist = new ArrayList<>();
         glist.add(new MainList("انتخاب محل ضایعه", "skin", (reqBodyPoints.size() != 0 && !reqDuration.equals(""))));
-        glist.add(new MainList("پاسخ به سوالات", "qu", (reqQuestionsArrayList.size() != 0)));
+        glist.add(new MainList("پاسخ به سوالات", "ques", (reqQuestionsArrayList.size() != 0)));
         glist.add(new MainList("ارسال تصویر آزمایش", "test", (reqTestPhotosArrayList.size() != 0)));
         glist.add(new MainList("ارسال تصویر ضایعه", "skin", (reqBodyPhotosArrayList.size() != 0)));
         glist.add(new MainList("انتخاب پزشک", "doc", !reqDoctor.equals("")));
-
-/*        if((reqBodyPoints.size() != 0 && !reqDuration.equals(""))&&(reqQuestionsArrayList.size() != 0)&&(reqTestPhotosArrayList.size() != 0)
-        &&(reqBodyPhotosArrayList.size() != 0)&&!reqDoctor.equals("")){
-            btnSendRequest.setClickable(true);
-        }else { btnSendRequest.setClickable(false);}*/
-
 
         adapterRcycleMain madapter = new adapterRcycleMain(glist);
         mainActivity_recycle.setAdapter(madapter);
@@ -149,24 +139,6 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         });
         if(useDrug.equals("")){
 
-      /*      new AlertDialog.Builder(getActivity())
-                    .setMessage("آیا این درخواست را بعد از مصرف دارو انجام می\u200Cدهید؟")
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton("بله، مصرف کرده\u200Cام", new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            useDrug="true";
-
-                        }})
-                    .setNegativeButton("خیر", new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int whichButton) {
-
-
-                        }})
-
-                    .show();*/
-
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("آیا این درخواست را بعد از مصرف دارو انجام می\u200Cدهید؟");
             builder.setCancelable(false);
@@ -193,26 +165,6 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
             Button pbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
             pbutton.setTextColor(getResources().getColor(R.color.allOkButton));
 
-      /*
-        SweetAlertDialog a = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
-        a.setTitleText("آیا این درخواست را بعد از مصرف دارو انجام می\u200Cدهید؟");
-        a.setConfirmText("بله، مصرف کرده\u200Cام");
-        a.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sDialog) {
-                useDrug="true";
-                sDialog.dismissWithAnimation();
-            }
-        });
-        a.setCancelButton("خیر", new SweetAlertDialog.OnSweetClickListener() {
-            @Override
-            public void onClick(SweetAlertDialog sDialog) {
-                sDialog.dismissWithAnimation();
-            }
-        });
-        a.setCancelable(false);
-        a.show();
-        */
         }
 
         return rootView;
@@ -234,12 +186,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        //  if (context instanceof OnFragmentInteractionListener) {
-        //      mListener = (OnFragmentInteractionListener) context;
-        //   } else {
-        //     throw new RuntimeException(context.toString()
-        //              + " must implement OnFragmentInteractionListener");
-        //   }
+
     }
 
     @Override
@@ -263,14 +210,12 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         }
     }
 
-
     private void loadFragment(Fragment fragment) {
         // load fragment
-
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
 
     private void uploadBitmap() {
@@ -300,9 +245,6 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-
-
-
 
                 params.put("questions", arrToJsonReqQuestions(reqQuestionsArrayList));
                 params.put("api_key", user_id);

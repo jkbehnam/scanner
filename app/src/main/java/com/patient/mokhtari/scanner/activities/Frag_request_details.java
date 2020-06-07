@@ -87,7 +87,7 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     ArrayList<AddImage> testphotos = new ArrayList<>();
     public ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
     public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
-
+public static Frag_request_details frag_request_details;
     // TODO: Rename and change types and number of parameters
     public Frag_request_details(Request RequestId) {
         this.request = RequestId;
@@ -96,7 +96,12 @@ public class Frag_request_details extends myFragment implements View.OnClickList
 
     public static Frag_request_details newInstance(Request RequestId) {
         Frag_request_details fragment = new Frag_request_details(RequestId);
+        frag_request_details=fragment;
         return fragment;
+    }
+    public static Frag_request_details getit(){
+
+        return frag_request_details;
     }
 
     @Override
@@ -129,11 +134,11 @@ public class Frag_request_details extends myFragment implements View.OnClickList
         retryPhoto.setOnClickListener(this);
         ReqDiagnosis.setText("تشخیص پزشک: " + request.getDiagnosis());
         ReqTreatment.setText("پلن درمانی: " + request.getTreatment());
-        if(request.getReshot_test()==0){
+        if (request.getReshot_test() == 0) {
 
             retryPhotoExam.setVisibility(View.INVISIBLE);
         }
-        if(request.getReshot_body()==0){
+        if (request.getReshot_body() == 0) {
 
             retryPhoto.setVisibility(View.INVISIBLE);
         }
@@ -186,11 +191,11 @@ public class Frag_request_details extends myFragment implements View.OnClickList
                 loadFragment(Frag_chat_ui.newInstance(request));
                 break;
             case R.id.retryPhoto:
-                reqBodyPhotosArrayList=new ArrayList<>();
+                reqBodyPhotosArrayList = new ArrayList<>();
                 loadFragment(AddSkinPhoto.newInstance(request));
                 break;
             case R.id.retryPhotoExam:
-                reqTestPhotosArrayList=new ArrayList<>();
+                reqTestPhotosArrayList = new ArrayList<>();
                 loadFragment(AddTestPhoto.newInstance(request));
                 break;
         }

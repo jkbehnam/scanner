@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,8 @@ public class Frag_Body_part extends myFragment {
     View rootView;
     @BindView(R.id.t2)
     SegmentTabLayout segmentTabLayout;
-
+@BindView(R.id.btn_clear)
+    Button btn_clear;
     public static FragmentActivity fragment_body_part;
     private WaveEffectLayout container;
     private HumanBodyWidget bodyWidget;
@@ -104,6 +106,14 @@ public class Frag_Body_part extends myFragment {
     }
     public void initViews(Bundle savedInstanceState){
         ButterKnife.bind(this, rootView);
+        btn_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                reqBodyPoints.clear();
+               getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, Frag_Body_part.newInstance()).commit();
+            }
+        });
         container = (WaveEffectLayout) rootView.findViewById(R.id.container);
         manIv = (ImageView) rootView.findViewById(R.id.man_icon);
         manTv = (TextView) rootView.findViewById(R.id.man_text);

@@ -63,13 +63,10 @@ switch (wizard_page_position){
         img_id=  getImage("fasele");
         break;
     case 2:
-        tv.setText("");
-        img_id=  getImage("fasele");
+        tv.setText("رعایت روشنایی مناسب تصویر");
+        img_id=  getImage("lighttip");
         break;
-    case 3:
-        tv.setText("");
-        img_id= getImage("tar");
-        break;
+
 }
         Glide.with(getActivity()).load(img_id).into(img);
     //    loadImageRequest(img, "https://moviemag.ir/cache/d4f76de61b5f614c3502dcc2f6763d75_w250_h250_cp.jpg");

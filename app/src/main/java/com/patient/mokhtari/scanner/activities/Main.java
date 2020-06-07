@@ -18,6 +18,7 @@ import com.patient.mokhtari.scanner.activities.walkthrough.WalkthroughStyle3Acti
 public class Main extends BaseActivity {
     public static String user_id;
     private FirebaseAnalytics mFirebaseAnalytics;
+    @SuppressWarnings("unused")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,16 +43,14 @@ public class Main extends BaseActivity {
         }
     }
 
-    @Override
+  /*  @Override
     public void onBackPressed() {
 
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStack();
         } else {
             super.onBackPressed();}
-
-
-    }
+    }*/
 
 
 }

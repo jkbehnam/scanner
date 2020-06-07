@@ -1,7 +1,7 @@
 package com.patient.mokhtari.scanner.activities.webservice;
 
 public class URLs {
-    static String site = "http://scanner.beigzadeh4behnam.ir/new_app";
+    static String site = "http://skindoc.beigzadeh4behnam.ir/scanner/new_app";
 
     public static final String URL_LOGIN = site +"/include/scanner_Login.php";
     public static final String URL_GET_DOC_LIST=site +"/include/scanner_get_doc_list.php";

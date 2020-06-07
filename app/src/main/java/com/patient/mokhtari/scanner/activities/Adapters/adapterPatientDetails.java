@@ -86,6 +86,11 @@ public class adapterPatientDetails extends RecyclerView.Adapter<adapterPatientDe
             holder.item_name.setText("");
             holder.item_datail.setText("");
         }
+
+        if(position==7){
+            holder.item_datail.setText(data_service.getDesc());
+
+        }
         // holder.iv.setImageResource(R.drawable.transaction);
         //   Glide.with(context).load(getImage(data_service.getImg())).into(holder.iv);
 

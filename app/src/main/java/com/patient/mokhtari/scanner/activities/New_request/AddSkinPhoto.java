@@ -32,6 +32,7 @@ import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterAddPhoto;
 import com.patient.mokhtari.scanner.activities.CustomItems.RtlGridLayoutManager;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
+import com.patient.mokhtari.scanner.activities.Frag_request_details;
 import com.patient.mokhtari.scanner.activities.New_request.select_photo.ImagePickerActivity;
 import com.patient.mokhtari.scanner.activities.Objects.AddImage;
 import com.patient.mokhtari.scanner.activities.Objects.ReqPhoto;
@@ -50,7 +51,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.patient.mokhtari.scanner.activities.Frag_new_request.reqBodyPhotosArrayList;
-
 import static com.yalantis.ucrop.UCropFragment.TAG;
 
 
@@ -104,6 +104,11 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
         glist.add(new AddImage(""));
         glist.add(new AddImage(""));
         glist.add(new AddImage(""));
+
+            for (ReqPhoto req : reqBodyPhotosArrayList
+            ) {
+                glist.set(req.getId(),new AddImage(req.getUrl()));
+            }
 
         madapter = new adapterAddPhoto(glist);
         mainActivity_recycle.setAdapter(madapter);
@@ -191,12 +196,17 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
                         @Override
                         public void onSuccess(String result) throws JSONException {
                             hideLoading_base();
+                            Frag_request_details.getit().getRequestDetail();
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            fm.popBackStack();
+
                             // reciveRequest(result);
                         }
                     }, reqBodyPhotosArrayList, request, "body");
                 } else {
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.popBackStack();}
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack();
+                }
                 break;
         }
     }
