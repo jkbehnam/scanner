@@ -26,10 +26,10 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
            android:paddingLeft="12dp"
-            android:tint="@color/allOkButton"
             app:layout_constraintEnd_toEndOf="@+id/txttoolbar"
             app:srcCompat="@drawable/checked"
-            tools:layout_editor_absoluteY="8dp" />
+            tools:layout_editor_absoluteY="8dp"
+            app:tint="@color/allOkButton" />
 
         <TextView
 

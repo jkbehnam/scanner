@@ -107,7 +107,6 @@ android:onClick="onClick"
           >
 
             <TextView
-                android:id="@+id/textView3"
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="16dp"

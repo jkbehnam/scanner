@@ -19,7 +19,7 @@ public class SignupPresenter {
         this.signupActivity=signupActivity;
         this.context=context;
     }
-    public void signup(String username,String password,String name,String bday,String gender,String address){
+    public void signup(String username,String password,String name,String bday,String gender,String address,String introduction){
 
         Map<String, String> param = new HashMap<String, String>();
         param.put("username", username);
@@ -28,6 +28,7 @@ public class SignupPresenter {
         param.put("bday", bday);
         param.put("gender", gender);
         param.put("address", address);
+        param.put("introduction", introduction);
 
         ConnectToServer.any_send(new VolleyCallback() {
             @Override

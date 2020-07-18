@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.flyco.tablayout.SegmentTabLayout;
@@ -19,6 +20,7 @@ import com.patient.mokhtari.scanner.activities.BaseActivity;
 import com.patient.mokhtari.scanner.activities.Dialoges.DialogTime;
 import com.patient.mokhtari.scanner.activities.LoginRegistration.login.LoginActivity;
 import com.patient.mokhtari.scanner.activities.Main;
+import com.whygraphics.multilineradiogroup.MultiLineRadioGroup;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +34,9 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
     ConstraintLayout lay_1;
     @BindView(R.id.lay_2)
     ConstraintLayout lay_2;
+    @BindView(R.id.rel_lay_2)
+    RelativeLayout rel_lay_2;
+
     @BindView(R.id.btn_lay_1)
     CardView btn_lay_1;
     @BindView(R.id.btn_lay_2)
@@ -46,7 +51,8 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
     EditText et_bday;
     @BindView(R.id.et_address)
     EditText et_address;
-
+    @BindView(R.id.main_activity_multi_line_radio_group)
+    MultiLineRadioGroup mrg;
     private String[] mTitles = {"مرد", "زن"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +75,12 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         btn_lay_2.setOnClickListener(this);
         et_bday.setOnClickListener(this);
 
+        mrg.setMaxInRow(2);
+        mrg.addButtons(0, "بروشور");
+        mrg.addButtons(1, "مصاحبه گفتگو");
+        mrg.addButtons(2, "شبکه های اجتماعی");
+        mrg.checkAt(0);
+
     }
 
     @Override
@@ -76,11 +88,11 @@ public class SignupActivity extends BaseActivity implements View.OnClickListener
         switch (view.getId()){
             case R.id.btn_lay_1:
                 lay_1.setVisibility(View.GONE);
-                lay_2.setVisibility(View.VISIBLE);
+                rel_lay_2.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.btn_lay_2:
-                signupPresenter.signup(et_username.getText().toString(),et_password.getText().toString(),et_name.getText().toString(),et_bday.getText().toString(),mTitles[segmentTabLayout.getCurrentTab()],et_address.getText().toString());
+                signupPresenter.signup(et_username.getText().toString(),et_password.getText().toString(),et_name.getText().toString(),et_bday.getText().toString(),mTitles[segmentTabLayout.getCurrentTab()],et_address.getText().toString(),mrg.getCheckedRadioButtonText().toString());
                 break;
             case R.id.et_bday:
                 showbdateDialog(view);

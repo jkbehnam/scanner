@@ -24,9 +24,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="4dp"
-            android:tint="@color/allOkButton"
             app:layout_constraintStart_toStartOf="@+id/txttoolbar"
-            app:srcCompat="@drawable/conversation" />
+            app:srcCompat="@drawable/conversation"
+            app:tint="@color/allOkButton" />
 
         <TextView
 

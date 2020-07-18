@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:multi_line_radio_group="http://schemas.android.com/apk/res-auto"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+
     android:fillViewport="true">
 
     <LinearLayout
@@ -13,204 +17,250 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/lay_2"
+        <RelativeLayout
+            android:id="@+id/rel_lay_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background"
             android:visibility="gone">
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="168dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/back_et_white"
-                android:orientation="horizontal"
+                android:clipToPadding="false"
+                android:paddingBottom="130dp">
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
 
-                <EditText
-                    android:id="@+id/et_name"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lay_2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/et_nothing"
-                    android:ems="10"
-                    android:gravity="center"
-
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textCursorDrawable="@null" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="48dp"
-                android:background="@drawable/back_et_white"
-                android:orientation="vertical"
-
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                <EditText
-                    android:id="@+id/et_bday"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/et_nothing"
-                    android:ems="10"
-                    android:focusable="false"
-                    android:gravity="center"
-
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textCursorDrawable="@null" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout10"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="48dp"
-
-                android:background="@drawable/back_et_white"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout4"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-                <EditText
-                    android:id="@+id/et_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/et_nothing"
-                    android:ems="10"
-                    android:gravity="center"
-
-                    android:inputType="textPersonName"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textCursorDrawable="@null" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="0dp"
-
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:visibility="gone" />
+                    android:background="@color/background">
 
-                <com.flyco.tablayout.SegmentTabLayout
-                    android:id="@+id/tl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1.5"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-                    app:tl_bar_stroke_color="@color/second_color"
-                    app:tl_bar_stroke_width="2dp"
-                    app:tl_textUnselectColor="@color/text_color_all"
-                    tl:tl_indicator_anim_enable="true"
-                    tl:tl_indicator_bounce_enable="false"
-                    tl:tl_indicator_color="@color/allOkButton"
 
-                    tl:tl_tab_space_equal="true" />
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginTop="168dp"
+                        android:layout_marginRight="40dp"
+                        android:background="@drawable/back_et_white"
+                        android:orientation="horizontal"
 
-            </LinearLayout>
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="نام و نام خانوادگی"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-                app:layout_constraintEnd_toEndOf="@+id/textView2" />
+                        <EditText
+                            android:id="@+id/et_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/et_nothing"
+                            android:ems="10"
+                            android:gravity="center"
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="8dp"
-                android:text="تاریخ تولد"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout3" />
+                            android:inputType="textPersonName"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textCursorDrawable="@null" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="جنسیت"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
-                app:layout_constraintEnd_toEndOf="@+id/textView2" />
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="آدرس"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
-                app:layout_constraintEnd_toEndOf="@+id/textView10" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="48dp"
+                        android:background="@drawable/back_et_white"
+                        android:orientation="vertical"
+
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout2"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                        <EditText
+                            android:id="@+id/et_bday"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/et_nothing"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:gravity="center"
+
+                            android:inputType="textPersonName"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textCursorDrawable="@null" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout10"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="48dp"
+
+                        android:background="@drawable/back_et_white"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+                        <EditText
+                            android:id="@+id/et_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/et_nothing"
+                            android:ems="10"
+                            android:gravity="center"
+
+                            android:inputType="textPersonName"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textCursorDrawable="@null" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout12"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout4"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+
+                        <com.whygraphics.multilineradiogroup.MultiLineRadioGroup
+
+                            android:id="@+id/main_activity_multi_line_radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/allOkButton"
+
+                            android:layoutDirection="rtl"
+                            android:outlineAmbientShadowColor="@color/allOkButton"
+                            android:outlineSpotShadowColor="@color/allOkButton"
+                            android:textColor="@drawable/radio_text_selected"
+                            android:textDirection="rtl"
+                            multi_line_radio_group:max_in_row="2" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout4"
+                        android:layout_width="0dp"
+
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="48dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+                        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="gone" />
+
+                        <com.flyco.tablayout.SegmentTabLayout
+                            android:id="@+id/tl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="48dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.5"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                            app:tl_bar_stroke_color="@color/second_color"
+                            app:tl_bar_stroke_width="2dp"
+                            app:tl_textUnselectColor="@color/text_color_all"
+                            tl:tl_indicator_anim_enable="true"
+                            tl:tl_indicator_bounce_enable="false"
+                            tl:tl_indicator_color="@color/allOkButton"
+
+                            tl:tl_tab_space_equal="true" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="نام و نام خانوادگی"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+                        app:layout_constraintEnd_toEndOf="@+id/textView2" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="تاریخ تولد"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+                        app:layout_constraintEnd_toEndOf="@+id/linearLayout3" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="جنسیت"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+                        app:layout_constraintEnd_toEndOf="@+id/textView2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="آدرس"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout10"
+                        app:layout_constraintEnd_toEndOf="@+id/textView10" />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="طریقه ی آشنایی با اپلیکیشن"
+                        app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
+                        app:layout_constraintEnd_toEndOf="@+id/textView10" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_lay_2"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="48dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/allOkButton"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
-                app:layout_constraintVertical_bias="1.0">
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                >
 
                 <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="ثبت نام"
                     android:textColor="@color/white"
-                    android:textSize="18dp"
-                     />
+                    android:textSize="18dp" />
             </androidx.cardview.widget.CardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lay_1"
@@ -281,7 +331,6 @@
 
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -315,7 +364,6 @@
                 app:layout_constraintStart_toStartOf="@+id/linearLayout3">
 
                 <TextView
-                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -330,4 +378,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</RelativeLayout>
