@@ -70,9 +70,8 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
 
     // TODO: Rename and change types and number of parameters
     public static AddSkinPhoto newInstance() {
-        AddSkinPhoto fragment = new AddSkinPhoto();
 
-        return fragment;
+        return new AddSkinPhoto();
     }
 
     public static AddSkinPhoto newInstance(Request request) {
@@ -96,7 +95,7 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
         setToolbar_notmain(rootView, "ارسال تصویر ضایعه");
         RtlGridLayoutManager layoutManager = new RtlGridLayoutManager(getActivity(), 3);
 
-        btn_camera_tips.setOnClickListener(this::onClick);
+        btn_camera_tips.setOnClickListener(this);
         mainActivity_recycle.setLayoutManager(layoutManager);
         glist = new ArrayList<>();
         glist.add(new AddImage(""));
@@ -113,31 +112,28 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
         madapter = new adapterAddPhoto(glist);
         mainActivity_recycle.setAdapter(madapter);
 
-        madapter.setOnCardClickListner(new adapterAddPhoto.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position2) {
-                position = position2;
-                Dexter.withActivity(getActivity())
-                        .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .withListener(new MultiplePermissionsListener() {
-                            @Override
-                            public void onPermissionsChecked(MultiplePermissionsReport report) {
-                                if (report.areAllPermissionsGranted()) {
-                                    showImagePickerOptions();
-                                }
-
-                                if (report.isAnyPermissionPermanentlyDenied()) {
-                                    showSettingsDialog();
-                                }
+        madapter.setOnCardClickListner((view, position2) -> {
+            position = position2;
+            Dexter.withActivity(getActivity())
+                    .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .withListener(new MultiplePermissionsListener() {
+                        @Override
+                        public void onPermissionsChecked(MultiplePermissionsReport report) {
+                            if (report.areAllPermissionsGranted()) {
+                                showImagePickerOptions();
                             }
 
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            if (report.isAnyPermissionPermanentlyDenied()) {
+                                showSettingsDialog();
                             }
-                        }).check();
+                        }
 
-            }
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                            token.continuePermissionRequest();
+                        }
+                    }).check();
+
         });
 
 
@@ -192,16 +188,13 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
             case R.id.btnSkin:
                 if (request != null) {
                     showLoading_base();
-                    ConnectToServer.uploadBitmap(new VolleyCallback() {
-                        @Override
-                        public void onSuccess(String result) throws JSONException {
-                            hideLoading_base();
-                            Frag_request_details.getit().getRequestDetail();
-                            FragmentManager fm = getActivity().getSupportFragmentManager();
-                            fm.popBackStack();
+                    ConnectToServer.uploadBitmap(result -> {
+                        hideLoading_base();
+                        Frag_request_details.getit().getRequestDetail();
+                        FragmentManager fm = getActivity().getSupportFragmentManager();
+                        fm.popBackStack();
 
-                            // reciveRequest(result);
-                        }
+                        // reciveRequest(result);
                     }, reqBodyPhotosArrayList, request, "body");
                 } else {
                     FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -276,13 +269,13 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
             if (req.getId() == position) {
                 dup = true;
                 reqBodyPhotosArrayList.set(reqBodyPhotosArrayList.indexOf(req), new ReqPhoto(position, url));
-                Log.d("behnamBodyphoto", String.valueOf(reqBodyPhotosArrayList.toString()));
+                Log.d("behnamBodyphoto", reqBodyPhotosArrayList.toString());
             }
 
         }
         if (!dup) {
             reqBodyPhotosArrayList.add(new ReqPhoto(position, url));
-            Log.d("behnamBodyphoto", String.valueOf(reqBodyPhotosArrayList.toString()));
+            Log.d("behnamBodyphoto", reqBodyPhotosArrayList.toString());
         }
     }
 
@@ -313,10 +306,9 @@ public class AddSkinPhoto extends myFragment implements View.OnClickListener {
         bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
 
         for (int pixel : pixels) {
-            int color = pixel;
-            int r = Color.red(color);
-            int g = Color.green(color);
-            int b = Color.blue(color);
+            int r = Color.red(pixel);
+            int g = Color.green(pixel);
+            int b = Color.blue(pixel);
             double luminance = (0.299 * r + 0.0f + 0.587 * g + 0.0f + 0.114 * b + 0.0f);
             if (luminance < 150) {
                 darkPixels++;

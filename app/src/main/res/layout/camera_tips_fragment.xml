@@ -48,7 +48,7 @@
                 android:padding="8dp"
                 android:layout_marginTop="15dp"
                 android:textColor="@color/text_color_second"
-android:textSize="18dp"
+android:textSize="18sp"
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class AddImage {
     @SerializedName("photo")
     @Expose
-    private String address="";
+    private String address;
 
     public AddImage(String address){
         this.address=address;

@@ -21,8 +21,8 @@ import java.util.List;
 public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     CardPagerAdapter.OnCardClickListner onCardClickListner;
     String YNQ="no";
-    private List<CardView> mViews;
-    private List<CardItem> mData;
+    private final List<CardView> mViews;
+    private final List<CardItem> mData;
     private float mBaseElevation;
 int Qid;
     public CardPagerAdapter() {
@@ -68,17 +68,17 @@ int Qid;
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.adapter, container, false);
         container.addView(view);
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.buttonContainer);
+        LinearLayout linearLayout = view.findViewById(R.id.buttonContainer);
         final ExpandableRelativeLayout expandableLayout
-                = (ExpandableRelativeLayout) view.findViewById(R.id.what_is_ezterab_expandableLayout1);
+                = view.findViewById(R.id.what_is_ezterab_expandableLayout1);
         expandableLayout.setInterpolator(new LinearInterpolator());
         expandableLayout.collapse();
         bind(mData.get(position), view);
-        CardView cardView = (CardView) view.findViewById(R.id.cardView);
-        CardView cardYes = (CardView) view.findViewById(R.id.btnyes);
-        CardView cardNo = (CardView) view.findViewById(R.id.btnno);
-        CardView cardNext = (CardView) view.findViewById(R.id.btn_next);
-        EditText et_more_desc = (EditText) view.findViewById(R.id.et_more_desc);
+        CardView cardView = view.findViewById(R.id.cardView);
+        CardView cardYes = view.findViewById(R.id.btnyes);
+        CardView cardNo = view.findViewById(R.id.btnno);
+        CardView cardNext = view.findViewById(R.id.btn_next);
+        EditText et_more_desc = view.findViewById(R.id.et_more_desc);
 
         if (!mData.get(position).isYesNo()){
             expandableLayout.setVisibility(View.VISIBLE);
@@ -90,30 +90,19 @@ int Qid;
             mBaseElevation = cardView.getCardElevation();
         }
 
-        cardNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YNQ="no";
-                //  onCardClickListner.OnCardClicked(v, position);
-                expandableLayout.setVisibility(View.VISIBLE);
-                linearLayout.setVisibility(View.GONE);
-            }
+        cardNo.setOnClickListener(v -> {
+            YNQ="no";
+            //  onCardClickListner.OnCardClicked(v, position);
+            expandableLayout.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.GONE);
         });
-        cardYes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                YNQ="yes";
-                //  onCardClickListner.OnCardClicked(v, position);
-                expandableLayout.setVisibility(View.VISIBLE);
-                linearLayout.setVisibility(View.GONE);
-            }
+        cardYes.setOnClickListener(v -> {
+            YNQ="yes";
+            //  onCardClickListner.OnCardClicked(v, position);
+            expandableLayout.setVisibility(View.VISIBLE);
+            linearLayout.setVisibility(View.GONE);
         });
-        cardNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onCardClickListner.OnCardClicked(view, position, new ReqQuestions(mData.get(position).getId(), YNQ, et_more_desc.getText().toString()));
-            }
-        });
+        cardNext.setOnClickListener(view1 -> onCardClickListner.OnCardClicked(view1, position, new ReqQuestions(mData.get(position).getId(), YNQ, et_more_desc.getText().toString())));
 
         cardView.setMaxCardElevation(mBaseElevation * MAX_ELEVATION_FACTOR);
         mViews.set(position, cardView);
@@ -128,7 +117,7 @@ int Qid;
 
     private void bind(CardItem item, View view) {
 
-        TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
+        TextView contentTextView = view.findViewById(R.id.contentTextView);
         contentTextView.setText(item.getText());
     }
 

@@ -45,13 +45,12 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     @BindView(R.id.chat_view)
     ChatView chatView;
     ArrayList<ChatMessage> chat_list;
-    Request request;
+    final Request request;
 
     // TODO: Rename and change types and number of parameters
     public static Frag_chat_ui newInstance(Request request) {
-        Frag_chat_ui fragment = new Frag_chat_ui(request);
 
-        return fragment;
+        return new Frag_chat_ui(request);
     }
 
     public Frag_chat_ui(Request request) {
@@ -73,16 +72,13 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
 
         //chatView.addMessage(new ChatMessage("سلام", 1548570748, ChatMessage.Type.SENT, "دکتر یوسفی"));
         //chatView.addMessage(new ChatMessage("سلام", 1548550748, ChatMessage.Type.RECEIVED, "حسن حسن زاده"));
-        chatView.setOnSentMessageListener(new ChatView.OnSentMessageListener() {
-            @Override
-            public boolean sendMessage(ChatMessage chatMessage) {
-                // perform actual message sending
-                if(!request.getRequest_state().equals("endchat")) {
+        chatView.setOnSentMessageListener(chatMessage -> {
+            // perform actual message sending
+            if(!request.getRequest_state().equals("endchat")) {
 
-                    sendMessageServer(chatMessage);
-                    return true;
-                }return false;
-            }
+                sendMessageServer(chatMessage);
+                return true;
+            }return false;
         });
 
         showEndedSnackbar(request.getRequest_state());
@@ -127,30 +123,22 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
     }
 
     public void sendMessageServer(ChatMessage chatMessage) {
-        Map<String, String> param = new HashMap<String, String>();
+        Map<String, String> param = new HashMap<>();
         param.put("request_key", request.getRequest_id());
         param.put("content", chatMessage.getMessage());
         param.put("sender", "user");
         param.put("user_id", user_id);
         param.put("doc_id", request.getRequest_doctor());
-        ConnectToServer.any_send(new VolleyCallback() {
-            @Override
-            public void onSuccess(String result) throws JSONException {
-                // reciveRequest(result);
-            }
+        ConnectToServer.any_send(result -> {
+            // reciveRequest(result);
         }, param, URL_SEND_CHAT);
     }
 
     public void getMessageServer() {
-        Map<String, String> param = new HashMap<String, String>();
+        Map<String, String> param = new HashMap<>();
         param.put("request_key", request.getRequest_id());
 
-        ConnectToServer.any_send(new VolleyCallback() {
-            @Override
-            public void onSuccess(String result) throws JSONException {
-                reciveRequest(result);
-            }
-        }, param, URL_GET_CHAT);
+        ConnectToServer.any_send(result -> reciveRequest(result), param, URL_GET_CHAT);
     }
 
     public void reciveRequest(String response) throws JSONException {
@@ -196,6 +184,7 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
         if(s.equals("endchat")){
 
             KSnack kSnack = new KSnack(getActivity());
+            // name and clicklistener
             kSnack
                     .setListener(new KSnackBarEventListener() { // listener
                         @Override
@@ -208,12 +197,7 @@ public class Frag_chat_ui extends myFragment implements View.OnClickListener {
                             System.out.println("Stopped");
                         }
                     })
-                    .setAction("Text", new View.OnClickListener() { // name and clicklistener
-                        @Override
-                        public void onClick(View v) {
-                            System.out.println("Your action !");
-                        }
-                    })
+                    .setAction("Text", v -> System.out.println("Your action !"))
                     .setMessage("مکالمه به درخواست شما با پایان رسیده است") // message
                     .setTextColor(R.color.white) // message text color
                     .setBackColor(R.color.red_600) // background color

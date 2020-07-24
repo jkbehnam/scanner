@@ -5,11 +5,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.helper.PrefManager;
@@ -17,13 +13,13 @@ import com.patient.mokhtari.scanner.activities.walkthrough.WalkthroughStyle3Acti
 
 public class Main extends BaseActivity {
     public static String user_id;
-    private FirebaseAnalytics mFirebaseAnalytics;
+
     @SuppressWarnings("unused")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         PrefManager pm = new PrefManager(this.getBaseContext());
 

@@ -202,7 +202,7 @@ public final class HashedPassword {
 	}
 
 	private int nextExtra() {
-		return (int) nextExtraChar();
+		return nextExtraChar();
 	}
 
 	private char nextExtraChar() {
@@ -214,7 +214,7 @@ public final class HashedPassword {
 	}
 
 	private char nextBetween(char base, int interval) {
-		return (char) between((int) base, interval, nextExtra());
+		return (char) between(base, interval, nextExtra());
 	}
 
 	private static String rotate(String s, int amount) {

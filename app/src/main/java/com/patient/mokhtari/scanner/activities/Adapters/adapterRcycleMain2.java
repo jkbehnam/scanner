@@ -30,12 +30,12 @@ import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestStat
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.MyViewHolder> {
-    private List<Request> data_services_list;
+    private final List<Request> data_services_list;
 
     Context context;
     OnCardClickListner onCardClickListner;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         //  public TextView card_title;
         ////   public ImageView img;
         @BindView(R.id.cv_request)
@@ -101,12 +101,7 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
                 .load(data_service.getRequest_img())
                 .thumbnail(.005f)
                 .into(holder.iv_requet);
-        holder.cv_request.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCardClickListner.OnCardClicked(v, position, data_service);
-            }
-        });
+        holder.cv_request.setOnClickListener(v -> onCardClickListner.OnCardClicked(v, position, data_service));
     }
     @Override
     public int getItemCount() {
@@ -123,8 +118,6 @@ public class adapterRcycleMain2 extends RecyclerView.Adapter<adapterRcycleMain2.
 
     public int getImage(String imageName) {
 
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-
-        return drawableResourceId;
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 }

@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterRcycleMain extends RecyclerView.Adapter<adapterRcycleMain.MyViewHolder> {
-    private List<MainList> data_services_list;
+    private final List<MainList> data_services_list;
 
     Context context;
     OnCardClickListner onCardClickListner;
@@ -88,12 +88,7 @@ if(!data_service.isState()){
     holder.iv.setColorFilter(filter);
    holder.tv_number. setBackgroundTintList(context.getResources().getColorStateList(R.color.grey_40));
 }
-        holder.cv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onCardClickListner.OnCardClicked(v, position);
-            }
-        });
+        holder.cv.setOnClickListener(v -> onCardClickListner.OnCardClicked(v, position));
 
     }
 
@@ -111,8 +106,6 @@ if(!data_service.isState()){
     }
     public int getImage(String imageName) {
 
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-
-        return drawableResourceId;
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 }

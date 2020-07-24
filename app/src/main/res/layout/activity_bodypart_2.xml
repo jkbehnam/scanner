@@ -54,7 +54,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="مرد"
                     android:textColor="@android:color/white"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -80,7 +80,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="زن"
                     android:textColor="@color/colorLightBlue"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -109,7 +109,7 @@
                 android:onClick="sideClick"
                 android:text="جلو"
                 android:textColor="@android:color/white"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/flipBack"
@@ -121,7 +121,7 @@
                 android:onClick="sideClick"
                 android:text="پشت"
                 android:textColor="@color/colorLightBlue"
-                android:textSize="16dp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
 
@@ -180,7 +180,6 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1.5"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
             app:tl_bar_stroke_color="@color/second_color"
             app:tl_bar_stroke_width="2dp"

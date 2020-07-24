@@ -3,8 +3,8 @@ package com.patient.mokhtari.scanner.activities.questioner;
 
 public class CardItem {
 
-    private int mTextResource;
-    private int mTitleResource;
+    private final int mTextResource;
+    private final int mTitleResource;
     private int id;
     private boolean yesNo;
 

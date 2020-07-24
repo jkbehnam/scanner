@@ -35,32 +35,29 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
     float pright_copy = 0;
     public boolean istouch = false;
     private static final String TAG = "DxWaveEffectLayout";
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     public static int[] location_copy = null;
     public static int[] location_copy2 = null;
     public static int[] location_copy3 = null;
 
     private int mTargetWidth;
-    private int mTargetHeight;
 
     private static final int mMaxRevealRadius = 24; //40
     private static final int mRevealRadiusGap = 3; //5
     private int mRevealRadius = 0;
     private float mCenterX;
     private float mCenterY;
-    private int[] mLocationInScreen = new int[2];
+    private final int[] mLocationInScreen = new int[2];
 
     private boolean mShouldDoAnimation = false;
     private boolean mIsPressed = false;
     private String mTag;
-    private int INVALIDATE_DURATION = 40;
 
     private View mTouchTarget;
-    private DispatchUpTouchEventRunnable mDispatchUpTouchEventRunnable = new DispatchUpTouchEventRunnable();
+    private final DispatchUpTouchEventRunnable mDispatchUpTouchEventRunnable = new DispatchUpTouchEventRunnable();
     private RegionView regionView;
     private RegionPathView regionPathView;
     private ImageView bodyImageView;
-    private int regionType = -1;
 
     private static int mHeadY, mHandX1, mHandX2, mChestY, mWaistY, mBackHeadY, mUpperPartY, mMiddlePartY;
 
@@ -105,7 +102,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
         mCenterX = event.getX();
         mCenterY = event.getY();
         mTargetWidth = view.getMeasuredWidth();
-        mTargetHeight = view.getMeasuredHeight();
+        int mTargetHeight = view.getMeasuredHeight();
         mRevealRadius = 0;
         mShouldDoAnimation = true;
         mIsPressed = true;
@@ -145,7 +142,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
                     for (BodyPointMain f : reqBodyPoints
                     ) {
                         if (HumanBodyWidget.mShowingBack == f.mShowingBack)
-                            canvas.drawCircle((float) (left + (right - left) * f.fx), (float) (top + (bottom - top) * f.fy), mRevealRadius, mPaint);
+                            canvas.drawCircle(left + (right - left) * f.fx, top + (bottom - top) * f.fy, mRevealRadius, mPaint);
                     }
                 }
 
@@ -184,7 +181,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
                 for (BodyPointMain f : reqBodyPoints
                 ) {
                     if (HumanBodyWidget.mShowingBack == f.mShowingBack)
-                        canvas.drawCircle((float) (left + (right - left) * f.fx), (float) (top + (bottom - top) * f.fy), mRevealRadius, mPaint);
+                        canvas.drawCircle(left + (right - left) * f.fx, top + (bottom - top) * f.fy, mRevealRadius, mPaint);
                 }
                 if (location[0] < location2[0] || location2[0] == 0 && location2[1] == 0) {
                 } else {
@@ -214,6 +211,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
             int x = (int) event.getRawX();
             int y = (int) event.getRawY();
             int action = event.getAction();
+            int INVALIDATE_DURATION = 40;
             if (action == MotionEvent.ACTION_DOWN) {
 
                 View touchTarget = getTouchTarget(this, x, y);
@@ -286,11 +284,8 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
             int top = location[1];
             int right = left + view.getMeasuredWidth();
             int bottom = top + view.getMeasuredHeight();
-            if (view.isClickable() && y >= top && y <= bottom
-                    && x >= left && x <= right) {
-                return true;
-            }
-            return false;
+            return view.isClickable() && y >= top && y <= bottom
+                    && x >= left && x <= right;
         }
 
         @Override
@@ -319,9 +314,7 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
             }
         }
 
-        ;
-
-        private void initParametersForRegion () {
+    private void initParametersForRegion () {
 
             if (bodyImageView == null)
                 return;
@@ -351,8 +344,8 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
 
             for (Map.Entry<Integer, Region[]> item : RegionParam.regionItems.entrySet()) {
                 Region[] regions = item.getValue();
-                for (int i = 0; i < regions.length; i++) {
-                    initLocationForRegion(regions[i], middleAlignmentX);
+                for (Region region : regions) {
+                    initLocationForRegion(region, middleAlignmentX);
                 }
             }
 
@@ -438,9 +431,9 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
         private ImageView getBodyImageView () {
             ImageView imageView;
             if (HumanBodyWidget.mShowingBack)
-                imageView = (ImageView) this.findViewById(R.id.body_back);
+                imageView = this.findViewById(R.id.body_back);
             else
-                imageView = (ImageView) this.findViewById(R.id.body_front);
+                imageView = this.findViewById(R.id.body_front);
 
             return imageView;
         }
@@ -455,6 +448,5 @@ public class WaveEffectLayout extends FrameLayout implements Runnable {
         }
 
         public void setRegionType ( int regionType){
-            this.regionType = regionType;
         }
     }

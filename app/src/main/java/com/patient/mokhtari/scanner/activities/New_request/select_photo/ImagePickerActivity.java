@@ -150,6 +150,7 @@ public class ImagePickerActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_IMAGE_CAPTURE:
                 if (resultCode == RESULT_OK) {

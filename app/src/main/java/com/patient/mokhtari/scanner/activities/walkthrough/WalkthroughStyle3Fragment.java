@@ -19,7 +19,7 @@ import com.patient.mokhtari.scanner.R;
 
 @SuppressLint("ValidFragment")
 public class WalkthroughStyle3Fragment extends Fragment {
-    int wizard_page_position;
+    final int wizard_page_position;
 
     public WalkthroughStyle3Fragment(int position) {
         this.wizard_page_position = position;
@@ -29,7 +29,7 @@ public class WalkthroughStyle3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         int layout_id = R.layout.walkthrough3_fragment;
         View view = inflater.inflate(layout_id, container, false);
-        ImageView img = (ImageView) view.findViewById(R.id.imagePage1);
+        ImageView img = view.findViewById(R.id.imagePage1);
         int img_id=0;
       //  String url = BuildConfig.IMAGE_URL + "walkthrough/style-3/Welcome-3-circle.png";
 switch (wizard_page_position){
@@ -61,8 +61,6 @@ switch (wizard_page_position){
     }
     public int getImage(String imageName) {
 
-        int drawableResourceId = getActivity().getResources().getIdentifier(imageName, "drawable", getActivity().getPackageName());
-
-        return drawableResourceId;
+        return getActivity().getResources().getIdentifier(imageName, "drawable", getActivity().getPackageName());
     }
 }

@@ -46,9 +46,8 @@ public class Frag_doctor_list extends myFragment implements View.OnClickListener
 
     // TODO: Rename and change types and number of parameters
     public static Frag_doctor_list newInstance() {
-        Frag_doctor_list fragment = new Frag_doctor_list();
 
-        return fragment;
+        return new Frag_doctor_list();
     }
 
 
@@ -116,13 +115,8 @@ public class Frag_doctor_list extends myFragment implements View.OnClickListener
     }
 
     public void getEventList() {
-        Map<String, String> param = new HashMap<String, String>();
-        ConnectToServer.any_send(new VolleyCallback() {
-            @Override
-            public void onSuccess(String result) throws JSONException {
-                reciveRequeset(result);
-            }
-        }, param, URL_GET_DOC_LIST);
+        Map<String, String> param = new HashMap<>();
+        ConnectToServer.any_send(result -> reciveRequeset(result), param, URL_GET_DOC_LIST);
     }
     public void reciveRequeset(String response) throws JSONException {
 
@@ -145,12 +139,6 @@ public class Frag_doctor_list extends myFragment implements View.OnClickListener
         adapterDocotrList madapter = new adapterDocotrList(doctors);
         mainActivity_recycle.setAdapter(madapter);
 
-        madapter.setOnCardClickListner(new adapterDocotrList.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position) {
-
-                reqDoctor =doctors.get(position).getId();
-            }
-        });
+        madapter.setOnCardClickListner((view, position) -> reqDoctor =doctors.get(position).getId());
     }
 }

@@ -27,12 +27,11 @@ public class BodyMain extends BaseActivity {
     @BindView(R.id.t2)
     SegmentTabLayout segmentTabLayout;
 
-    private WaveEffectLayout container;
     private HumanBodyWidget bodyWidget;
     private ImageView manIv, womanIv;
     private TextView manTv, womanTv, flipFrontTv, flipBackTv;
-    private String[] mTitles = {"جلو","پشت" };
-    private ArrayList<MyTouchListener> mTouchListeners = new ArrayList<>();
+    private final String[] mTitles = {"جلو","پشت" };
+    private final ArrayList<MyTouchListener> mTouchListeners = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +45,21 @@ public class BodyMain extends BaseActivity {
     public void initViews(Bundle savedInstanceState){
         setContentView(R.layout.activity_bodypart);
         ButterKnife.bind(this);
-        container = (WaveEffectLayout) findViewById(R.id.container);
-        manIv = (ImageView) findViewById(R.id.man_icon);
-        manTv = (TextView) findViewById(R.id.man_text);
-        womanIv = (ImageView) findViewById(R.id.woman_icon);
-        womanTv = (TextView) findViewById(R.id.woman_text);
-        flipFrontTv = (TextView) findViewById(R.id.flipFront);
-        flipBackTv = (TextView) findViewById(R.id.flipBack);
+        WaveEffectLayout container = findViewById(R.id.container);
+        manIv = findViewById(R.id.man_icon);
+        manTv = findViewById(R.id.man_text);
+        womanIv = findViewById(R.id.woman_icon);
+        womanTv = findViewById(R.id.woman_text);
+        flipFrontTv = findViewById(R.id.flipFront);
+        flipBackTv = findViewById(R.id.flipBack);
         segmentTabLayout.setTabData(mTitles);
         bodyWidget = new HumanBodyWidget(this, container, savedInstanceState);
         container.setRegionView(new RegionView(container, this));
 
         Toolbar toolbar;
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        toolbar= findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TextView txttoolbar=(TextView)findViewById(R.id.txttoolbar);
+        TextView txttoolbar= findViewById(R.id.txttoolbar);
         txttoolbar.setText("انتخاب محل ضایعه");
         Typeface typeface3 = Typeface.createFromAsset(getAssets(), "font/vazirbold.ttf");
         txttoolbar.setTypeface(typeface3, Typeface.BOLD);

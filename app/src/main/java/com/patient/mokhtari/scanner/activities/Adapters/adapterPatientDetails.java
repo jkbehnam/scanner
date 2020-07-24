@@ -29,12 +29,12 @@ import static com.patient.mokhtari.scanner.activities.utils.Utils.getRequestQues
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterPatientDetails extends RecyclerView.Adapter<adapterPatientDetails.MyViewHolder> {
-    private List<ReqQuestions> data_services_list;
+    private final List<ReqQuestions> data_services_list;
 
     Context context;
     OnCardClickListner onCardClickListner;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         //  public TextView card_title;
         ////   public ImageView img;
 
@@ -112,8 +112,6 @@ public class adapterPatientDetails extends RecyclerView.Adapter<adapterPatientDe
 
     public int getImage(String imageName) {
 
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-
-        return drawableResourceId;
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 }

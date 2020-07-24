@@ -28,15 +28,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.login);
         ButterKnife.bind(this);
         Toolbar toolbar;
-        toolbar=(Toolbar)findViewById(R.id.toolbar);
+        toolbar= findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TextView txttoolbar=(TextView)findViewById(R.id.txttoolbar);
+        TextView txttoolbar= findViewById(R.id.txttoolbar);
         txttoolbar.setText("ورود");
         Typeface typeface3 = Typeface.createFromAsset(getAssets(), "font/vazirbold.ttf");
         txttoolbar.setTypeface(typeface3, Typeface.BOLD);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loginPresenter = new LoginPresenter(this);
+        setLoading(this);
     }
     @Override
     public void onClick(View view) {

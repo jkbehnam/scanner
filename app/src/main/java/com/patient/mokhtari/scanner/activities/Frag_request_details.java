@@ -84,12 +84,12 @@ public class Frag_request_details extends myFragment implements View.OnClickList
     @BindView(R.id.tv_duration)
     TextView tv_duration;
     int position;
-    Request request;
+    final Request request;
     JSONObject jsonObject;
-    ArrayList<AddImage> bodyphotos = new ArrayList<>();
-    ArrayList<AddImage> testphotos = new ArrayList<>();
+    final ArrayList<AddImage> bodyphotos = new ArrayList<>();
+    final ArrayList<AddImage> testphotos = new ArrayList<>();
     public ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
-    public static ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
+    public static final ArrayList<BodyPointMain> reqBodyPoints2 = new ArrayList<>();
 public static Frag_request_details frag_request_details;
     // TODO: Rename and change types and number of parameters
     public Frag_request_details(Request RequestId) {
@@ -224,15 +224,9 @@ public static Frag_request_details frag_request_details;
 
 
     public void getRequestDetail() {
-        Map<String, String> param = new HashMap<String, String>();
+        Map<String, String> param = new HashMap<>();
         param.put("request_id", request.getRequest_id());
-        ConnectToServer.any_send(new VolleyCallback() {
-            @Override
-            public void onSuccess(String result) throws JSONException {
-
-                reciveRequest(result);
-            }
-        }, param, URL_GET_REQUEST_DETAIL);
+        ConnectToServer.any_send(result -> reciveRequest(result), param, URL_GET_REQUEST_DETAIL);
     }
 
     public void reciveRequest(String response) throws JSONException {
@@ -266,27 +260,21 @@ public static Frag_request_details frag_request_details;
         madapter2 = new adapterShowPhoto(testphotos);
         test_img_recycle.setAdapter(madapter2);
 
-        madapter.setOnCardClickListner(new adapterShowPhoto.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position) {
+        madapter.setOnCardClickListner((view, position) -> {
 //                Intent intent = new Intent(getActivity(), imageSampleActivity.class);
 //                getActivity().startActivity(intent);
 
-                showphoto shortAnswerAlert = new showphoto();
-                shortAnswerAlert.init_dialog(getActivity(), (bodyphotos.get(position).getAddress()));
-                shortAnswerAlert.show();
-            }
+            showphoto shortAnswerAlert = new showphoto();
+            shortAnswerAlert.init_dialog(getActivity(), (bodyphotos.get(position).getAddress()));
+            shortAnswerAlert.show();
         });
-        madapter2.setOnCardClickListner(new adapterShowPhoto.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position) {
-                // Intent intent = new Intent(getActivity(), imageSampleActivity.class);
-                //  getActivity().startActivity(intent);
+        madapter2.setOnCardClickListner((view, position) -> {
+            // Intent intent = new Intent(getActivity(), imageSampleActivity.class);
+            //  getActivity().startActivity(intent);
 
-                showphoto shortAnswerAlert = new showphoto();
-                shortAnswerAlert.init_dialog(getActivity(), (testphotos.get(position).getAddress()));
-                shortAnswerAlert.show();
-            }
+            showphoto shortAnswerAlert = new showphoto();
+            shortAnswerAlert.init_dialog(getActivity(), (testphotos.get(position).getAddress()));
+            shortAnswerAlert.show();
         });
 
     }

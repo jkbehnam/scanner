@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.animation.Interpolator;
 
 
+import androidx.annotation.Keep;
+
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.BodyPart.region.Region;
 
@@ -30,7 +32,7 @@ public class AnimatedPathView extends View {
     /**
      * The paint for the path.
      */
-    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     /**
      * Utils to catch the paths from the svg.
      */
@@ -38,7 +40,7 @@ public class AnimatedPathView extends View {
     /**
      * All the paths provided to the view. Both from Path and Svg.
      */
-    private List<SvgUtils.SvgPath> paths = new ArrayList<SvgUtils.SvgPath>(0);
+    private List<SvgUtils.SvgPath> paths = new ArrayList<>(0);
     /**
      * This is a lock before the view is redrawn
      * or resided it must be synchronized with this object.
@@ -84,7 +86,7 @@ public class AnimatedPathView extends View {
      */
     public boolean toClear = false;
     private Region[] regions;
-    private Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     public void setRegions(Region[] regions) {
         this.regions = regions;
@@ -181,6 +183,7 @@ public class AnimatedPathView extends View {
      *
      * @param percentage float the percentage of the path.
      */
+    @Keep
     public void setPercentage(float percentage) {
         if (percentage < 0.0f || percentage > 1.0f) {
             throw new IllegalArgumentException("setPercentage not between 0.0f and 1.0f");
@@ -262,18 +265,15 @@ public class AnimatedPathView extends View {
             }
         }
         if (svgResourceId != 0) {
-            mLoader = new Thread(new Runnable() {
-                @Override
-                public void run() {
+            mLoader = new Thread(() -> {
 
-                    svgUtils.load(getContext(), svgResourceId);
+                svgUtils.load(getContext(), svgResourceId);
 
-                    synchronized (mSvgLock) {
-                        width = w - getPaddingLeft() - getPaddingRight();
-                        height = h - getPaddingTop() - getPaddingBottom();
-                        paths = svgUtils.getPathsForViewport(width, height);
-                        updatePathsPhaseLocked();
-                    }
+                synchronized (mSvgLock) {
+                    width = w - getPaddingLeft() - getPaddingRight();
+                    height = h - getPaddingTop() - getPaddingBottom();
+                    paths = svgUtils.getPathsForViewport(width, height);
+                    updatePathsPhaseLocked();
                 }
             }, "SVG Loader");
             mLoader.start();

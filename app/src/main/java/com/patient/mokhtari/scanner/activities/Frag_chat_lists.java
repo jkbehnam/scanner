@@ -42,9 +42,8 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
 
     // TODO: Rename and change types and number of parameters
     public static Frag_chat_lists newInstance() {
-        Frag_chat_lists fragment = new Frag_chat_lists();
 
-        return fragment;
+        return new Frag_chat_lists();
     }
 
     @Override
@@ -89,17 +88,14 @@ public class Frag_chat_lists extends myFragment implements View.OnClickListener 
         }
         adapterChatList madapter = new adapterChatList(glist);
         mainActivity_recycle.setAdapter(madapter);
-        madapter.setOnCardClickListner(new adapterChatList.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position) {
+        madapter.setOnCardClickListner((view, position) -> {
 
-                loadFragment(Frag_chat_ui.newInstance(glist.get(position)));
-                // Intent i=new Intent(Mainskin.this, question.class);
-                //startActivity(i);
-                //   loadFragment(new BuyQuestionFragment());
+            loadFragment(Frag_chat_ui.newInstance(glist.get(position)));
+            // Intent i=new Intent(Mainskin.this, question.class);
+            //startActivity(i);
+            //   loadFragment(new BuyQuestionFragment());
 
 
-            }
         });
 
     }

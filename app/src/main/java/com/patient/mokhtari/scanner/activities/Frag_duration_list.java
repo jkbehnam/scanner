@@ -35,9 +35,8 @@ public class Frag_duration_list extends myFragment implements View.OnClickListen
     CardView btn_period;
     // TODO: Rename and change types and number of parameters
     public static Frag_duration_list newInstance() {
-        Frag_duration_list fragment = new Frag_duration_list();
 
-        return fragment;
+        return new Frag_duration_list();
     }
 
     @Override

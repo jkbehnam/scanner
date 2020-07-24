@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,7 +41,7 @@ public class showphoto {
     private Matrix mCurrentDisplayMatrix = null;
 
     @SuppressLint("ResourceAsColor")
-    public Dialog init_dialog(Context context, String url) {
+    public void init_dialog(Context context, String url) {
         this.context = context;
         dialog = new Dialog(context, android.R.style.Theme_Holo_Light_NoActionBar);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -55,11 +53,8 @@ public class showphoto {
         //  et_answer = dialog.findViewById(R.id.txt_pin_entry);
         Toolbar toolbar = dialog.findViewById(R.id.toolbar);
         toolbar.setTitle("تصویر ");
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //onBackPressed();
-            }
+        toolbar.setNavigationOnClickListener(v -> {
+            //onBackPressed();
         });
         mPhotoView = dialog.findViewById(R.id.iv_photo);
 
@@ -99,7 +94,6 @@ public class showphoto {
                 ).submit();
 
 
-        return dialog;
     }
 
     public void show() {
@@ -115,7 +109,7 @@ public class showphoto {
         mCurrentToast.show();
     }
 
-    private class SingleFlingListener implements OnSingleFlingListener {
+    private static class SingleFlingListener implements OnSingleFlingListener {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {

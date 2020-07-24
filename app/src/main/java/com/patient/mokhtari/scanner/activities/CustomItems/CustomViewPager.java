@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 
 import androidx.viewpager.widget.ViewPager;
 enum SwipeDirection {
-    all, left, right, none ;
+    all, left, right, none
 }
 public class CustomViewPager extends ViewPager {
     private float initialXValue;

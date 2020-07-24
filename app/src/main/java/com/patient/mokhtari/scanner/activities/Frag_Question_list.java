@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -48,7 +47,7 @@ public class Frag_Question_list extends myFragment implements View.OnClickListen
     @BindView(R.id.tv_qnumber)
     TextView tv_qnumber;
 
-public  static String[] ql={"آیا محل ضایعه بیمار همراه با درد است؟ ",
+public  static final String[] ql={"آیا محل ضایعه بیمار همراه با درد است؟ ",
         "آیا محل ضایعه بیمار همراه با خارش است؟ ",
         "آیا بیمار تب دارد؟ ",
         "آیا بیمار در حال حاضر داروی خاصی مصرف می کند؟ در صورت استفاده از دارو نام آن را وارد کنید.",
@@ -62,9 +61,8 @@ public  static String[] ql={"آیا محل ضایعه بیمار همراه با
 
     // TODO: Rename and change types and number of parameters
     public static Frag_Question_list newInstance() {
-        Frag_Question_list fragment = new Frag_Question_list();
 
-        return fragment;
+        return new Frag_Question_list();
     }
 
     @Override
@@ -80,7 +78,7 @@ public  static String[] ql={"آیا محل ضایعه بیمار همراه با
         setFragmentActivity(getActivity());
         setToolbar_notmain(rootView, "پاسخ به سوالات");
 Fragment fragment=this;
-        mViewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
+        mViewPager = rootView.findViewById(R.id.viewPager);
 
         Typeface typeface3 = Typeface.createFromAsset(getActivity().getAssets(), "font/iran_sans.ttf");
         tv_queston_title.setTypeface(typeface3, Typeface.BOLD);
@@ -113,7 +111,7 @@ Fragment fragment=this;
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                tv_qnumber.setText(String.valueOf(position + 1) +"/"+ mCardAdapter.getCount());
+                tv_qnumber.setText((position + 1) +"/"+ mCardAdapter.getCount());
             }
 
             @Override
@@ -126,29 +124,26 @@ Fragment fragment=this;
 
             }
         });
-        mCardAdapter.setOnCardClickListner(new CardPagerAdapter.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position, ReqQuestions reqQuestions) {
-                mViewPager.setCurrentItem(position + 1, true);
+        mCardAdapter.setOnCardClickListner((view, position, reqQuestions) -> {
+            mViewPager.setCurrentItem(position + 1, true);
 
-                boolean dup=false;
-                for (ReqQuestions req : reqQuestionsArrayList
-                ) {
-                    if (req.getQ_id() == reqQuestions.getQ_id()) {
-                        dup=true;
-                        reqQuestionsArrayList.set(reqQuestionsArrayList.indexOf(req),reqQuestions);
-                        Log.d("behnamq",String.valueOf(reqQuestionsArrayList.toString()));
-                    }
+            boolean dup=false;
+            for (ReqQuestions req : reqQuestionsArrayList
+            ) {
+                if (req.getQ_id() == reqQuestions.getQ_id()) {
+                    dup=true;
+                    reqQuestionsArrayList.set(reqQuestionsArrayList.indexOf(req),reqQuestions);
+                    Log.d("behnamq", reqQuestionsArrayList.toString());
+                }
 
-                }
-                if(!dup){
-                    reqQuestionsArrayList.add(reqQuestions);
-                    Log.d("behnamq",String.valueOf(reqQuestionsArrayList.toString()));
-                }
-                if(position==mCardAdapter.getCount()-1){
-                    getActivity().onBackPressed();                }
-                mViewPager.setCurrentItem(position + 1, true);
             }
+            if(!dup){
+                reqQuestionsArrayList.add(reqQuestions);
+                Log.d("behnamq", reqQuestionsArrayList.toString());
+            }
+            if(position==mCardAdapter.getCount()-1){
+                getActivity().onBackPressed();                }
+            mViewPager.setCurrentItem(position + 1, true);
         });
 
 

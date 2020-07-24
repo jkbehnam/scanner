@@ -2,18 +2,11 @@ package com.patient.mokhtari.scanner.activities.Dialoges;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-
-import com.patient.mokhtari.scanner.R;
 
 
 public class DialogPassword {

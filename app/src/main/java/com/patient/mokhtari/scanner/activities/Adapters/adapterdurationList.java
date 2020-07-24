@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterdurationList extends RecyclerView.Adapter<adapterdurationList.MyViewHolder> {
-    private List<Duration> data_services_list;
+    private final List<Duration> data_services_list;
     public int lastCheckedPosition = -1;
     Context context;
     OnCardClickListner onCardClickListner;
@@ -47,16 +47,13 @@ public class adapterdurationList extends RecyclerView.Adapter<adapterdurationLis
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
-            cv_doctor.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    lastCheckedPosition = getAdapterPosition();
-                    onCardClickListner.OnCardClicked(view, getAdapterPosition());
-                    //because of this blinking problem occurs so
-                    //i have a suggestion to add notifyDataSetChanged();
-                    //   notifyItemRangeChanged(0, list.length);//blink list problem
-                    notifyDataSetChanged();
-                }
+            cv_doctor.setOnClickListener(view1 -> {
+                lastCheckedPosition = getAdapterPosition();
+                onCardClickListner.OnCardClicked(view1, getAdapterPosition());
+                //because of this blinking problem occurs so
+                //i have a suggestion to add notifyDataSetChanged();
+                //   notifyItemRangeChanged(0, list.length);//blink list problem
+                notifyDataSetChanged();
             });
 
             // img = (ImageView) view.findViewById(R.id.itemImage);
@@ -109,8 +106,6 @@ public class adapterdurationList extends RecyclerView.Adapter<adapterdurationLis
 
     public int getImage(String imageName) {
 
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-
-        return drawableResourceId;
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 }

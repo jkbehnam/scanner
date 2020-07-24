@@ -60,13 +60,13 @@ import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_UPLOAD
 
 
 public class Frag_new_request extends myFragment implements View.OnClickListener {
-    public static ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
+    public static final ArrayList<ReqQuestions> reqQuestionsArrayList = new ArrayList<>();
     public static ArrayList<ReqPhoto> reqTestPhotosArrayList = new ArrayList<>();
     public static ArrayList<ReqPhoto> reqBodyPhotosArrayList = new ArrayList<>();
     public static String reqDuration = "";
     public static String reqDoctor = "";
     public static String useDrug = "";
-    public static ArrayList<BodyPointMain> reqBodyPoints = new ArrayList<>();
+    public static final ArrayList<BodyPointMain> reqBodyPoints = new ArrayList<>();
     private OnFragmentInteractionListener mListener;
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
@@ -75,9 +75,8 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
 
     // TODO: Rename and change types and number of parameters
     public static Frag_new_request newInstance() {
-        Frag_new_request fragment = new Frag_new_request();
 
-        return fragment;
+        return new Frag_new_request();
     }
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -113,28 +112,25 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         adapterRcycleMain madapter = new adapterRcycleMain(glist);
         mainActivity_recycle.setAdapter(madapter);
 
-        madapter.setOnCardClickListner(new adapterRcycleMain.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position) {
+        madapter.setOnCardClickListner((view, position) -> {
 
-                switch (position) {
-                    case 0:
-                        loadFragment(new Frag_Body_part());
-                        break;
-                    case 1:
-                        loadFragment(Frag_Question_list.newInstance());
-                        break;
-                    case 2:
-                        loadFragment(AddTestPhoto.newInstance());
-                        break;
-                    case 3:
-                        loadFragment(AddSkinPhoto.newInstance());
-                        break;
-                    case 4:
-                        loadFragment(Frag_doctor_list.newInstance());
+            switch (position) {
+                case 0:
+                    loadFragment(new Frag_Body_part());
+                    break;
+                case 1:
+                    loadFragment(Frag_Question_list.newInstance());
+                    break;
+                case 2:
+                    loadFragment(AddTestPhoto.newInstance());
+                    break;
+                case 3:
+                    loadFragment(AddSkinPhoto.newInstance());
+                    break;
+                case 4:
+                    loadFragment(Frag_doctor_list.newInstance());
 
-                        break;
-                }
+                    break;
             }
         });
         if(useDrug.equals("")){
@@ -142,20 +138,16 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("آیا این درخواست را بعد از مصرف دارو انجام می\u200Cدهید؟");
             builder.setCancelable(false);
-            builder.setNegativeButton("خیر", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    useDrug="false";
-                    dialog.cancel();
-                }
+            builder.setNegativeButton("خیر", (dialog, which) -> {
+                useDrug="false";
+                dialog.cancel();
             });
 
-            builder.setPositiveButton("بله، مصرف کرده\u200Cام", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    useDrug="true";
-                    dialog.cancel();
+            builder.setPositiveButton("بله، مصرف کرده\u200Cام", (dialog, which) -> {
+                useDrug="true";
+                dialog.cancel();
 
 
-                }
             });
 
             AlertDialog alert = builder.create();
@@ -223,23 +215,16 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         int bodyPhotoSize = reqBodyPhotosArrayList.size();
         int testPhotoSize = reqTestPhotosArrayList.size();
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL_UPLOAD_REQUEST,
-                new Response.Listener<NetworkResponse>() {
-
-                    @Override
-                    public void onResponse(NetworkResponse response) {
-                        hideLoading_base();
-                        FragmentManager fm = getActivity().getSupportFragmentManager();
-                        fm.popBackStack();
-                       // String s = new String(response.data);
-                        Toast.makeText(getActivity(), "درخواست با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
-                    }
+                response -> {
+                    hideLoading_base();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.popBackStack();
+                   // String s = new String(response.data);
+                    Toast.makeText(getActivity(), "درخواست با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
                 }) {
 
             @Override
@@ -321,7 +306,7 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         JSONObject JSONcontacts = new JSONObject();
         for (int i = 0; i < req.size(); i++) {
             try {
-                JSONcontacts.put("Count:" + String.valueOf(i + 1),req.get(i));
+                JSONcontacts.put("Count:" + (i + 1),req.get(i));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -329,32 +314,29 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
 
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
-        String x = gson.toJson(
+        return gson.toJson(
                 req,
                 new TypeToken<ArrayList<ReqQuestions>>() {
                 }.getType());
-        return x;
     }
 
     public String arrToJsonBodyPointMain(ArrayList<BodyPointMain> req) {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
-        String x = gson.toJson(
+
+        return gson.toJson(
                 req,
                 new TypeToken<ArrayList<BodyPointMain>>() {
                 }.getType());
-
-        return x;
     }
 
     public String arrToJsonReqPhoto(ArrayList<ReqPhoto> req) {
         final GsonBuilder builder = new GsonBuilder();
         final Gson gson = builder.create();
-        String x = gson.toJson(
+        return gson.toJson(
                 req,
                 new TypeToken<ArrayList<ReqPhoto>>() {
                 }.getType());
-        return x;
     }
 
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {

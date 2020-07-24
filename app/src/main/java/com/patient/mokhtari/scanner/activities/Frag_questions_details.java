@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.patient.mokhtari.scanner.R;
 import com.patient.mokhtari.scanner.activities.Adapters.adapterPatientDetails;
-import com.patient.mokhtari.scanner.activities.BodyPart.view.BodyPointMain;
 import com.patient.mokhtari.scanner.activities.CustomItems.myFragment;
 import com.patient.mokhtari.scanner.activities.Objects.ReqQuestions;
 
@@ -28,16 +27,15 @@ import butterknife.ButterKnife;
 
 
 public class Frag_questions_details extends myFragment implements View.OnClickListener{
-    JSONObject jsonObject;
+    final JSONObject jsonObject;
     private OnFragmentInteractionListener mListener;
     @BindView(R.id.MainActivity_recycle)
     RecyclerView mainActivity_recycle;
 
     // TODO: Rename and change types and number of parameters
     public static Frag_questions_details newInstance(JSONObject jsonObject) {
-        Frag_questions_details fragment = new Frag_questions_details( jsonObject);
 
-        return fragment;
+        return new Frag_questions_details( jsonObject);
     }
 public Frag_questions_details( JSONObject jsonObject){
         this.jsonObject=jsonObject;
@@ -85,11 +83,8 @@ public Frag_questions_details( JSONObject jsonObject){
         adapterPatientDetails madapter = new adapterPatientDetails(glist);
         mainActivity_recycle.setAdapter(madapter);
 
-        madapter.setOnCardClickListner(new adapterPatientDetails.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position) {
+        madapter.setOnCardClickListner((view, position) -> {
 
-            }
         });
 
 

@@ -40,7 +40,19 @@ public class Utils {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
     }
-
+    public static String faToEn(String num) {
+        return num
+                .replace("۰", "0")
+                .replace("۱", "1")
+                .replace("۲", "2")
+                .replace("۳", "3")
+                .replace("۴", "4")
+                .replace("۵", "5")
+                .replace("۶", "6")
+                .replace("۷", "7")
+                .replace("۸", "8")
+                .replace("۹", "9");
+    }
     public static boolean isNetworkAvailable(Context context) {
 
         boolean isNetAvailable = false;

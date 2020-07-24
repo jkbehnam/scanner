@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -47,16 +46,15 @@ public class Frag_Body_part extends myFragment {
     public static FragmentActivity fragment_body_part;
     private WaveEffectLayout container;
     private HumanBodyWidget bodyWidget;
-    private ImageView manIv, womanIv;
-    private TextView manTv, womanTv, flipFrontTv, flipBackTv;
-    private String[] mTitles = {"جلو","پشت" };
-    private ArrayList<MyTouchListener> mTouchListeners = new ArrayList<>();
+    private TextView flipFrontTv;
+    private TextView flipBackTv;
+    private final String[] mTitles = {"جلو","پشت" };
+    private final ArrayList<MyTouchListener> mTouchListeners = new ArrayList<>();
 
     // TODO: Rename and change types and number of parameters
     public static Frag_Body_part newInstance() {
-        Frag_Body_part fragment = new Frag_Body_part();
 
-        return fragment;
+        return new Frag_Body_part();
     }
 
     @Override
@@ -75,28 +73,21 @@ public class Frag_Body_part extends myFragment {
        getActivity(). setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         View myLayout = rootView.findViewById(R.id.toolbar); // root View id from that link
-        ImageView myView = (ImageView) myLayout.findViewById(R.id.imageView3);
-        myView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadFragment(Frag_duration_list.newInstance());
-            }
-        });
+        ImageView myView = myLayout.findViewById(R.id.imageView3);
+        myView.setOnClickListener(view -> loadFragment(Frag_duration_list.newInstance()));
 
         initViews(savedInstanceState);
 
 
-        rootView.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
+        rootView.setOnTouchListener((v, event) -> {
 
-                if(event.getAction() == MotionEvent.ACTION_MOVE){
-                    //do something
-                    for(MyTouchListener listener : mTouchListeners){
-                        listener.onTouchEvent(event);
-                    }
+            if(event.getAction() == MotionEvent.ACTION_MOVE){
+                //do something
+                for(MyTouchListener listener : mTouchListeners){
+                    listener.onTouchEvent(event);
                 }
-                return true;
             }
+            return true;
         });
 
 
@@ -106,21 +97,18 @@ public class Frag_Body_part extends myFragment {
     }
     public void initViews(Bundle savedInstanceState){
         ButterKnife.bind(this, rootView);
-        btn_clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reqBodyPoints.clear();
-               getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.container, Frag_Body_part.newInstance()).commit();
-            }
+        btn_clear.setOnClickListener(view -> {
+            reqBodyPoints.clear();
+           getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, Frag_Body_part.newInstance()).commit();
         });
-        container = (WaveEffectLayout) rootView.findViewById(R.id.container);
-        manIv = (ImageView) rootView.findViewById(R.id.man_icon);
-        manTv = (TextView) rootView.findViewById(R.id.man_text);
-        womanIv = (ImageView)rootView. findViewById(R.id.woman_icon);
-        womanTv = (TextView) rootView.findViewById(R.id.woman_text);
-        flipFrontTv = (TextView)rootView.findViewById(R.id.flipFront);
-        flipBackTv = (TextView)rootView. findViewById(R.id.flipBack);
+        container = rootView.findViewById(R.id.container);
+        ImageView manIv = rootView.findViewById(R.id.man_icon);
+        TextView manTv = rootView.findViewById(R.id.man_text);
+        ImageView womanIv = rootView.findViewById(R.id.woman_icon);
+        TextView womanTv = rootView.findViewById(R.id.woman_text);
+        flipFrontTv = rootView.findViewById(R.id.flipFront);
+        flipBackTv = rootView. findViewById(R.id.flipBack);
         segmentTabLayout.setTabData(mTitles);
         segmentTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -153,81 +141,73 @@ public class Frag_Body_part extends myFragment {
         bodyWidget = new HumanBodyWidget(getActivity(), container, savedInstanceState);
         container.setRegionView(new RegionView(container, getActivity()));
         Toolbar toolbar;
-        toolbar=(Toolbar)rootView.findViewById(R.id.toolbar);
+        toolbar= rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        TextView txttoolbar=(TextView)rootView.findViewById(R.id.txttoolbar);
+        TextView txttoolbar= rootView.findViewById(R.id.txttoolbar);
         txttoolbar.setText("انتخاب محل ضایعه");
         Typeface typeface3 = Typeface.createFromAsset(getActivity().getAssets(), "font/vazirbold.ttf");
         txttoolbar.setTypeface(typeface3, Typeface.BOLD);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((AppCompatActivity) getActivity()).onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
         ((AppCompatActivity)getActivity()). getSupportActionBar().setDisplayShowHomeEnabled(true);
         ((AppCompatActivity)getActivity()). getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                long downTime = SystemClock.uptimeMillis();
-                long eventTime = SystemClock.uptimeMillis() + 100;
-                float x = 0.50f;
-                float y = 0.50f;
+        handler.postDelayed(() -> {
+            long downTime = SystemClock.uptimeMillis();
+            long eventTime = SystemClock.uptimeMillis() + 100;
+            float x = 0.50f;
+            float y = 0.50f;
 // List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
-                int metaState = 0;
-                MotionEvent motionEvent = MotionEvent.obtain(
-                        downTime,
-                        eventTime,
-                        MotionEvent.ACTION_UP,
-                        x,
-                        y,
-                        metaState
-                );
+            int metaState = 0;
+            MotionEvent motionEvent = MotionEvent.obtain(
+                    downTime,
+                    eventTime,
+                    MotionEvent.ACTION_UP,
+                    x,
+                    y,
+                    metaState
+            );
 
 // Dispatch touch event to view
-                motionEvent.setAction(0);
-                container.dispatchTouchEvent(motionEvent);
+            motionEvent.setAction(0);
+            container.dispatchTouchEvent(motionEvent);
 
-                 downTime = SystemClock.uptimeMillis();
-                 eventTime = SystemClock.uptimeMillis() + 100;
-                 x = 0.50f;
-                 y = 0.50f;
+             downTime = SystemClock.uptimeMillis();
+             eventTime = SystemClock.uptimeMillis() + 100;
+             x = 0.50f;
+             y = 0.50f;
 // List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
-                 metaState = 0;
-                 motionEvent = MotionEvent.obtain(
-                        downTime,
-                        eventTime,
-                        MotionEvent.ACTION_MOVE,
-                        x,
-                        y,
-                        metaState
-                );
+             metaState = 0;
+             motionEvent = MotionEvent.obtain(
+                    downTime,
+                    eventTime,
+                    MotionEvent.ACTION_MOVE,
+                    x,
+                    y,
+                    metaState
+            );
 
 // Dispatch touch event to view
-                motionEvent.setAction(0);
-                container.dispatchTouchEvent(motionEvent);
+            motionEvent.setAction(0);
+            container.dispatchTouchEvent(motionEvent);
 
-                downTime = SystemClock.uptimeMillis();
-                eventTime = SystemClock.uptimeMillis() + 100;
-                x = 0.50f;
-                y = 0.50f;
+            downTime = SystemClock.uptimeMillis();
+            eventTime = SystemClock.uptimeMillis() + 100;
+            x = 0.50f;
+            y = 0.50f;
 // List of meta states found here: developer.android.com/reference/android/view/KeyEvent.html#getMetaState()
-                metaState = 0;
-                motionEvent = MotionEvent.obtain(
-                        downTime,
-                        eventTime,
-                        MotionEvent.ACTION_UP,
-                        x,
-                        y,
-                        metaState
-                );
-       motionEvent.setAction(0);
+            metaState = 0;
+            motionEvent = MotionEvent.obtain(
+                    downTime,
+                    eventTime,
+                    MotionEvent.ACTION_UP,
+                    x,
+                    y,
+                    metaState
+            );
+   motionEvent.setAction(0);
 // Dispatch touch event to view
-                container.dispatchTouchEvent(motionEvent);
-            }
+            container.dispatchTouchEvent(motionEvent);
         }, 1000);
 
 

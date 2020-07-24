@@ -1,8 +1,6 @@
 package com.patient.mokhtari.scanner.activities.BodyPart.region;
 
 import android.graphics.Path;
-import android.os.SystemClock;
-import android.view.MotionEvent;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 
@@ -21,8 +19,8 @@ public class RegionPathView {
 
     public static AnimatedPathView pathView;
 
-    private FrameLayout container;
-    private List<Path> paths = new ArrayList<>();
+    private final FrameLayout container;
+    private final List<Path> paths = new ArrayList<>();
     private Region[] regions;
     private int regionRadius = 0;
     private int pathOffsetX = 0;
@@ -33,7 +31,7 @@ public class RegionPathView {
     }
 
     private void init(){
-        pathView = (AnimatedPathView) container.findViewById(R.id.animatedPathView);
+        pathView = container.findViewById(R.id.animatedPathView);
         regionRadius = UIUtil.dip2px(RegionParam.REGION_WIDTH / 2f);
         pathOffsetX = UIUtil.dip2px(RegionParam.PATH_OFFSET_X / 2f);
 

@@ -62,8 +62,7 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
 
     // TODO: Rename and change types and number of parameters
     public static Frag_request_list newInstance() {
-        Frag_request_list fragment = new Frag_request_list();
-        return fragment;
+        return new Frag_request_list();
     }
 
     @Override
@@ -80,33 +79,19 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
         setToolbar(rootView, "لیست درخواست ها");
         btnNewRequest.setOnClickListener(this);
         bottomAppBar.setOnClickListener(this);
-        bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
+        bottomAppBar.setOnMenuItemClickListener(menuItem -> false);
 
-                return false;
-            }
-        });
+        reqListSwipeContainer.setOnRefreshListener(() -> {
 
-        reqListSwipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                requests=new ArrayList<>();
-                getRequestList();
-            }
+            requests=new ArrayList<>();
+            getRequestList();
         });
 
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
         mainActivity_recycle.setLayoutManager(layoutManager);
         View myLayout = rootView.findViewById(R.id.toolbar); // root View id from that link
-        ImageView myView = (ImageView) myLayout.findViewById(R.id.iv_chat);
-        myView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loadFragment(Frag_chat_lists.newInstance());
-            }
-        });
+        ImageView myView = myLayout.findViewById(R.id.iv_chat);
+        myView.setOnClickListener(view -> loadFragment(Frag_chat_lists.newInstance()));
         if (requests.size() == 0) {
             getRequestList();
         } else {
@@ -160,7 +145,7 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
                 break;
             case R.id.bottomAppBar:
                 MenuFrag dialogFragment = new MenuFrag();
-                dialogFragment.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "tag");
+                dialogFragment.show(getActivity().getSupportFragmentManager(), "tag");
                 break;
         }
     }
@@ -176,16 +161,13 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
 
     public void getRequestList() {
         showLoading_base();
-        Map<String, String> param = new HashMap<String, String>();
+        Map<String, String> param = new HashMap<>();
         param.put("user_id", user_id);
-        ConnectToServer.any_send(new VolleyCallback() {
-            @Override
-            public void onSuccess(String result) throws JSONException {
-                if(reqListSwipeContainer.isRefreshing()){reqListSwipeContainer.setRefreshing(false);}
+        ConnectToServer.any_send(result -> {
+            if(reqListSwipeContainer.isRefreshing()){reqListSwipeContainer.setRefreshing(false);}
 
-                reciveRequest(result);
-                hideLoading_base();
-            }
+            reciveRequest(result);
+            hideLoading_base();
         }, param, URL_GET_REQUEST_LIST);
     }
 
@@ -214,14 +196,7 @@ public class Frag_request_list extends myFragment implements View.OnClickListene
         }
         adapterRcycleMain2 madapter = new adapterRcycleMain2(glist);
         mainActivity_recycle.setAdapter(madapter);
-        madapter.setOnCardClickListner(new adapterRcycleMain2.OnCardClickListner() {
-            @Override
-            public void OnCardClicked(View view, int position, Request req) {
-                loadFragment(Frag_request_details.newInstance(req));
-            }
-
-
-        });
+        madapter.setOnCardClickListner((view, position, req) -> loadFragment(Frag_request_details.newInstance(req)));
 
     }
 

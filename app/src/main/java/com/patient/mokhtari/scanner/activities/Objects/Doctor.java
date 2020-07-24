@@ -3,7 +3,7 @@ package com.patient.mokhtari.scanner.activities.Objects;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Doctor extends Object {
+public class Doctor {
     @SerializedName("name")
     @Expose
     private String name;

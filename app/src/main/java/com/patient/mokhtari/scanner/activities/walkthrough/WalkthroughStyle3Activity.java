@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 
 
 public class WalkthroughStyle3Activity extends BaseActivity implements View.OnClickListener {
-    private ViewPager viewPager;
     private View indicator1;
     private View indicator2;
     private View indicator3;
@@ -40,16 +39,14 @@ public class WalkthroughStyle3Activity extends BaseActivity implements View.OnCl
         indicator3 = findViewById(R.id.indicator3);
         indicator4 = findViewById(R.id.indicator4);
 
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         viewPager.addOnPageChangeListener(new WizardPageChangeListener());
         btnSignUp.setOnClickListener(this);
         updateIndicators(0);
     }
 
-    private class ViewPagerAdapter extends FragmentPagerAdapter {
-
-        private int WIZARD_PAGES_COUNT = 4;
+    private static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -62,6 +59,7 @@ public class WalkthroughStyle3Activity extends BaseActivity implements View.OnCl
 
         @Override
         public int getCount() {
+            int WIZARD_PAGES_COUNT = 4;
             return WIZARD_PAGES_COUNT;
         }
 

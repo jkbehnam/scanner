@@ -29,9 +29,9 @@ public class RegionView {
     private final WaveEffectLayout container;
     private final Context mContext;
     private AbsoluteLayout leftRegionLayout, rightRegionLayout;
-    private LayoutInflater layoutInflater;
+    private final LayoutInflater layoutInflater;
     private Region[] regions;
-    private List<View> regionViews = new ArrayList<>();
+    private final List<View> regionViews = new ArrayList<>();
 
     public RegionView(WaveEffectLayout container, Context context) {
         this.container = container;
@@ -41,8 +41,8 @@ public class RegionView {
     }
 
     private void init() {
-        leftRegionLayout = (AbsoluteLayout) container.findViewById(R.id.left_region_layout);
-        rightRegionLayout = (AbsoluteLayout) container.findViewById(R.id.right_region_layout);
+        leftRegionLayout = container.findViewById(R.id.left_region_layout);
+        rightRegionLayout = container.findViewById(R.id.right_region_layout);
 
     }
 
@@ -70,35 +70,29 @@ public class RegionView {
     private View getItem(final Region region) {
 
         View itemView = layoutInflater.inflate(R.layout.region_item, null);
-        final TextView textView = (TextView) itemView.findViewById(R.id.text_view);
+        final TextView textView = itemView.findViewById(R.id.text_view);
         textView.setText(region.getName());
         itemView.setTag(String.valueOf(region.getValue()));
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext,"انتخاب شما: "+ region.getName(), Toast.LENGTH_SHORT).show();
+        itemView.setOnClickListener(v -> {
+            Toast.makeText(mContext,"انتخاب شما: "+ region.getName(), Toast.LENGTH_SHORT).show();
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+            new Handler().postDelayed(() -> {
 
-                        //    android.support.v4.app.FragmentManager fragmentManager = (getActivity()).getSupportFragmentManager();
-                        // android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                //    android.support.v4.app.FragmentManager fragmentManager = (getActivity()).getSupportFragmentManager();
+                // android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-                        //  fragmentTransaction.remove(fragment);
-                        //  fragmentTransaction.commit();
+                //  fragmentTransaction.remove(fragment);
+                //  fragmentTransaction.commit();
 
-                      //  Intent i=new Intent(mContext, Mainskin.class);
-                      //  mContext.startActivity(i);
+                //  Intent i=new Intent(mContext, Mainskin.class);
+                //  mContext.startActivity(i);
 
-                        FragmentTransaction transaction = (Frag_Body_part.fragment_body_part).getSupportFragmentManager().beginTransaction();
-                        transaction.replace(R.id.container, Frag_duration_list.newInstance());
-                        transaction.addToBackStack(null);
-                        transaction.commit();
-                    }
-                }, 800);
-              //  Toast.makeText(mContext, "You click " + region.getName(), Toast.LENGTH_SHORT);
-            }
+                FragmentTransaction transaction = (Frag_Body_part.fragment_body_part).getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, Frag_duration_list.newInstance());
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }, 800);
+          //  Toast.makeText(mContext, "You click " + region.getName(), Toast.LENGTH_SHORT);
         });
         return itemView;
     }

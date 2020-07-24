@@ -33,13 +33,10 @@ public abstract class myFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread paramThread, Throwable paramThrowable) {
-                //Catch your exception
-                // Without System.exit() this will not work.
-                System.exit(2);
-            }
+        Thread.setDefaultUncaughtExceptionHandler((paramThread, paramThrowable) -> {
+            //Catch your exception
+            // Without System.exit() this will not work.
+            System.exit(2);
         });
     }
 
@@ -58,32 +55,21 @@ public abstract class myFragment extends Fragment {
     }
 
     public void setToolbar(View rootView, String title) {
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        TextView tvToolbarTitle = (TextView) rootView.findViewById(R.id.txttoolbar);
+        TextView tvToolbarTitle = rootView.findViewById(R.id.txttoolbar);
 
         Typeface typeface3 = Typeface.createFromAsset(a.getAssets(), "font/vazirbold.ttf");
         tvToolbarTitle.setTypeface(typeface3, Typeface.BOLD);
         tvToolbarTitle.setText(title);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((AppCompatActivity) getActivity()).onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
     }
 
     public void setToolbar_notmain(View rootView, String title) {
-        Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        Toolbar toolbar = rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        TextView tvToolbarTitle = (TextView) rootView.findViewById(R.id.txttoolbar);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ((AppCompatActivity) getActivity()).onBackPressed();
-            }
-        });
+        TextView tvToolbarTitle = rootView.findViewById(R.id.txttoolbar);
+        toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
         Typeface typeface3 = Typeface.createFromAsset(a.getAssets(), "font/vazirbold.ttf");
         tvToolbarTitle.setTypeface(typeface3, Typeface.BOLD);
         tvToolbarTitle.setText(title);

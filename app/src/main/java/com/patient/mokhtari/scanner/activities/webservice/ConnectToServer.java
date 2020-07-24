@@ -6,8 +6,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentManager;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NetworkResponse;
@@ -31,10 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static com.patient.mokhtari.scanner.activities.Main.user_id;
 import static com.patient.mokhtari.scanner.activities.base.Application.homecontext;
 import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_UPLOAD_Photo;
-import static com.patient.mokhtari.scanner.activities.webservice.URLs.URL_UPLOAD_REQUEST;
 
 
 public class ConnectToServer {
@@ -43,25 +39,18 @@ public class ConnectToServer {
 
         //our custom volley request
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, url,
-                new Response.Listener<NetworkResponse>() {
-
-                    @Override
-                    public void onResponse(NetworkResponse response) {
-                        try {
-                            String s = new String(response.data);
-                            callback.onSuccess(s);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                response -> {
+                    try {
+                        String s = new String(response.data);
+                        callback.onSuccess(s);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        show_error_warning(error, homecontext);
-                        error.getMessage();
-                    }
+                error -> {
+                    error.printStackTrace();
+                    show_error_warning(error, homecontext);
+                    error.getMessage();
                 }) {
 
             @Override
@@ -93,23 +82,17 @@ public class ConnectToServer {
 
         int PhotoSize = PhotosArrayList.size();
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, URL_UPLOAD_Photo,
-                new Response.Listener<NetworkResponse>() {
-                    @Override
-                    public void onResponse(NetworkResponse response) {
-                        try {
-                            String s = new String(response.data);
-                            callback.onSuccess(s);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                response -> {
+                    try {
+                        String s = new String(response.data);
+                        callback.onSuccess(s);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        Toast.makeText(homecontext, error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+                error -> {
+                    error.printStackTrace();
+                    Toast.makeText(homecontext, error.getMessage(), Toast.LENGTH_LONG).show();
                 }) {
 
             @Override

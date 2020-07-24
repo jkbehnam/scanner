@@ -37,12 +37,9 @@ public class DialogTime {
         ald_exit.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         btn_ok = view_alert_dialog_exit.findViewById(R.id.alert_btn_ok);
         pdp = view_alert_dialog_exit.findViewById(R.id.pdp);
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((EditText) view1).setText(pdp.getDateString("/"));
-                ald_exit.hide();
-            }
+        btn_ok.setOnClickListener(view -> {
+            ((EditText) view1).setText(pdp.getDateString("/"));
+            ald_exit.hide();
         });
         return ald_exit;
     }

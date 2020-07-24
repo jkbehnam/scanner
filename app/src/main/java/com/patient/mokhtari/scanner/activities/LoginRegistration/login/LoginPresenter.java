@@ -15,25 +15,19 @@ import java.util.Map;
 import es.dmoral.toasty.Toasty;
 
 public class LoginPresenter {
-    LoginActivity loginActivity;
+    final LoginActivity loginActivity;
     String url;
     public LoginPresenter(LoginActivity loginActivity) {
         this.loginActivity = loginActivity;
     }
 
     public void login(String username, String password) {
-        Map<String, String> param = new HashMap<String, String>();
+        Map<String, String> param = new HashMap<>();
         url = URLs.URL_LOGIN;
         param.put("Username", username);
         param.put("Password", password);
 
-        ConnectToServer.any_send(new VolleyCallback() {
-            @Override
-            public void onSuccess(String result) throws JSONException {
-
-                reciveRequeset(result);
-            }
-        }, param, url);
+        ConnectToServer.any_send(result -> reciveRequeset(result), param, url);
     }
 
     public void reciveRequeset(String result) throws JSONException {

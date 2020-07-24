@@ -6,6 +6,7 @@
     xmlns:multi_line_radio_group="http://schemas.android.com/apk/res-auto"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
 
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -258,7 +259,7 @@
                     android:gravity="center"
                     android:text="ثبت نام"
                     android:textColor="@color/white"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
@@ -283,7 +284,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="DuplicateIds">
 
                 <EditText
                     android:id="@+id/et_username"
@@ -312,7 +314,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/linearLayout2"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/linearLayout2"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                tools:ignore="DuplicateIds">
 
                 <EditText
                     android:id="@+id/et_password"
@@ -346,7 +349,8 @@
                 android:layout_marginBottom="8dp"
                 android:text="رمز عبور"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-                app:layout_constraintEnd_toEndOf="@+id/linearLayout3" />
+                app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+                tools:ignore="DuplicateIds" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_lay_1"
@@ -369,7 +373,7 @@
                     android:gravity="center"
                     android:text="ادامه"
                     android:textColor="@color/white"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
             </androidx.cardview.widget.CardView>
 
             <include

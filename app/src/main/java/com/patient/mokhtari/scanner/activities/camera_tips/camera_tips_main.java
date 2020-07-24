@@ -38,9 +38,8 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
 
     // TODO: Rename and change types and number of parameters
     public static camera_tips_main newInstance() {
-        camera_tips_main fragment = new camera_tips_main();
 
-        return fragment;
+        return new camera_tips_main();
     }
 
     @Override
@@ -62,8 +61,8 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
         indicator3 = rootView.findViewById(R.id.indicator3);
      //   indicator4 = rootView.findViewById(R.id.indicator4);
 
-        viewPager = (ViewPager) rootView.findViewById(R.id.viewPager);
-        vp = new ViewPagerAdapter(((AppCompatActivity) getActivity()).getSupportFragmentManager());
+        viewPager = rootView.findViewById(R.id.viewPager);
+        vp = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(vp);
         viewPager.addOnPageChangeListener(new camera_tips_main.WizardPageChangeListener());
 
@@ -133,9 +132,7 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
         }
     }
 
-    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
-
-        private int WIZARD_PAGES_COUNT = 3;
+    private static class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -148,6 +145,7 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
 
         @Override
         public int getCount() {
+            int WIZARD_PAGES_COUNT = 3;
             return WIZARD_PAGES_COUNT;
         }
 
@@ -189,7 +187,7 @@ public class camera_tips_main extends myFragment implements View.OnClickListener
 
                 int x = viewPager.getCurrentItem();
                 if (x == vp.getCount() - 1) {
-                    ((AppCompatActivity) getActivity()).onBackPressed();
+                    getActivity().onBackPressed();
 
                 } else {
                     viewPager.setCurrentItem(++x);

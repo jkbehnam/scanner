@@ -26,19 +26,17 @@ import com.patient.mokhtari.scanner.activities.BodyPart.region.RegionPathView;
 
 public class HumanBodyWidget {
 
-    static public boolean isAPI11 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
+    static public final boolean isAPI11 = true;
     public static boolean mShowingBack = false;
     public static boolean isMan = true;
 public static ImageView body2;
-    private BodyFrontFragment bodyFrontFragment = new BodyFrontFragment();
-    private BodyBackFragment bodyBackFragment = new BodyBackFragment();
+    private final BodyFrontFragment bodyFrontFragment = new BodyFrontFragment();
+    private final BodyBackFragment bodyBackFragment = new BodyBackFragment();
 //    private FragmentManager.OnBackStackChangedListener onBackStackChangedListener;
 
     private AppCompatActivity activity;
     private WaveEffectLayout container;
 
-    // api < 11
-    private LayoutInflater inflater;
     private ImageView frontView, backView;
     private AbsoluteLayout leftRegionLayout, rightRegionLayout;
 
@@ -58,7 +56,8 @@ public static ImageView body2;
             initFragment(savedInstanceState);
 
         } else {
-            inflater = LayoutInflater.from(context);
+            // api < 11
+            LayoutInflater inflater = LayoutInflater.from(context);
             frontView = (ImageView) inflater.inflate(R.layout.fragment_body_front, null);
             backView = (ImageView) inflater.inflate(R.layout.fragment_body_back, null);
             this.container.addView(frontView);
@@ -76,23 +75,18 @@ public static ImageView body2;
         } else {
             mShowingBack = (activity.getFragmentManager().getBackStackEntryCount() > 0);
         }
-        activity.getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                mShowingBack = (activity.getFragmentManager().getBackStackEntryCount() > 0);
-            }
-        });
+        activity.getFragmentManager().addOnBackStackChangedListener(() -> mShowingBack = (activity.getFragmentManager().getBackStackEntryCount() > 0));
     }
 
     private void initViews() {
-        leftRegionLayout = (AbsoluteLayout) container.findViewById(R.id.left_region_layout);
-        rightRegionLayout = (AbsoluteLayout) container.findViewById(R.id.right_region_layout);
+        leftRegionLayout = container.findViewById(R.id.left_region_layout);
+        rightRegionLayout = container.findViewById(R.id.right_region_layout);
     }
 
 
     public boolean flipBody(boolean isShowingBack) {
 
-        if (this.mShowingBack == isShowingBack)
+        if (mShowingBack == isShowingBack)
             return false;
 
         clearRegionView();
@@ -117,10 +111,10 @@ public static ImageView body2;
 
     @SuppressLint("ResourceType")
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private boolean performFragmentFlipAnimation() {
+    private void performFragmentFlipAnimation() {
         if (mShowingBack) {
             activity.getFragmentManager().popBackStack();
-            return true;
+            return;
         }
 
         activity.getFragmentManager()
@@ -132,7 +126,6 @@ public static ImageView body2;
                 .addToBackStack(null)
                 .commit();
 
-        return true;
     }
 
 //    @Override
@@ -143,11 +136,11 @@ public static ImageView body2;
 
 
     public Boolean toggleBodyGenderImage(Boolean isMan) {
-        if (this.isMan == isMan)
+        if (HumanBodyWidget.isMan == isMan)
             return false;
 
         clearRegionView();
-        this.isMan = isMan;
+        HumanBodyWidget.isMan = isMan;
         if (isAPI11) {
             if (mShowingBack) {
                 bodyFrontFragment.setMan(isMan);
@@ -181,7 +174,7 @@ public static ImageView body2;
         @Override
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            bodyImageView = (ImageView) view.findViewById(R.id.body_front);
+            bodyImageView = view.findViewById(R.id.body_front);
             body2=bodyImageView;
         }
 
@@ -210,7 +203,7 @@ public static ImageView body2;
         @Override
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            bodyImageView = (ImageView) view.findViewById(R.id.body_back);
+            bodyImageView = view.findViewById(R.id.body_back);
             body2=bodyImageView;
 
         }

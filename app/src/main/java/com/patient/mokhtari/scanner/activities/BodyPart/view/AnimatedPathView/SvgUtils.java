@@ -30,7 +30,7 @@ public class SvgUtils {
     /**
      * All the paths with their attributes from the svg.
      */
-    private final List<SvgPath> mPaths = new ArrayList<SvgPath>();
+    private final List<SvgPath> mPaths = new ArrayList<>();
     /**
      * The paint provided from the view.
      */

@@ -26,12 +26,12 @@ import butterknife.ButterKnife;
  * Created by behnam_b on 7/5/2016.
  */
 public class adapterAddPhoto extends RecyclerView.Adapter<adapterAddPhoto.MyViewHolder> {
-    private List<AddImage> data_services_list;
+    private final List<AddImage> data_services_list;
 
     Context context;
     OnCardClickListner onCardClickListner;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         //  public TextView card_title;
         ////   public ImageView img;
 
@@ -72,12 +72,7 @@ public class adapterAddPhoto extends RecyclerView.Adapter<adapterAddPhoto.MyView
             holder.iv_add_photo.setColorFilter(ContextCompat.getColor(context, android.R.color.transparent));
         }
         // write code
-        holder.cv_add_photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onCardClickListner.OnCardClicked(view, position);
-            }
-        });
+        holder.cv_add_photo.setOnClickListener(view -> onCardClickListner.OnCardClicked(view, position));
 
     }
 
@@ -96,9 +91,7 @@ public class adapterAddPhoto extends RecyclerView.Adapter<adapterAddPhoto.MyView
 
     public int getImage(String imageName) {
 
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-
-        return drawableResourceId;
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 
 
