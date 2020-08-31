@@ -27,7 +27,6 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:clipToPadding="false"
                 android:paddingBottom="130dp">
 
@@ -233,34 +232,36 @@
                         app:layout_constraintBottom_toTopOf="@+id/linearLayout12"
                         app:layout_constraintEnd_toEndOf="@+id/textView10" />
 
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btn_lay_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="48dp"
+                        android:clickable="true"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout12"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="@color/allOkButton"
+                        app:cardCornerRadius="24dp"
+                        app:cardElevation="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
 
+                        >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="ثبت نام"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+                    </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
             </ScrollView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/btn_lay_2"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="48dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="@color/allOkButton"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="2dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
 
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="ثبت نام"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-            </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

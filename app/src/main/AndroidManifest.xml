@@ -22,6 +22,8 @@
         android:supportsRtl="true"
         tools:replace="android:appComponentFactory,android:icon"
         android:appComponentFactory="whateverString"
+        android:layout_alignParentBottom="true"
+
         android:theme="@style/AppTheme">
 
         <activity android:name="com.patient.mokhtari.scanner.activities.Main" >

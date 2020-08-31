@@ -36,16 +36,16 @@ switch (wizard_page_position){
 
     case 0:
 
-        img_id= getImage("skin_desise1");
+        img_id= getImage("skin_desiss");
         break;
     case 1:
-        img_id=  getImage("skin_");
+        img_id=  getImage("skin_desiss");
         break;
     case 2:
-        img_id=  getImage("skin_desise1");
+        img_id=  getImage("skin_desiss");
         break;
     case 3:
-        img_id=  getImage("skin_desise1");
+        img_id=  getImage("skin_desiss");
         break;
 }
         Glide.with(getActivity()).load(img_id).into(img);

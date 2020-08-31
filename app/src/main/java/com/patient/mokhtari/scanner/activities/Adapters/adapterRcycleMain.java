@@ -5,8 +5,10 @@ import android.content.Context;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Typeface;
+
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +45,10 @@ public class adapterRcycleMain extends RecyclerView.Adapter<adapterRcycleMain.My
         @BindView(R.id.item_game_tv)
         TextView tv;
         @BindView(R.id.item_game_img)
-       ImageView iv;
-@BindView(R.id.tv_mainList)
-TextView tv_number;
+        ImageView iv;
+        @BindView(R.id.tv_mainList)
+        TextView tv_number;
+
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -75,19 +78,19 @@ TextView tv_number;
         final MainList data_service = data_services_list.get(position);
 
         holder.tv.setText(data_service.getTitle());
-        holder.tv_number.setText(String.valueOf(position+1));
+        holder.tv_number.setText(String.valueOf(position + 1));
 
         ColorMatrix matrix = new ColorMatrix();
         matrix.setSaturation(0);
 
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
 
-       // holder.iv.setImageResource(R.drawable.transaction);
-       Glide.with(context).load(getImage(data_service.getImg())).into(holder.iv);
-if(!data_service.isState()){
-    holder.iv.setColorFilter(filter);
-   holder.tv_number. setBackgroundTintList(context.getResources().getColorStateList(R.color.grey_40));
-}
+        // holder.iv.setImageResource(R.drawable.transaction);
+        Glide.with(context).load(getImage(data_service.getImg())).into(holder.iv);
+        if (!data_service.isState()) {
+            holder.iv.setColorFilter(filter);
+            holder.tv_number.setBackgroundTintList(context.getResources().getColorStateList(R.color.grey_40));
+        }
         holder.cv.setOnClickListener(v -> onCardClickListner.OnCardClicked(v, position));
 
     }
@@ -104,6 +107,7 @@ if(!data_service.isState()){
     public void setOnCardClickListner(OnCardClickListner onCardClickListner) {
         this.onCardClickListner = onCardClickListner;
     }
+
     public int getImage(String imageName) {
 
         return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());

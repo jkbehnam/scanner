@@ -4,45 +4,45 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center_horizontal|center_vertical"
-        android:layout_marginBottom="70dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imagePage1"
-            android:scaleType="centerCrop"
             android:layout_width="230dp"
-
-            android:src="@drawable/skin_desise1"
-            android:layout_height="230dp" />
+            android:layout_height="230dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_dot_grey"
+             />
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
+                android:gravity="center_horizontal"
                 android:text="خوش آمدید"
+                android:textColor="@color/text_color_all"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:visibility="gone"
-                android:textColor="@color/text_color_all"
-                android:gravity="center_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:visibility="gone" />
 
             <TextView
-                android:text="سامانه تشخیص و درمان بیماری پوستی"
-                android:padding="8dp"
-                android:textColor="@color/text_color_second"
-
-                android:gravity="center_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+
+                android:padding="8dp"
+                android:text="سامانه تشخیص و درمان بیماری پوستی"
+                android:textColor="@color/text_color_second" />
 
         </LinearLayout>
 
