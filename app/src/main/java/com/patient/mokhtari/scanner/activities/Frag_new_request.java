@@ -104,10 +104,10 @@ public class Frag_new_request extends myFragment implements View.OnClickListener
         mainActivity_recycle.setLayoutManager(layoutManager);
         ArrayList<MainList> glist = new ArrayList<>();
         glist.add(new MainList("انتخاب محل ضایعه", "skin", (reqBodyPoints.size() != 0 && !reqDuration.equals(""))));
-        glist.add(new MainList("پاسخ به سوالات", "ques", (reqQuestionsArrayList.size() != 0)));
-        glist.add(new MainList("ارسال تصویر آزمایش", "test", (reqTestPhotosArrayList.size() != 0)));
-        glist.add(new MainList("ارسال تصویر ضایعه", "skin", (reqBodyPhotosArrayList.size() != 0)));
-        glist.add(new MainList("انتخاب پزشک", "doc", !reqDoctor.equals("")));
+        glist.add(new MainList("پاسخ به سوالات", "ans", (reqQuestionsArrayList.size() != 0)));
+        glist.add(new MainList("ارسال تصویر آزمایش", "bloodtest", (reqTestPhotosArrayList.size() != 0)));
+        glist.add(new MainList("ارسال تصویر ضایعه", "skintest", (reqBodyPhotosArrayList.size() != 0)));
+        glist.add(new MainList("انتخاب پزشک", "choosedoc", !reqDoctor.equals("")));
 
         adapterRcycleMain madapter = new adapterRcycleMain(glist);
         mainActivity_recycle.setAdapter(madapter);

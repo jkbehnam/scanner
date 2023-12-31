@@ -24,7 +24,9 @@ public class Main extends BaseActivity {
         PrefManager pm = new PrefManager(this.getBaseContext());
 
         String session = pm.getUserDetails().get("session");
-        if (pm.getUserDetails().get("name") .equals("")) {
+        if (false) {
+
+        //    if (pm.getUserDetails().get("name") .equals("")) {
             Intent i = new Intent(this, WalkthroughStyle3Activity.class);
             startActivity(i);
             this.finish();
